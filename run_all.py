@@ -25,7 +25,7 @@ if __name__ == '__main__':
     #be_run=unittest.TextTestRunner() #返回实例
     #run所有用例
     #be_run.run(all_case())
-    report_path = r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\6.html'  #报告存放路径,若用HTMLTestRunner则要加上具体文件名称
+    report_path = r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\7.html'  #报告存放路径,若用HTMLTestRunner则要加上具体文件名称
 
     with open(report_path,'wb') as f:
         runner = HTMLTestRunner.HTMLTestRunner(stream=f,title='我的麦豆接口测试报告',description='这是4月12日的测试结果',verbosity=2)
