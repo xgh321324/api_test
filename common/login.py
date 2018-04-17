@@ -69,7 +69,7 @@ class LG():
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
                        'Connection': 'keep-alive'}
         s = requests.session()
-        json_data1 = {"UID":str(self.get_duid()),"loginDevice":"2","loginCity":"no location"}
+        json_data1 = {"UID":str(self.get_duid()),"loginDevice":"1","loginCity":"no location"}  #device 1是安卓
         r = s.post(url,headers= header,json=json_data1) ##医生用uid自动登录接口的请求数据又是登录成功后返回的json中的duid
         UID_token = r.json()['data']['Token'] #取到我想要的token
         return UID_token

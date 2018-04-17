@@ -24,7 +24,28 @@ class Test_pay(unittest.TestCase):
         json_data = {"nonce":"2hcvqaxfbau8f6cos6okr4j27um5dpr2","timestamp":"1523937360","sign":"560F0E0C35F2FFDF213512F8E6470F22","token":self.uid_token}
         r = self.s.post(url,headers = self.header,json=json_data)
         print(r.json())
+        #判断返回状态
         self.assertEqual('请求成功.',r.json()['note'],msg='请求返回状态不是200，有问题')
+        imagelinks = []
+        links= []
+        L= r.json()['data']['banner_list']
+        print(L)
+        #将返回json中所有照片链接放进[]
+        for i in L:
+            imagelinks.append(i['image'])
+            links.append(i['link'])
+        print('照片链接：%s' %  imagelinks)
+        print('links:%s' % links)
+        #下面测试banner=图片链接是否可用
+        for image in imagelinks:
+            r1 = self.s.get(image)
+            self.assertEqual(200,r1.status_code,msg='banner图片链接打开失败')
+        #下面测试banner链接是否可用
+        for link in links:
+            r2 = self.s.get(link)
+            self.assertEqual(200,r2.status_code,msg='banner链接打开失败')
+
+
     def tearDown(self):
         self.s.close()
 if __name__ == '__main__':
