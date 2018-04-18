@@ -3,8 +3,9 @@ import requests
 import unittest
 from common.login import LG
 import time
+from common.logger import Log
 class LessonInfo(unittest.TestCase):
-    global fuck
+    log = Log()#实例化记录日志的类
     def setUp(self):
         self.s = requests.session()
         self.lgin = LG() #实例化登录类
@@ -20,13 +21,14 @@ class LessonInfo(unittest.TestCase):
                        'Connection': 'keep-alive'}
     def testLessonList(self):
         u'测试课程列表'
+        self.log.info('-----开始测试课程列表接口-----')
         url = 'http://api.lesson.sunnycare.cc/v1/lesson/list'
         json_data = {"timestamp":str(time.time()),"sign":"9D3136CFDE472E7A1C614B8BD76A34CE","token":self.uid_token,"time":"0"}
         r = self.s.post(url,headers = self.header,json=json_data)
-        print('课程列表返回：%s' % r.json())
+        self.log.info('课程列表返回：%s' % r.json())
         #判断课程列表获取是否成功
         self.assertEqual('请求成功.',r.json()['note'],msg='返回的状态不是请求成功！！！')
-
+        self.log.info('------------测试结束--------')
         #将lesson_code保存至txt留下一接口所用
         with open(r'C:\Users\Administrator\Desktop\test_data.txt','w') as f:
             for i in r.json()['data']['list']:
@@ -34,6 +36,7 @@ class LessonInfo(unittest.TestCase):
 
     def testLessonInfo(self):
         u'测试课程信息'
+        self.log.info('------开始测试课程信息接口---------')
         url = 'http://api.lesson.sunnycare.cc/v1/lesson'
         #从txt读取上个接口的lesson_codes来循环post
         lesson_codes = []
@@ -48,9 +51,9 @@ class LessonInfo(unittest.TestCase):
         for n in need_codes:
             json_data = {"lesson_code":n,"token":self.uid_token}
             r2 = self.s.post(url,headers = self.header,json=json_data)
-            print('课程信息返回：%s' % r2.json())
+            self.log.info('课程信息返回：%s' % r2.json())
             self.assertEqual('请求成功.',r2.json()['note'])
-
+        self.log.info('------------测试结束---------------')
     def tearDown(self):
         self.s.close()
 if __name__=='__main__':
