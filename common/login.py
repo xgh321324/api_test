@@ -72,6 +72,7 @@ class LG():
         json_data1 = {"UID":str(self.get_duid()),"loginDevice":"1","loginCity":"no location"}  #device 1是安卓
         r = s.post(url,headers= header,json=json_data1) ##医生用uid自动登录接口的请求数据又是登录成功后返回的json中的duid
         UID_token = r.json()['data']['Token'] #取到我想要的token
+        #print(UID_token)
         return UID_token
 
 if __name__=='__main__':
@@ -79,4 +80,5 @@ if __name__=='__main__':
     x.login()
     x.get_token()
     x.get_duid()
+    x.gettoken_loginbyUID()
 

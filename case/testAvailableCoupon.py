@@ -3,7 +3,9 @@ import requests
 import unittest
 from common.login import LG
 import time
+from common.logger import Log
 class ColumnInfo(unittest.TestCase):
+
     def setUp(self):
         self.s = requests.session()
         self.lgin = LG() #实例化登录类
@@ -17,6 +19,23 @@ class ColumnInfo(unittest.TestCase):
                        'versionForApp': '2.0',
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
                        'Connection': 'keep-alive'}
-    #def testAvailabelCoupon(self):
+        self.log = Log()#实例化日志的类
+    def testAvailabelCoupon(self):
         u'测试可领用优惠券列表接口'
-        url = ''
+        self.log.info('-----开始测试可领的优惠券列表接口-------')
+        url = 'http://api.lesson.sunnycare.cc/v1/coupon/canget'
+        json_DATA = {"where_code":"Z2018041914505917219",
+                     "timestamp":str(time.time()),"for_where":"3",
+                     "token":self.uid_token}
+        r = self.s.post(url,headers = self.header,json=json_DATA)
+        try:
+            self.log.info('开始断言请求该接口返回的状态是否成功')
+            self.assertEqual('请求成功.',r.json()['note'])
+        except Exception as e:
+            self.log.error('请求接口返回不成功，原因：%s' % e)
+        self.log.info('---------------测试接口结束--------------------')
+        print(r.json())
+    def tearDown(self):
+        self.s.close()
+if __name__=='__main__':
+    unittest.main()

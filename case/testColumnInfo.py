@@ -21,7 +21,7 @@ class ColumnInfo(unittest.TestCase):
         u'测试专栏信息接口'
         url = 'http://api.lesson.sunnycare.cc/v1/spe'
         #将所有专栏的code放进list
-        column_list = ['Z2018041715491952019','Z2018041617010338836','ZL2018040945462','ZL2018040912829']
+        column_list = ['Z2018041715491952019']
         #详情介绍链接
         detail_links = []
         for i in column_list:
