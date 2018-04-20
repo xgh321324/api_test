@@ -35,7 +35,7 @@ class Test_pay(unittest.TestCase):
             imagelinks.append(i['image'])
             links.append(i['link'])
         print('照片链接：%s' %  imagelinks)
-        print('links:%s' % links)
+        print('内容链接:%s' % links)
         #下面测试banner=图片链接是否可用
         for image in imagelinks:
             r1 = self.s.get(image)

@@ -26,11 +26,11 @@ if __name__ == '__main__':
     #be_run=unittest.TextTestRunner() #返回实例
     #run所有用例
     #be_run.run(all_case())
-    report_path = r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\2018-4-19.html'  #报告存放路径,若用HTMLTestRunner则要加上具体文件名称
+    report_path = r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\2018-4-20.html'  #报告存放路径,若用HTMLTestRunner则要加上具体文件名称
 
     with open(report_path,'wb') as f:
-        runner = HTMLTestRunner.HTMLTestRunner(stream=f,title='麦豆接口测试',description='这是4月19日的测试结果',verbosity=2)
+        runner = HTMLTestRunner.HTMLTestRunner(stream=f,title='麦豆接口测试',description='这是4月20日的测试结果',verbosity=2)
         runner.run(all_case())#这种用法也不错，也挺好看
-    Send_email('15651797525@163.com','15651797525@163.com','xgh321324',['15651797525@163.com','15651797525@139.com','970185127@qq.com'],r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\2018-4-19.html').send()  #xgh321324是授权码登录
+    Send_email('15651797525@163.com','15651797525@163.com','xgh321324',['15651797525@163.com','15651797525@139.com','970185127@qq.com'],r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\2018-4-20.html').send()  #xgh321324是授权码登录
 
     print('发送成功！')

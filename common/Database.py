@@ -68,10 +68,6 @@ class Sqldriver(object):
 
 if __name__=='__main__':
     s = Sqldriver('120.26.40.252',3306,'root','MedLander','school')
-    sql = "select * from lesson"
+    sql = "select code from chap"
     need = s.exec_mysql(sql)
     print('need:',need)
-    print(len(need))
-    for n in need:
-        print(n[1])
-
