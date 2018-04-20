@@ -5,7 +5,7 @@ from email.header import Header
 from email.mime.multipart import MIMEMultipart  #发送附件用的
 #这个模块写的是可被调用的发送邮件的模块
 class Send_email():
-    def __init__(self,sender,username,password,receivers,file_dir):#file_dir是绝对路劲   授权码: xgh321324         qq邮箱授权码：yagcogxporkmbcac
+    def __init__(self,sender,username,password,receivers,file_dir):#file_dir是绝对路劲   授权码: xgh321324  qq邮箱授权码：yagcogxporkmbcac
         self.sender = sender
         self.username = username
         self.password = password
@@ -41,5 +41,9 @@ class Send_email():
         smtp.sendmail(self.sender,self.receivers,msg.as_string())  #发送
         smtp.quit()#关闭
 if __name__=='__main__':
-    Send_email('15651797525@163.com','15651797525@163.com','xgh321324',['15651797525@139.com','970185127@qq.com'],r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\33.html').send()
+    Send_email('15651797525@163.com',
+               '15651797525@163.com',
+               'xgh321324',
+               ['15651797525@139.com','970185127@qq.com'],
+               r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\33.html').send()
     print('发送成功！')
