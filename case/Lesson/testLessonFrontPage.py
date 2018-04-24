@@ -20,8 +20,12 @@ class Test_pay(unittest.TestCase):
 
     def test_lesson_frontpage(self):
         u'测试课程首页接口'
-        url = 'http://api.lesson.sunnycare.cc/v1/rec'
-        json_data = {"nonce":"2hcvqaxfbau8f6cos6okr4j27um5dpr2","timestamp":"1523937360","sign":"560F0E0C35F2FFDF213512F8E6470F22","token":self.uid_token}
+        #url = 'http://api.lesson.sunnycare.cc/v1/rec'#测试环境接口
+        url = 'https://api.lesson.wrightin.com/v1/rec'
+        json_data = {
+            "timestamp":"1523937360",
+            "token":self.uid_token
+                     }
         r = self.s.post(url,headers = self.header,json=json_data)
         print(r.json())
         #判断返回状态

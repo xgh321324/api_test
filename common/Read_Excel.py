@@ -1,10 +1,14 @@
 #coding:utf-8
 import xlrd
+import xlwt
+from xlutils.copy import copy
 class Excel_util():
     def __init__(self,abspath):
         #打开表格
-        self.data = xlrd.open_workbook(abspath)
+        self.data = xlrd.open_workbook(abspath) #只读
+        #self.w_data = xlwt.Workbook(abspath)    #只写入
 
+    #获取要读取的sheet
     @property
     def gettable(self):
         #获取索引
@@ -61,14 +65,27 @@ class Excel_util():
         for i in range(1,self.get_row_num):
             parameters.append(self.gettable.cell_value(i,5))
         return parameters
+###############################################################################################################
+    '''
+    #获取要读取的sheet
+    @property
+    def get_tabel2(self):
+         # 所以在打开时加cell_overwrite_ok=True 解决一个单元格重复操作报错问题
+        tabel = self.w_data.add_sheet('demo',cell_overwrite_ok=True)
+        return tabel
+
+    #写入出参
+    @property
+    def write_out_parameter(self,value):
+        self.get_tabel2.witr(2,4,lable=value)
+        self.w_data.save(r'C:\Users\Administrator\Desktop\test.xls')
+
+'''
+
+
 if __name__== '__main__':
     s = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
-    print(s.get_row_num)
-    print(s.get_col_num)
-    print(s.get_case_name)
-    print(s.get_get_way)
-    print(s.get_Expect_out)
-    print(s.get_url)
+    s.write_out_parameter(value='888')
 
 
 
