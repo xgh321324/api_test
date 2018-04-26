@@ -2,6 +2,9 @@
 import requests,unittest
 from common.login import LG
 from common.logger import Log
+from common.Excel import Excel_util
+import json
+
 class Meet(unittest.TestCase):
     def setUp(self):
         #banner获取接口
@@ -19,6 +22,7 @@ class Meet(unittest.TestCase):
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
                        'Connection': 'keep-alive'}
         self.log = Log()
+        self.EXCEL = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
 
     def test_getbanner(self):
         u'测试获取banner链接接口'
@@ -89,16 +93,59 @@ class Meet(unittest.TestCase):
         #print('code::::',codes)
         #循环对每一个会议code获取会议信息
         url_2 = 'http://api.exam.wrightin.com/v1/meetinfo'
+        #创建考试code list
+        exam_codes = []
+
         for code in codes:
             json_data_2 = {"token":self.uid_token,"code":code}
             r2 = self.s.post(url_2,headers = self.header,json=json_data_2)#json_data可以共用
+            #print(r2.json())
             #断言每个会议信息的返回状态
             try:
                 self.assertEqual('请求成功.',r2.json()['note'])
                 self.log.info('会议信息返回状态成功')
             except Exception as e:
                 self.log.error('会议信息返回状态失败，原因：%s' % e)
-        self.log.info('=========测试会议信息接口结束==========')
+            #获取试卷code作为关联参数
+            d = r2.json()['data']
+            exam_codes.append(d['exam_code'])
+
+        #去除exam列表中的空元素
+        new_exam_codes = []
+        for i in exam_codes:
+            if i != '':
+                new_exam_codes.append(i)
+        print('exam code:' ,new_exam_codes)
+
+        #将exam code 以字典格式写入excel
+        D = {}
+        x = 1
+        for i in new_exam_codes:
+            D['exam_code'+ str(x)] = i
+            x += 1
+        self.EXCEL.write_value(3,4,json.dumps(D))
+
+
+    def test_exam_msg(self):
+        u'测试获取考试信息 接口'
+        self.log.info('-----------开始测试获取考试信息 接口-----------')
+        #之前写入excel是str类型，现在转换为dict类型
+        exam_codes = json.loads(self.EXCEL.read_value(3,4))
+        self.log.info('读取的考试code是：%s' % exam_codes)
+        url = 'http://api.exam.wrightin.com/v1/examMsgByMeetCode'
+        #循环字典的value作为examcode
+        for value in exam_codes.values():
+            json_data = {
+                "token":self.uid_token,"examcode":value,
+                "userid":"107dfd1c1ade4a0f820e4897491710c6"
+            }
+            r = self.s.post(url,headers=self.header,json=json_data)
+            try:
+                self.assertEqual('请求成功.',r.json()['note'])
+                self.log.info('考试信息获取成功！')
+            except Exception as e:
+                self.log.error('考试信息获取失败，原因是：%s' % e)
+        self.log.info('-----------开始测试获取考试信息 接口测试结束！-----------')
 
     def tearDown(self):
         self.s.close()

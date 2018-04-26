@@ -1,11 +1,13 @@
 #coding:utf-8
-import xlrd
+import xlrd,time
 import xlwt
 from xlutils.copy import copy
 class Excel_util():
+    #舒适化要传入表格绝对路径
     def __init__(self,abspath):
-        #打开表格
-        self.data = xlrd.open_workbook(abspath) #只读
+        self.path = abspath
+        #添加对应的参数formatting_info=True，可以保留原有格式
+        self.data = xlrd.open_workbook(abspath,formatting_info=True)
         #self.w_data = xlwt.Workbook(abspath)    #只写入
 
     #获取要读取的sheet
@@ -65,27 +67,47 @@ class Excel_util():
         for i in range(1,self.get_row_num):
             parameters.append(self.gettable.cell_value(i,5))
         return parameters
-###############################################################################################################
-    '''
-    #获取要读取的sheet
-    @property
-    def get_tabel2(self):
-         # 所以在打开时加cell_overwrite_ok=True 解决一个单元格重复操作报错问题
-        tabel = self.w_data.add_sheet('demo',cell_overwrite_ok=True)
-        return tabel
 
-    #写入出参
-    @property
-    def write_out_parameter(self,value):
-        self.get_tabel2.witr(2,4,lable=value)
-        self.w_data.save(r'C:\Users\Administrator\Desktop\test.xls')
 
-'''
+
+###########################################################################################################
+    #下面是常用的读取具体位置数值
+    def read_value(self,row,col):
+        try:
+            value = self.gettable.cell_value(row,col)
+            print('Read suceess!')
+            #print(value)
+            return value
+        except Exception as e:
+            print('读取数据有错，原因：%s' % e)
+
+    #下面是写入具体位置数据
+    def write_value(self,row,col,value):
+        """修改数据"""
+        rb =self.data
+        wb = copy(rb)
+        s = wb.get_sheet(0)
+        #设置自动换行
+        style = xlwt.easyxf('align: wrap on')
+        try:
+            s.write(row,col,value,style)
+            wb.save(self.path)
+            print ("Write finished")
+        except Exception as e :
+            print('数据写入失败，原因：%s' % e)
+
+
+
+    def set_style(self):
+        """设置样式"""
+
 
 
 if __name__== '__main__':
     s = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
-    s.write_out_parameter(value='888')
+    s.read_value(1,5)
+    s.write_value(1,5,'今天是个好日子，阿三将会对阿什顿建的话，，阿神大叔大婶都卡的：{88888888888888888888888888888888888888888}')
+
 
 
 
