@@ -17,7 +17,7 @@ class LG():
                        'Connection': 'keep-alive'}
         s = requests.session()
         #利用自己固定的账号密码登录
-        t = {"username":"15651797525","password":"123456","loginDevice":"2","loginCity":"no location"}
+        t = {"username":"15651797525","password":"123456","loginDevice":"2","loginCity":"南京市"}
         r = s.post(url,headers=header,json=t)
         #print(r.json())
         s.close()
@@ -36,7 +36,7 @@ class LG():
                        'Connection': 'keep-alive'}
         s = requests.session()
         #利用自己固定的账号密码登录
-        t = {"username":"15651797525","password":"123456","loginDevice":"2","loginCity":"no location"}
+        t = {"username":"15651797525","password":"123456","loginDevice":"2","loginCity":"南京市"}
         r = s.post(url,headers=header,json=t)
         success_token = r.json()['data']['Token']  #后面的很多操作会用到这个token，该token在登录成功后的步骤中作为请求的数据
         #print('success token:%s' % success_token)
@@ -57,7 +57,7 @@ class LG():
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
                        'Connection': 'keep-alive'}
         s = requests.session()
-        t = {"username":"15651797525","password":"123456","loginDevice":"2","loginCity":"no location"}
+        t = {"username":"15651797525","password":"123456","loginDevice":"2","loginCity":"南京市"}
         r = s.post(url,headers=header,json=t)
         success_duid = r.json()['data']['doctorInfo']['duid']  #后面的很多操作会用到这个duid，
         #print('success duid:%s' % success_duid)
@@ -78,7 +78,7 @@ class LG():
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
                        'Connection': 'keep-alive'}
         s = requests.session()
-        json_data1 = {"UID":str(self.get_duid()),"loginDevice":"2","loginCity":"no location"}  #device 1是安卓
+        json_data1 = {"UID":str(self.get_duid()),"loginDevice":"2","loginCity":"南京市"}  #device 1是安卓
         r = s.post(url,headers= header,json=json_data1) ##医生用uid自动登录接口的请求数据又是登录成功后返回的json中的duid
         UID_token = r.json()['data']['Token'] #取到我想要的token
         #print(UID_token)

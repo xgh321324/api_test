@@ -4,7 +4,7 @@ import requests
 import unittest
 from common.login import LG
 from common.logger import Log
-from common.Write_Exel import write03
+from common.Excel import Excel_util
 class Test_transaction(unittest.TestCase):
 
     def setUp(self):
@@ -45,8 +45,6 @@ class Test_transaction(unittest.TestCase):
             L.append(i['order_no'])
 
 
-
-
     def test_transaction_1(self):
         u'测试交易记录接口(1:未申请发票)'
         json_data = {"token":self.uid_token,"is_invoices_req":"1"}#0全部 1未申请发票 2已经申请发票
@@ -54,8 +52,8 @@ class Test_transaction(unittest.TestCase):
         print('未申请发票返回：%s' % r.json())
         code = r.json()['code']
         n = r.json()['note']
-        try:
 
+        try:
             self.assertEqual(200,code,msg='返回的状态码不是200')
             self.assertEqual('请求成功.',n,msg='消息未请求成功')
         except Exception as e:
@@ -68,6 +66,7 @@ class Test_transaction(unittest.TestCase):
         print('已申请发票返回：%s' % r.json())
         code = r.json()['code']
         n = r.json()['note']
+
         try:
             self.assertEqual(200,code,msg='返回的状态码不是200')
             self.assertEqual('请求成功.',n,msg='消息未请求成功')
@@ -83,12 +82,13 @@ class Test_transaction(unittest.TestCase):
         json_data = {'token':self.uid_token,"is_invoices_req":"0"} #0全部 1未申请发票 2已经申请发票
         r = self.s.post(self.url,headers=self.header,json=json_data)
         print('全部：%s' % r.json())
-
         #取出交易记录中的订单号
         order_no_list = r.json()['data']['list']
+
         L=[]
         for i in order_no_list:
             L.append(i['order_no'])
+
         #循环订单号
         for x in L:
             json_data2 = {

@@ -18,8 +18,8 @@ class Test_pay(unittest.TestCase):
                        'Connection': 'keep-alive'}
     def test_pay(self):
         u'测试支付接口'
-        url = 'http://api.exam.sunnycare.cc/v1/mldProductPay'
-        json_data = {"payType":"0","product_type":"2","token":self.uid_token,"product_code":"K2018041809552018060"}
+        url = 'http://api.exam.wrightin.com/v1/mldProductPay'
+        json_data = {"payType":"0","product_type":"2","token":self.uid_token,"product_code":"K00001"}
         r = self.s.post(url,headers = self.header,json=json_data)
         print(r.json())
         global out_trad_num   #设置为全局变量供下一case调用
@@ -29,7 +29,7 @@ class Test_pay(unittest.TestCase):
         self.assertEqual('请求成功.',r.json()['note'],msg='支付请求状态不是200')
     def test_pay_success(self):
         u'测试支付成功后的确认接口'
-        url = 'http://api.exam.sunnycare.cc/v1/mldProductPaySucessReq'
+        url = 'http://api.exam.wrightin.com/v1/mldProductPaySucessReq'
         json_data = {"payType":"0","out_trade_no":"","token":self.uid_token,"orderid":""}
         r = self.s.post(url,headers=self.header,json=json_data)
         print(r.json())

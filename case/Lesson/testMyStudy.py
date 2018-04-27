@@ -25,7 +25,7 @@ class Mystudy(unittest.TestCase):
     def test_mystudy(self):
         u'测试我的学习接口'
         self.log.info('-----开始测试测试我的学习接口-----')
-        url = 'http://api.lesson.sunnycare.cc/v1/learns'
+        url = 'https://api.lesson.wrightin.com/v1/learns'
         json_data = {"token":self.uid_token}
         r = self.s.post(url,headers = self.header,json=json_data)
         print(r.json())
@@ -42,7 +42,7 @@ class Mystudy(unittest.TestCase):
     def test_remove_study(self):
         u'这是测试取消加入学习接口'
         self.log.info('-----开始测试测试取消加入学习接口--------')
-        url = 'http://api.lesson.sunnycare.cc/v1/learn/remove'
+        url = 'https://api.lesson.wrightin.com/v1/learn/remove'
         for i in L:
             json_data = {
                 "timestamp":str(time.time()),

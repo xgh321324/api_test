@@ -24,7 +24,7 @@ class LessonInfo(unittest.TestCase):
     def testLessonList(self):
         u'测试课程列表'
         self.log.info('-----开始测试课程列表接口-----')
-        url = 'http://api.lesson.sunnycare.cc/v1/lesson/list'
+        url = 'https://api.lesson.wrightin.com/v1/lesson/list'
         json_data = {"timestamp":str(time.time()),"token":self.uid_token,"time":"0"}
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('课程列表返回：%s' % r.json())
@@ -39,13 +39,13 @@ class LessonInfo(unittest.TestCase):
     def testLessonInfo(self):
         u'测试课程信息'
         self.log.info('------开始测试课程信息接口---------')
-        url = 'http://api.lesson.sunnycare.cc/v1/lesson'
+        url = 'https://api.lesson.wrightin.com/v1/lesson'
 
         #从txt读取上个接口的lesson_codes来循环post
-        lesson_codes = []
         with open(r'C:\Users\Administrator\Desktop\test_data.txt','r') as f:
                 lesson_codes=(f.readlines())
         #因为readline读取的列表元素末尾有'\n' 所以利用字符串的strip（）去除
+        #print(lesson_codes)
         need_codes = []
         for x in lesson_codes:
             need_codes.append(x.strip())
