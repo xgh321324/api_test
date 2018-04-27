@@ -2,6 +2,7 @@
 import xlrd,time
 import xlwt
 from xlutils.copy import copy
+import json
 class Excel_util():
     #舒适化要传入表格绝对路径
     def __init__(self,abspath):
@@ -89,17 +90,50 @@ class Excel_util():
         s = wb.get_sheet(0)
         #设置自动换行
         style = xlwt.easyxf('align: wrap on')
+        if type(value) == dict:
+            #如果写入类型是dict需要转换成str输出
+            try:
+                new_value = json.dumps(value)
+                s.write(row,col,new_value,style)
+                wb.save(self.path)
+                print ("Write finished")
+            except Exception as e:
+                print('数据写入失败，原因：%s' % e)
+        else:
+            try:
+                s.write(row,col,value,style)
+                wb.save(self.path)
+                print ("Write finished")
+            except Exception as e :
+                print('数据写入失败，原因：%s' % e)
+
+#########################################################################################################
+    #一下两个方法只适用于以字典格式存储关联参数
+
+    def write_relation_param(self,case_id,value):
+        u'只需要传入一个caseid 就可以直接把关联参数写入对应的关联参数列'
+        rb =self.data
+        wb = copy(rb)
+        s = wb.get_sheet(0)
+        #设置自动换行
+        style = xlwt.easyxf('align: wrap on')
+        #将要写入内容转换为str写入
+        str = json.dumps(value)
         try:
-            s.write(row,col,value,style)
-            wb.save(self.path)
-            print ("Write finished")
-        except Exception as e :
-            print('数据写入失败，原因：%s' % e)
+            s.write(case_id - 1,6,str)
+        except Exception as e:
+            print('写入失败，原因：%s' % e)
 
-
-
-    def set_style(self):
-        """设置样式"""
+    def read_relation_param(self,case_id):
+        u'只需要传入一个caseid 就可读取其中内容'
+        try:
+            value = self.gettable.cell_value(case_id,6)
+            print('Read suceess!')
+            #将读取的内容转换为字典格式
+            real_value = json.loads(value)
+            return real_value
+        except Exception as e:
+            print('读取数据有错，原因：%s' % e)
 
 
 

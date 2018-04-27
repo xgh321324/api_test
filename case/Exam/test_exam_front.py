@@ -20,7 +20,8 @@ class Meet(unittest.TestCase):
                        'requestclient': '2',
                        'versionForApp': '2.0',
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
-                       'Connection': 'keep-alive'}
+                       'Connection': 'keep-alive'
+                       }
         self.log = Log()
         self.EXCEL = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
 
@@ -123,14 +124,15 @@ class Meet(unittest.TestCase):
         for i in new_exam_codes:
             D['exam_code'+ str(x)] = i
             x += 1
-        self.EXCEL.write_value(3,4,json.dumps(D))
+        self.EXCEL.write_value(3,5,json.dumps(D))
+        self.log.info('=========测试会议信息接口结束==========')
 
 
     def test_exam_msg(self):
         u'测试获取考试信息 接口'
         self.log.info('-----------开始测试获取考试信息 接口-----------')
         #之前写入excel是str类型，现在转换为dict类型
-        exam_codes = json.loads(self.EXCEL.read_value(3,4))
+        exam_codes = json.loads(self.EXCEL.read_value(3,5))
         self.log.info('读取的考试code是：%s' % exam_codes)
         url = 'http://api.exam.wrightin.com/v1/examMsgByMeetCode'
         #循环字典的value作为examcode

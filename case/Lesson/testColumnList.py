@@ -3,6 +3,7 @@ import requests
 import unittest
 from common.login import LG
 import time
+from common.Excel import Excel_util
 class ColumnList(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
@@ -16,18 +17,29 @@ class ColumnList(unittest.TestCase):
                        'requestclient': '2',
                        'versionForApp': '2.0',
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
-                       'Connection': 'keep-alive'}
+                       'Connection': 'keep-alive'
+                       }
+        self.EXCEL = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
+
     def test_ColumnList(self):
         u'测试专栏列表接口'
-        url = 'http://api.lesson.sunnycare.cc/v1/spe/list'
-        #传入当前时间和杨雪固定验证码的token
+        url = 'https://api.lesson.wrightin.com/v1/spe/list'
         json_data = {"timestamp":str(time.time()),"token":self.uid_token}
         r = self.s.post(url,headers = self.header,json=json_data)
-        print(r.json())
+        self.EXCEL.write_value(4,5,r.json())
+
         self.assertEqual('请求成功.',r.json()['note'])
         data = r.json()['data']
         content = data['list'] #专栏列表的内容
         self.assertTrue(len(content) >= 1,msg='专栏列表为空，肯定有问题！')
+
+        spe_codes = {}
+        n = 1
+        for i in r.json()['data']['list']:
+            spe_codes['spe_code'+ str(n)] = i['spe_code']
+            n += 1
+        self.EXCEL.write_value(4,6,(spe_codes))
+
 
     def tearDown(self):
         self.s.close()

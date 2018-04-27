@@ -17,17 +17,25 @@ class Test_pay(unittest.TestCase):
                        'requestclient': '2',
                        'versionForApp': '2.0',
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
-                       'Connection': 'keep-alive'}
+                       'Connection': 'keep-alive'
+                       }
 
 
     def testpayment(self):
         u'测试通用-支付接口-微信支付'
         url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'  #医生用uid自动登录接口
-        json_data1 = {"UID":str(self.duid),"loginDevice":"2","loginCity":"no location"}
+        json_data1 = {"UID":str(self.duid),
+                      "loginDevice":"2",
+                      "loginCity":"no location"
+                      }
         r = self.s.post(url,headers= self.header,json=json_data1) ##医生用uid自动登录接口的请求数据又是登录成功后返回的json中的duid
         t= r.json()['data']['Token'] #取到我想要的token
 
-        json_data2 = {"payType":"1","user_source":"1","product_type":"2","token":t,"product_code":"K2018042016241650629"}  #上一接口返回的token现在用来做请求参数
+        json_data2 = {"payType":"1",
+                      "user_source":"1",
+                      "product_type":"2",
+                      "token":t,"product_code":"K00001"
+                      }  #上一接口返回的token现在用来做请求参数
         url2 ='http://api.exam.sunnycare.cc/v1/mldProductPay'#支付接口地址
         r2 = self.s.post(url2,headers=self.header,json=json_data2)
         print(r2.json())
@@ -36,27 +44,43 @@ class Test_pay(unittest.TestCase):
     def testpayment2(self):
         u'测试通用-支付接口-支付宝支付'
         url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'  #医生用uid自动登录接口
-        json_data1 = {"UID":str(self.duid),"loginDevice":"2","loginCity":"no location"}
+        json_data1 = {"UID":str(self.duid),
+                      "loginDevice":"2",
+                      "loginCity":"no location"
+                      }
         ##医生用uid自动登录接口的请求数据又是登录成功后返回的json中的duid
         r = self.s.post(url,headers= self.header,json=json_data1)
         t= r.json()['data']['Token'] #取到我想要的token
 
         #上一接口返回的token现在用来做请求参数
-        json_data2 = {"payType":"0","user_source":"1","product_type":"2","token":t,"product_code":"K2018042016241650629"}
+        json_data2 = {"payType":"0",
+                      "user_source":"1",
+                      "product_type":"2",
+                      "token":t,"product_code":"K00001"
+                      }
         url2 ='http://api.exam.sunnycare.cc/v1/mldProductPay'#支付接口地址
         r2 = self.s.post(url2,headers=self.header,json=json_data2)
         print(r2.json())
         self.assertEqual(200,r2.json()['code'])
+
     def testpayment3(self):
         u'测试通用-支付接口-专栏支付'
         url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'  #医生用uid自动登录接口
-        json_data1 = {"UID":str(self.duid),"loginDevice":"2","loginCity":"no location"}
+        json_data1 = {"UID":str(self.duid),
+                      "loginDevice":"2",
+                      "loginCity":"no location"
+                      }
         ##医生用uid自动登录接口的请求数据又是登录成功后返回的json中的duid
         r = self.s.post(url,headers= self.header,json=json_data1)
         t= r.json()['data']['Token'] #取到我想要的token
 
         #上一接口返回的token现在用来做请求参数
-        json_data2 = {"payType":"0","user_source":"1","product_type":"3","token":t,"product_code":"Z2018041715491952019"}
+        json_data2 = {"payType":"0",
+                      "user_source":"1",
+                      "product_type":"3",
+                      "token":t,
+                      "product_code":"Z00001"
+                      }
         url2 ='http://api.exam.sunnycare.cc/v1/mldProductPay'#支付接口地址
         r2 = self.s.post(url2,headers=self.header,json=json_data2)
         print(r2.json())
