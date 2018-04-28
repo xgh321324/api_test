@@ -19,6 +19,7 @@ class AddLearnRecord(unittest.TestCase):
                        'Connection': 'keep-alive'}
         self.log = Log()
 
+
     def test_addlearn_record(self):
         u'测试增加学习记录接口'
         self.log.info('--------开始测试增加学习记录接口---------')

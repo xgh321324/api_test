@@ -26,7 +26,8 @@ if __name__ == '__main__':
     #be_run=unittest.TextTestRunner() #返回实例
     #run所有用例
     #be_run.run(all_case())
-    report_path = r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\2018-4-27-1.html'  #报告存放路径,若用HTMLTestRunner则要加上具体文件名称
+    now_time = time.strftime('%Y_%m_%d %H_%M_%S',time.localtime())
+    report_path = "C:\\Users\\Administrator\\Documents\\GitHub\\Medohealth\\report\\" + now_time+ ".html" #报告存放路径,若用HTMLTestRunner则要加上具体文件名称
 
     with open(report_path,'wb') as f:
         runner = HTMLTestRunner.HTMLTestRunner(stream=f,
@@ -39,6 +40,6 @@ if __name__ == '__main__':
                '15651797525@163.com',
                'xgh321324',
                ['15651797525@163.com','15651797525@139.com','970185127@qq.com']
-               ,r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\2018-4-27-1.html').send()  #xgh321324是授权码登录
+               ,report_path).send()  #xgh321324是授权码登录
 
     print('发送成功！')

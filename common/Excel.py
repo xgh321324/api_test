@@ -120,7 +120,8 @@ class Excel_util():
         #将要写入内容转换为str写入
         str = json.dumps(value)
         try:
-            s.write(case_id - 1,6,str)
+            s.write(case_id,6,str)
+            print('写入关联参数成功！')
         except Exception as e:
             print('写入失败，原因：%s' % e)
 
@@ -135,13 +136,37 @@ class Excel_util():
         except Exception as e:
             print('读取数据有错，原因：%s' % e)
 
+#########################################################################################################
+    #这个方法是将表格中数据返回成地点的格式 ；每一行是一个字典
+    def dict_data(self):
+        #先获取行数，列数
+        self.rownum = self.gettable.nrows
+        self.colnum = self.gettable.ncols
+        #获取第一行为key的值
+        self.keys = self.gettable.row_values(0)
+
+        if self.rownum <= 1:
+            print('表格中的数据行数小于1的')
+        else:
+            L = []
+            x = 1 #初始值为1
+            for i in range(self.rownum-1):
+                s = {}
+                #从第二行取对应values值
+                values = self.gettable.row_values(x)
+                for n in range(self.colnum):
+                    s[self.keys[n]] = values[n]
+                L.append(s)
+                x += 1
+            print(L)
+            return L
+
 
 
 if __name__== '__main__':
     s = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
     s.read_value(1,5)
-    s.write_value(1,5,'今天是个好日子，阿三将会对阿什顿建的话，，阿神大叔大婶都卡的：{88888888888888888888888888888888888888888}')
-
+    s.write_relation_param(6,521521)
 
 
 
