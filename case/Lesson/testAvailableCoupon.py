@@ -23,7 +23,7 @@ class ColumnInfo(unittest.TestCase):
     def testAvailabelCoupon(self):
         u'测试可领用优惠券列表接口'
         self.log.info('-----开始测试可领的优惠券列表接口-------')
-        url = 'http://api.lesson.sunnycare.cc/v1/coupon/canget'
+        url = 'http://api.lesson.wrightin.com/v1/coupon/canget'
         json_DATA = {"where_code":"Z2018041914505917219",
                      "timestamp":str(time.time()),"for_where":"3",
                      "token":self.uid_token}

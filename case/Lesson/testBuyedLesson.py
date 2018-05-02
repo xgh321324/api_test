@@ -20,7 +20,7 @@ class Buyed_lesson(unittest.TestCase):
     def test_buyed_lesson(self):
         u'这是测试已购课程接口-课程类型为所有'
         self.log.info('-----开始测试已购课程接口（课程类型是所有）------')
-        url = 'http://api.lesson.sunnycare.cc/v1/orders'
+        url = 'http://api.lesson.wrightin.com/v1/orders'
         json_data = {"timestamp":str(time.time()),"product_type":"","token":self.uid_token,"time":"0"}
         r = self.s.post(url,headers = self.header,json=json_data)
         try:
@@ -34,7 +34,7 @@ class Buyed_lesson(unittest.TestCase):
     def test_buyed_lesson2(self):
         u'这是测试已购课程接口-课程类型为所有课程'
         self.log.info('-----开始测试已购课程接口（课程类型是所有课程）------')
-        url = 'http://api.lesson.sunnycare.cc/v1/orders'
+        url = 'http://api.lesson.wrightin.com/v1/orders'
         json_data = {"timestamp":str(time.time()),"product_type":"2","token":self.uid_token,"time":"0"}
         r = self.s.post(url,headers = self.header,json=json_data)
         try:
@@ -47,7 +47,7 @@ class Buyed_lesson(unittest.TestCase):
     def test_buyed_lesson3(self):
         u'这是测试已购课程接口-课程类型为所有专栏'
         self.log.info('-----开始测试已购课程接口（课程类型是所有专栏）------')
-        url = 'http://api.lesson.sunnycare.cc/v1/orders'
+        url = 'http://api.lesson.wrightin.com/v1/orders'
         json_data = {"timestamp":str(time.time()),"product_type":"3","token":self.uid_token,"time":"0"}
         r = self.s.post(url,headers = self.header,json=json_data)
         try:

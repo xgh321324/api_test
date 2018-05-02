@@ -16,7 +16,7 @@ class Send_email():
         with open(self.file_dir,'rb') as f:
             mail_body = f.read()
         server = 'smtp.163.com'
-        subject = '今天测试报告'
+        subject = '这是今天的测试报告'
         #msg = MIMEText(body,_subtype='html',_charset='utf-8')   #html和utf-8容易忘了加引号，这里要注意
 
         '''定义邮件内容'''
