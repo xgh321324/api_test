@@ -1,4 +1,4 @@
-import time
+import time,datetime
 import unittest
 import HTMLTestRunner
 from common.Send_email import Send_email
@@ -27,12 +27,14 @@ if __name__ == '__main__':
     #run所有用例
     #be_run.run(all_case())
     now_time = time.strftime('%Y_%m_%d %H_%M_%S',time.localtime())
-    report_path = "C:\\Users\\Administrator\\Documents\\GitHub\\Medohealth\\report\\" + now_time+ ".html" #报告存放路径,若用HTMLTestRunner则要加上具体文件名称
+    #报告存放路径,若用HTMLTestRunner则要加上具体文件名称
+    report_path = "C:\\Users\\Administrator\\Documents\\GitHub\\Medohealth\\report\\" + now_time+ ".html"
+    today = datetime.date.today()
 
     with open(report_path,'wb') as f:
         runner = HTMLTestRunner.HTMLTestRunner(stream=f,
                                                title='麦豆接口测试',
-                                               description='这是4月27日的测试结果',
+                                               description='这是'+str(today)+'日的测试结果',
                                                verbosity=2)
         runner.run(all_case())#这种用法也不错，也挺好看
 

@@ -52,7 +52,7 @@ class LessonInfo(unittest.TestCase):
         self.log.info('-----------开始测试我的不可用优惠券列表接口-------------')
         url = 'https://api.lesson.wrightin.com/v1/coupon/mine'
         #0.不可用/1.可用
-        json_data = {"can_use":"1","timestamp":str(time.time()),"token":self.uid_token,"time":"0"}
+        json_data = {"can_use":"0","timestamp":str(time.time()),"token":self.uid_token,"time":"0"}
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的不可用优惠券json是：%s' % r.json())
         try:

@@ -24,7 +24,7 @@ class AddLearnRecord(unittest.TestCase):
         u'测试增加学习记录接口'
         self.log.info('--------开始测试增加学习记录接口---------')
         url = 'http://api.lesson.wrightin.com/v1/learn/chapadd'
-        json_data = {"chap_code":'ZJ2018042058324',
+        json_data = {"chap_code":'J00035',
                          "timestamp":str(time.time()),
                          "token":self.uid_token}
         r = self.s.post(url,headers = self.header,json=json_data)

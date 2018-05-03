@@ -1,5 +1,5 @@
 #coding:utf-8
-import requests
+import requests,time
 import unittest
 from common.login import LG
 import time,json
@@ -82,7 +82,7 @@ class Mystudy(unittest.TestCase):
         url_2 = 'https://api.lesson.wrightin.com/v1/learn/chapadd'
         for i in chap_codes:
             json_data2 = {"chap_code":i,
-                       "timestamp":"1524905531",
+                       "timestamp":str(time.time()),
                        "token":self.uid_token
                        }
             r2 = self.s.post(url_2,headers = self.header,json=json_data2)
