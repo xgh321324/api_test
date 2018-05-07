@@ -24,16 +24,19 @@ class AddLearnRecord(unittest.TestCase):
         u'测试增加学习记录接口'
         self.log.info('--------开始测试增加学习记录接口---------')
         url = 'http://api.lesson.wrightin.com/v1/learn/chapadd'
-        json_data = {"chap_code":'J00035',
-                         "timestamp":str(time.time()),
-                         "token":self.uid_token}
-        r = self.s.post(url,headers = self.header,json=json_data)
+        L = ['J00035','J00036','J00001','J00013','J00014','J00016','J00007','J00008']
+        for i in L:
+            json_data = {"chap_code":i,
+                             "timestamp":str(time.time()),
+                             "token":self.uid_token
+                         }
+            r = self.s.post(url,headers = self.header,json=json_data)
 
-        try:
-            self.log.info('请求返回的数据是%s' % r.json())
-            self.assertEqual('请求成功',r.json()['note'])
-        except Exception as e:
-            self.log.error('增加章节学习记录请求失败，原因是：%s' % e )
+            try:
+                self.log.info('请求返回的数据是%s' % r.json())
+                self.assertEqual('请求成功',r.json()['note'])
+            except Exception as e:
+                self.log.error('增加章节学习记录请求失败，原因是：%s' % e )
 
         '''
         #数据库查询出章节code，循环加入学习
