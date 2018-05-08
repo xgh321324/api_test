@@ -2,6 +2,7 @@
 import unittest,time,requests
 from common.login import LG
 from common.logger import Log
+from common import Hash
 class Adress(unittest.TestCase):
     def setUp(self):
         self.log = Log()
@@ -18,14 +19,18 @@ class Adress(unittest.TestCase):
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
                        'Connection': 'keep-alive'
                        }
+        self.set_nonce = Hash.get_md5(Hash.get_str())
+        self.set_sign = Hash.get_md5(Hash.get_str())
 
     def test_All_Adress(self):
         u'获取用户的全部收货地址接口'
         self.log.info('开始测试获取用户的全部收货地址接口')
         url = 'http://api.common.wrightin.com/v1/address/records'
-        json_data = {"nonce":"",
+        print(self.set_sign)
+        print(self.set_nonce)
+        json_data = {"nonce":self.set_nonce,
                      "timestamp":str(time.time()),
-                     "sign":"",
+                     #"sign":self.set_sign,
                      "token":self.uid_token
                      }
         r = self.s.post(url,headers=self.header,json=json_data)

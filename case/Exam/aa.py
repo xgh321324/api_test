@@ -47,3 +47,23 @@ while unread:
     print(current)
     completed.append(current)
 print('completed:',completed)
+print('=============================================')
+import string
+import random
+#将a-z大写和小写赋值
+x = string.ascii_letters
+print('x:',x)
+#将0-9赋值
+y = string.digits
+print('y:',y)
+z = x+y
+print('z:',z)
+print('=====================================')
+import hashlib
+#md5加密需要导入hashlib模块
+n = ''.join(random.sample(string.ascii_letters+string.digits,32))
+print('n:',n)
+m = hashlib.md5() #创建Md5对象
+m.update(n.encode('utf-8')) #生成加密串，其中n是要加密的字符串
+result = m.hexdigest() #经过md5加密的字符串赋值
+print('结果是：',result)
