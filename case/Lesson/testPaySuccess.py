@@ -22,7 +22,11 @@ class Test_pay(unittest.TestCase):
         u'测试支付接口,已购买的课程，去支付'
         self.log.info('开始测试支付接口,已购买的课程，去支付')
         url = 'http://api.exam.wrightin.com/v1/mldProductPay'
-        json_data = {"payType":"0","product_type":"2","token":self.uid_token,"product_code":"K00001"}
+        json_data = {"payType":"0",
+                     "product_type":"2",
+                     "token":self.uid_token,
+                     "product_code":"K00001"
+                     }
         r = self.s.post(url,headers = self.header,json=json_data)
         print(r.json())
         global out_trad_num   #设置为全局变量供下一case调用
@@ -37,7 +41,13 @@ class Test_pay(unittest.TestCase):
         u'测试支付接口,未购买的课程，去支付'
         self.log.info('开始测试支付接口,未购买的课程，去支付')
         url = 'http://api.exam.wrightin.com/v1/mldProductPay'
-        json_data = {"payType":"0","product_type":"2","token":self.uid_token,"product_code":"K00008"}
+
+        json_data = {"payType":"0",
+                     "product_type":"2",
+                     "token":self.uid_token,
+                     "product_code":"K00008"
+                     }
+
         r = self.s.post(url,headers = self.header,json=json_data)
         print(r.json())
         global out_trad_num   #设置为全局变量供下一case调用
@@ -50,7 +60,13 @@ class Test_pay(unittest.TestCase):
         u'测试支付后的确认接口（未支付的orderid）'
         self.log.info('测试支付后的确认接口（未支付的orderid）')
         url = 'http://api.exam.wrightin.com/v1/mldProductPaySucessReq'
-        json_data = {"payType":"0","out_trade_no":"","token":self.uid_token,"orderid":"309251BA4A7C9A2C95C0F0A908DD3D66"}
+
+        json_data = {"payType":"0",
+                     "out_trade_no":"",
+                     "token":self.uid_token,
+                     "orderid":"309251BA4A7C9A2C95C0F0A908DD3D66"
+                     }
+
         r = self.s.post(url,headers=self.header,json=json_data)
         #print('未支付',r.json())
         self.assertEqual(201,r.json()['code'],msg=('未支付的orderid，支付确认接口有问题'))

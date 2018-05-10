@@ -64,6 +64,29 @@ class Doctor(unittest.TestCase):
 
         self.log.info('测试更新个人简介接口结束')
 
+    def test_update_born_date(self):
+        u'测试更新出生日期接口'
+        self.log.info('开始测试更新出生日期接口')
+        url = 'http://api.rih.medohealth.com/API/V1/DoctorInfo/modifyBorn'
+        json_data = {"token":self.uid_token,
+                     "born":"2017-05-01 00:00:00"
+                     }
+        r = self.s.post(url,headers = self.header,json=json_data)
+        self.assertEqual('Success.',r.json()['msg'],msg='更新出生日期失败')
+        self.log.info('测试更新出生日期接口结束')
+
+    def test_uphospital_department(self):
+        u'测试更新医院和科室接口'
+        self.log.info('开始测试更新医院和科室接口')
+        url = 'http://api.rih.medohealth.com/API/V1/DoctorInfo/modifyHosDep'
+        json_data = {"token":self.uid_token,
+                     "huid":"99D8CA14B516813A698C63D745508D0E",
+                     "kuid":"umvtDTbiCaR3Yl7xgEQSqWs0FAI1NHhd"
+                     }
+        r = self.s.post(url,headers = self.header,json=json_data)
+        self.assertEqual('Success.',r.json()['msg'],msg='更新医院和科室失败')
+        self.log.info('测试更新医院和科室接口结束')
+
 
     def tearDown(self):
         self.s.close()

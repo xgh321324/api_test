@@ -30,7 +30,7 @@ class TestInvoice(unittest.TestCase):
         print(json_data2)
         r = self.s.post(url,headers=self.header,json=json_data2)
         self.excel.write_value(6,5,r.json())
-        self.assertEqual('请求成功.',r.json()['note'],msg='请求我的发票接口没用成功')
+        self.assertEqual('请求成功.',r.json()['note'],msg='请求我的发票接口没有成功')
         list1 = r.json()['data']['list']
         global d
         d = {}
