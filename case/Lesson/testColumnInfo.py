@@ -1,5 +1,5 @@
 #coding:utf-8
-import requests
+import requests,json
 import unittest
 from common.login import LG
 import time
@@ -24,7 +24,7 @@ class ColumnInfo(unittest.TestCase):
         u'测试专栏信息接口'
         url = 'https://api.lesson.wrightin.com/v1/spe'
         #将所有专栏的code放进list
-        column_list = self.EXCEL.read_relation_param(4)
+        column_list = json.loads(self.EXCEL.read_value(4,6))
         print(column_list)
 
         new_column_list = []

@@ -67,3 +67,25 @@ m = hashlib.md5() #创建Md5对象
 m.update(n.encode('utf-8')) #生成加密串，其中n是要加密的字符串
 result = m.hexdigest() #经过md5加密的字符串赋值
 print('结果是：',result)
+print('==============================')
+import random
+x = random.randint(0,9)
+print(x)
+
+print('======================================')
+import unittest
+class A(unittest.TestCase):
+    def test01(self):
+        x = self.assertEqual(2,2)
+        print(x)
+
+    def test02(self):
+        y = self.assertTrue(2>1)
+        print(y)
+if __name__ == '__main__':
+    unittest.main()
+
+print('====================')
+f = []
+print(len(f))
+
