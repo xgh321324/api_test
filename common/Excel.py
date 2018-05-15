@@ -107,37 +107,10 @@ class Excel_util():
             except Exception as e :
                 print('数据写入失败，原因：%s' % e)
 
-#########################################################################################################
-    #一下两个方法只适用于以字典格式存储关联参数
 
-    def write_relation_param(self,case_id,value):
-        u'只需要传入一个caseid 就可以直接把关联参数写入对应的关联参数列'
-        rb =self.data
-        wb = copy(rb)
-        s = wb.get_sheet(0)
-        #设置自动换行
-        style = xlwt.easyxf('align: wrap on')
-        #将要写入内容转换为str写入
-        str = json.dumps(value)
-        try:
-            s.write(case_id,6,str)
-            print('写入关联参数成功！')
-        except Exception as e:
-            print('写入失败，原因：%s' % e)
-
-    def read_relation_param(self,case_id):
-        u'只需要传入一个caseid 就可读取其中内容'
-        try:
-            value = self.gettable.cell_value(case_id,6)
-            print('Read suceess!')
-            #将读取的内容转换为字典格式
-            real_value = json.loads(value)
-            return real_value
-        except Exception as e:
-            print('读取数据有错，原因：%s' % e)
 
 #########################################################################################################
-    #这个方法是将表格中数据返回成地点的格式 ；每一行是一个字典
+    #这个方法是将表格中数据返回成字典的格式 ；每一行是一个字典
     def dict_data(self):
         #先获取行数，列数
         self.rownum = self.gettable.nrows
@@ -166,7 +139,8 @@ class Excel_util():
 if __name__== '__main__':
     s = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
     s.read_value(1,5)
-    s.write_relation_param(6,521521)
+    d= {'a':1,'b':99}
+    s.write_relation_param(10,d)
 
 
 

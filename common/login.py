@@ -60,7 +60,6 @@ class LG():
         t = {"username":"15651797525","password":"123456","loginDevice":"2","loginCity":"南京市"}
         r = s.post(url,headers=header,json=t)
         success_duid = r.json()['data']['doctorInfo']['duid']  #后面的很多操作会用到这个duid，
-        #print('success duid:%s' % success_duid)
         return success_duid
         s.close()
 
@@ -84,6 +83,24 @@ class LG():
         #print(UID_token)
         return UID_token
         s.close()
+
+    def get_autologin_token(self):
+        header = {'User-Agent': 'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)',
+                       'Accept-Encoding': 'gzip, deflate',
+                       'Accept-Language': 'zh-Hans-CN;q=1',
+                       'Content-Type': 'application/json',
+                       'requestApp': '3',
+                       'requestclient': '2',
+                       'versionForApp': '1.3',
+                       'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
+                       'Connection': 'keep-alive'}
+        url = 'http://api.rih.medohealth.com/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'
+        json_data = {"UID":"IKxSa8XhbiJH1CYlwQvkW50oLefZ62uB"}
+        s = requests.session()
+        r = s.post(url,headers = header,json=json_data)
+        t = r.json()['data']['Token']
+        return t
+
 
 if __name__=='__main__':
     x = LG()
