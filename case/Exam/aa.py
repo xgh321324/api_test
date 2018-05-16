@@ -69,8 +69,12 @@ result = m.hexdigest() #经过md5加密的字符串赋值
 print('结果是：',result)
 print('==============================')
 import random
-x = random.randint(0,9)
+x = random.randint(0,9)#在此范围内生成随机整数
 print(x)
+print('哈哈',random.random())#生成随机小数
+L = ['你好','你不好','我不好','他不好']#再次列表中随机选择一个
+y = random.choice(L)
+print('yy',y)
 
 print('======================================')
 import unittest
@@ -86,6 +90,5 @@ if __name__ == '__main__':
     unittest.main()
 
 print('====================')
-f = []
-print(len(f))
+
 

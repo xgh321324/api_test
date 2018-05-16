@@ -99,6 +99,16 @@ class Excel_util():
                 print ("Write finished")
             except Exception as e:
                 print('数据写入失败，原因：%s' % e)
+        elif type(value)==list:
+            u'如果写入的值是list'
+            try:
+                for i in value:
+                    s.write(row,col,value,style)
+                    wb.save(self.path)
+                    print('Write finished!')
+            except Exception as e:
+                print('数据写入失败，原因：%s' % e)
+
         else:
             try:
                 s.write(row,col,value,style)

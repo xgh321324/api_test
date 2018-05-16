@@ -2,6 +2,7 @@
 import requests,time,unittest
 from common.logger import Log
 from common.login import LG
+from common.Excel import Excel_util
 
 class Trian(unittest.TestCase):
 
@@ -21,6 +22,7 @@ class Trian(unittest.TestCase):
                        'Connection': 'keep-alive'
                        }
         self.log = Log()
+        self.excel = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
 
     def test_get_user_plan(self):
         u'医生获取用户训练方案接口'
@@ -45,12 +47,23 @@ class Trian(unittest.TestCase):
                              "userUID":id
                              }
                 r2 = self.s.post(url_2,headers = self.header,json=json_data_2)
-                print(r2.json())
                 self.assertEqual(200,r2.json()['code'])
+                plans = r2.json()['data']
+            #将方案的course id写入excel供调用
+            course_ids = {}
+            n = 1
+            for p in plans:
+                #print(p)
+                course_ids['corse_id_'+ str(n)]=p['utcUID']
+                n += 1
+            self.excel.write_value(11,6,course_ids)
+
         else:
             self.log.warning('该医生还没有绑定的用户！')
 
         self.log.info('医生查看用户训练方案接口测试结束！')
+
+
 
     def test_get_doctor_plan(self):
         u'医生获取训练方案接口'
