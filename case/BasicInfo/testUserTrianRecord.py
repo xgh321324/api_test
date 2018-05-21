@@ -55,7 +55,6 @@ class Trian_record(unittest.TestCase):
                 print(r2.json())
                 self.assertEqual(200,r2.json()['code'])
 
-
         else:
             self.log.warning('该医生还没有绑定的用户！')
 

@@ -22,6 +22,7 @@ class Adress(unittest.TestCase):
         self.set_nonce = Hash.get_md5(Hash.get_str())
         self.set_sign = Hash.get_md5(Hash.get_str())
 
+    @unittest.skip('无条件跳过')
     def test_All_Adress(self):
         u'获取用户的全部收货地址接口'
         self.log.info('开始测试获取用户的全部收货地址接口')
@@ -43,6 +44,7 @@ class Adress(unittest.TestCase):
 
         self.log.info('测试获取用户的全部收货地址接口结束')
 
+    @unittest.skip('无条件跳过')
     def testAddAdress(self):
         u'测试增加收货地址接口'
         self.log.info('开始测试新增收货地址接口')

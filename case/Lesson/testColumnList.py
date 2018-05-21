@@ -4,6 +4,7 @@ import unittest
 from common.login import LG
 import time
 from common.Excel import Excel_util
+from common.logger import Log
 class ColumnList(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
@@ -20,9 +21,11 @@ class ColumnList(unittest.TestCase):
                        'Connection': 'keep-alive'
                        }
         self.EXCEL = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
+        self.log = Log()
 
     def test_ColumnList(self):
         u'测试专栏列表接口'
+        self.log.info('开始测试专栏列表接口....')
         url = 'https://api.lesson.wrightin.com/v1/spe/list'
         json_data = {"timestamp":str(time.time()),"token":self.uid_token}
         r = self.s.post(url,headers = self.header,json=json_data)
@@ -39,6 +42,7 @@ class ColumnList(unittest.TestCase):
             spe_codes['spe_code'+ str(n)] = i['spe_code']
             n += 1
         self.EXCEL.write_value(4,6,(spe_codes))
+        self.log.info('专栏列表接口测试结束！！')
 
 
     def tearDown(self):
