@@ -17,6 +17,7 @@ def get_str():
     '''
 
     s = ''.join(random.sample(string.ascii_letters+string.digits,32))
+    #random.sample()  从中随机选择多少长度的值
     #print(s)
     return s
 
@@ -28,7 +29,18 @@ def get_md5(target):
     #print(result)
     return result
 
+def get_sha1(target):
+    u'传入参数，将此参数进行SHA1加密'
+    m = hashlib.sha1() #创建sha1对象
+    m.update(target.encode('utf-8'))
+    result = m.hexdigest()
+    print(result)
+    return result
+
 if __name__ == '__main__':
     #get_md5(get_str())
-    get_str()
+    #get_str()
+    get_sha1('我爱你')
+
+
 

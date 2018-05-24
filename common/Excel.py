@@ -17,21 +17,7 @@ class Excel_util():
         #获取索引
         table = self.data.sheet_by_name('Sheet1')
         return table
-    @property
-    def get_row_num(self):
-        row_num = self.gettable.nrows
-        return row_num
-    @property
-    def get_col_num(self):
-        col_num = self.gettable.ncols
-        return col_num
-    @property
-    #获取每一列的值
-    def get_case_name(self):
-        names = []
-        for i in range(1,self.get_row_num):
-            names.append(self.gettable.cell_value(i,0))
-        return names
+    '''
     @property
     #获取请求方式
     def get_get_way(self):
@@ -68,6 +54,7 @@ class Excel_util():
         for i in range(1,self.get_row_num):
             parameters.append(self.gettable.cell_value(i,5))
         return parameters
+    '''
 
 
 
@@ -120,7 +107,7 @@ class Excel_util():
 
 
 #########################################################################################################
-    #这个方法是将表格中数据返回成字典的格式 ；每一行是一个字典
+    #这个方法是将表格中所有数据返回成字典的格式 ；每一行是一个字典
     def dict_data(self):
         #先获取行数，列数
         self.rownum = self.gettable.nrows
@@ -129,7 +116,7 @@ class Excel_util():
         self.keys = self.gettable.row_values(0)
 
         if self.rownum <= 1:
-            print('表格中的数据行数小于1的')
+            print('表格中的数据行数小于1行')
         else:
             L = []
             x = 1 #初始值为1
@@ -144,13 +131,33 @@ class Excel_util():
             print(L)
             return L
 
+    #####################################################################################################
+    #这个方法是将excel中每一行生成一个字典，只需要传入caseid，字典的key是表头
+    def get_dict(self,caseid):
+        '''传入caseid即可以将此行数据返回成dict，每一个表头key对应该行的值'''
+        self.rownum = self.gettable.nrows  #行数
+        self.colnum = self.gettable.ncols  #列数
+        self.keys = self.gettable.row_values(0) #获取表头
+        #print(self.keys)
 
+        if self.rownum <= 1:
+            print('表格中的数据行数小于1行')
+        else:
+            d = {}
+            #获取该caseid的values
+            caseid_values = self.gettable.row_values(caseid)
+            #将caseid这行的每一个value赋值给字典的key
+            for i in range(self.colnum):
+                d[self.keys[i]] = caseid_values[i]
+        print(d)
+        return d
 
 if __name__== '__main__':
     s = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
-    s.read_value(1,5)
-    d= {'a':1,'b':99}
-    s.write_relation_param(10,d)
+    #s.read_value(1,5)
+    #d= {'a':1,'b':99}
+    #s.write_relation_param(10,d)
+    s.get_dict(11)
 
 
 
