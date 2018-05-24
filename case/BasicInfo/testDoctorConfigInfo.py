@@ -21,7 +21,7 @@ class ConfigInfo(unittest.TestCase):
                        'Connection': 'keep-alive'
                        }
         self.log = Log()
-
+    @unittest.skip('无条件跳过')
     def test_config_info(self):
         u'设置医生实名认证信息接口'
         self.log.info('开始测试医生实名认证接口.....')
@@ -39,6 +39,7 @@ class ConfigInfo(unittest.TestCase):
         self.assertEqual('更新医生资料成功',r.json()['msg'])
         self.log.info('医生实名认证接口测试结束!')
 
+    @unittest.skip('无条件跳过')
     def test_doctor_profession(self):
         u'设置医生职称接口'
         self.log.info('开始测试设置医生职称.....')

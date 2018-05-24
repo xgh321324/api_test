@@ -5,6 +5,8 @@ from common.login import LG
 import time,json
 from common.logger import Log
 from common.Excel import Excel_util
+import urllib3
+urllib3.disable_warnings()
 class Mystudy(unittest.TestCase):
 
     def setUp(self):
@@ -12,7 +14,7 @@ class Mystudy(unittest.TestCase):
         self.lgin = LG() #实例化登录类
         self.uid_token = self.lgin.gettoken_loginbyUID() #直接取第二部登录
         self.header = {
-            'User-Agent': 'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)',
+            'User-Agent': 'LanTingDoctor/2.0.2 (iPad; iOS 10.1.1; Scale/2.00)',
             'Accept-Encoding': 'gzip, deflate',
             'Accept-Language': 'zh-Hans-CN;q=1',
             'Content-Type': 'application/json',
@@ -30,7 +32,7 @@ class Mystudy(unittest.TestCase):
         self.log.info('-----开始测试测试我的学习接口-----')
         url = 'https://api.lesson.wrightin.com/v1/learns'
         json_data = {"token":self.uid_token}
-        r = self.s.post(url,headers = self.header,json=json_data)
+        r = self.s.post(url,headers = self.header,json=json_data,verify=False)
         print(r.json())
         self.assertEqual('请求成功.',r.json()['note'])
         lessons = r.json()['data']['list']
@@ -71,7 +73,7 @@ class Mystudy(unittest.TestCase):
             json_data = {"lesson_code":value,
                     "token":self.uid_token
                      }
-            r = self.s.post(url,headers = self.header,json=json_data)
+            r = self.s.post(url,headers = self.header,json=json_data,verify=False)
             #断言，我的学习中的每一个课程的标签都应是‘已加入学习’
             self.assertEqual('已加入学习',r.json()['data']['btn'][0]['btn_name'])
             #将chap_code 加入chap_codes列表
@@ -85,7 +87,7 @@ class Mystudy(unittest.TestCase):
                        "timestamp":str(time.time()),
                        "token":self.uid_token
                        }
-            r2 = self.s.post(url_2,headers = self.header,json=json_data2)
+            r2 = self.s.post(url_2,headers = self.header,json=json_data2,verify=False)
             self.assertEqual('请求成功',r2.json()['note'],msg='增加课程的学习进度失败')
         self.log.info('====测试增加课程的学习进度接口结束=====')
 

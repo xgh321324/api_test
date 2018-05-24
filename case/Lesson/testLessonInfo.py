@@ -4,6 +4,8 @@ import unittest
 from common.login import LG
 import time
 from common.logger import Log
+import urllib3
+urllib3.disable_warnings()
 class LessonInfo(unittest.TestCase):
     log = Log()#实例化记录日志的类
     def setUp(self):
@@ -26,7 +28,7 @@ class LessonInfo(unittest.TestCase):
         self.log.info('-----开始测试课程列表接口-----')
         url = 'https://api.lesson.wrightin.com/v1/lesson/list'
         json_data = {"timestamp":str(time.time()),"token":self.uid_token,"time":"0"}
-        r = self.s.post(url,headers = self.header,json=json_data)
+        r = self.s.post(url,headers = self.header,json=json_data,verify=False)
         self.log.info('课程列表返回：%s' % r.json())
         #判断课程列表获取是否成功
         self.assertEqual('请求成功.',r.json()['note'],msg='返回的状态不是请求成功！！！')
@@ -54,7 +56,7 @@ class LessonInfo(unittest.TestCase):
         #下面循环post课程 来断言课程详情是否获取成功
         for n in need_codes:
             json_data = {"lesson_code":n,"token":self.uid_token}
-            r2 = self.s.post(url,headers = self.header,json=json_data)
+            r2 = self.s.post(url,headers = self.header,json=json_data,verify=False)
             self.log.info('课程信息返回：%s' % r2.json())
             self.assertEqual('请求成功.',r2.json()['note'])
 
@@ -63,4 +65,4 @@ class LessonInfo(unittest.TestCase):
     def tearDown(self):
         self.s.close()
 if __name__=='__main__':
-    unittest.main()
+    unittest.main(warnings='ignore')

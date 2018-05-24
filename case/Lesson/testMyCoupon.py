@@ -4,6 +4,8 @@ import unittest
 from common.login import LG
 import time
 from common.logger import Log
+import urllib3
+urllib3.disable_warnings()
 class LessonInfo(unittest.TestCase):
     log = Log()#实例化记录日志的类
     def setUp(self):
@@ -25,7 +27,7 @@ class LessonInfo(unittest.TestCase):
         url = 'https://api.lesson.wrightin.com/v1/coupon/mine'
         #0.不可用/1.可用
         json_data = {"can_use":"1","timestamp":str(time.time()),"token":self.uid_token,"time":"0"}
-        r = self.s.post(url,headers = self.header,json=json_data)
+        r = self.s.post(url,headers = self.header,json=json_data,verify=False)
         self.log.info('返回的可用优惠券参数是：%s' % r.json())
         try:
             self.assertEqual('请求成功.',r.json()['note'])
@@ -53,7 +55,7 @@ class LessonInfo(unittest.TestCase):
         url = 'https://api.lesson.wrightin.com/v1/coupon/mine'
         #0.不可用/1.可用
         json_data = {"can_use":"0","timestamp":str(time.time()),"token":self.uid_token,"time":"0"}
-        r = self.s.post(url,headers = self.header,json=json_data)
+        r = self.s.post(url,headers = self.header,json=json_data,verify=False)
         self.log.info('返回的不可用优惠券json是：%s' % r.json())
         try:
             self.assertEqual('请求成功.',r.json()['note'])

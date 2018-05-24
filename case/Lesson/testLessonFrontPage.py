@@ -26,7 +26,7 @@ class Test_pay(unittest.TestCase):
             "timestamp":"1523937360",
             "token":self.uid_token
                      }
-        r = self.s.post(url,headers = self.header,json=json_data)
+        r = self.s.post(url,headers = self.header,json=json_data,verify=False)
         print(r.json())
         #判断返回状态
         self.assertEqual('请求成功.',r.json()['note'],msg='请求返回状态不是200，有问题')

@@ -5,6 +5,9 @@ from common.login import LG
 import time
 from common.Excel import Excel_util
 from common.logger import Log
+import urllib3
+urllib3.disable_warnings()
+
 class ColumnList(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
@@ -28,7 +31,7 @@ class ColumnList(unittest.TestCase):
         self.log.info('开始测试专栏列表接口....')
         url = 'https://api.lesson.wrightin.com/v1/spe/list'
         json_data = {"timestamp":str(time.time()),"token":self.uid_token}
-        r = self.s.post(url,headers = self.header,json=json_data)
+        r = self.s.post(url,headers = self.header,json=json_data,verify=False)
         self.EXCEL.write_value(4,5,r.json())
 
         self.assertEqual('请求成功.',r.json()['note'])

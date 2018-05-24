@@ -4,6 +4,9 @@ import unittest
 from common.login import LG
 import time
 from common.Excel import Excel_util
+import urllib3
+urllib3.disable_warnings()
+
 class ColumnInfo(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
@@ -34,14 +37,14 @@ class ColumnInfo(unittest.TestCase):
         detail_links = []
         for i in new_column_list:
             json_data = {"spe_code":i,"timestamp":str(time.time()),"token":self.uid_token}
-            r = self.s.post(url,headers = self.header,json=json_data)
+            r = self.s.post(url,headers = self.header,json=json_data,verify=False)
             #print(r.json())
             detail_links.append(r.json()['data']['detail_link'])
             self.assertEqual('请求成功.',r.json()['note'],msg='专栏信息返回的状态不是请求成功，有问题！')
         #下面测试专栏介绍的链接
 
         for link in detail_links:
-            r2 = self.s.get(link)
+            r2 = self.s.get(link,verify=False)
             self.assertEqual(200,r2.status_code,msg='专栏介绍链接返回状态码不是200！')
 
 
