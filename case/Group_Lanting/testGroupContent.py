@@ -31,6 +31,7 @@ class Content(unittest.TestCase):
                      "group_id":"G00009"
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
+        print(r.status_code)
         self.log.info('返回内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
         self.assertEqual('请求成功.',r.json()['note'])

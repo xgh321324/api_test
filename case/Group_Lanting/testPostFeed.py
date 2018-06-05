@@ -111,7 +111,7 @@ class Feed(unittest.TestCase):
         json_data = {
                     "token": self.auto_login_token,
                     "title": "标题ssss1",
-                    "cover": "封面",
+                    "cover": 'test\/sns\/2018\/6\/5\/61676081536705472720180605155604.png',
                     #"introduction": "简介",
                     "content": [
                         {
@@ -137,6 +137,7 @@ class Feed(unittest.TestCase):
                     ],
                     "groups": ["G00001", "G00002", "G00003"]
                 }
+        #for i in range(1,100):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是是：%s' % r.json())
         self.log.info('测试发布内容接口-introduction摘要为空情况测试结束\n')
