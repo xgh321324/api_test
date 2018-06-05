@@ -12,13 +12,13 @@ def auto_login_by_UID():
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
                        'Connection': 'keep-alive'
                        }
-    url = 'http://api.rih.medohealth.com/API/V1/LogForToken/autoLoginByUID'
-    json_data = {"uiUID":"Y7xdvSRFmWiKqEM195u6CNyt8kfrLJBH","loginDevice":"2","loginCity":"no location"}
+    url = 'http://api.rih.sunnycare.cc/API/V1/LogForToken/autoLoginByUID'
+    json_data = {"uiUID":"hms7W3a1nG54IeBD6C9qtiuw82TjZVMQ","loginDevice":"2","loginCity":"no location"}
     s = requests.session()
-    r = s.post(url,headers = header,json=json_data)
-    print(r.json())
+    r = s.post(url,headers = header,json=json_data,verify=False)
+    #print(r.json())
     t = r.json()['data']['Token']
-    print(t)
+    #print(t)
     return (t)
 
 if __name__=='__main__':
