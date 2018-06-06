@@ -40,8 +40,9 @@ class Feed(unittest.TestCase):
         url = 'http://api.sns.sunnycare.cc/v1/feed/add'
         json_data = {"token":self.auto_login_token,
                      "text":"不知道自己的心",
-                     'groups':['G00009']
+                     'groups':['G00001','G00002','G00003']
                      }
+        #for i in range(1,100):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
@@ -61,6 +62,7 @@ class Feed(unittest.TestCase):
         self.assertEqual('最多只能分享到 3 个圈子.',r.json()['note'])
         self.log.info('测试发布文字到大于3个圈子-参数正常情况测试结束\n')
 
+    @unittest.skip('无理由跳过')
     def test_post_picture(self):
         u'发布图片接口到圈子'
         self.log.info('测试发布图片接口到圈子')
@@ -68,12 +70,12 @@ class Feed(unittest.TestCase):
         json_data = {
             "pic":[
                 {
-                    "path":"test\/sns\/2018\/6\/5\/61676081536705472720180605155604.png",
+                    "path":"test\/sns\/2018\/6\/6\/73335171522067544620180606110557.png",
                     "width":828,
                     "height":1107
                 }
             ],
-            "groups":["G00009"],
+            "groups":["G00001"],
             "token":self.auto_login_token,
             "text":"南京东路"
         }
@@ -83,6 +85,7 @@ class Feed(unittest.TestCase):
         self.assertEqual('动态发布成功.',r.json()['note'])
         self.log.info('测试发布图片接口到圈子结束！\n')
 
+    @unittest.skip('无理由跳过')
     def test_post_picture2(self):
         u'发布图片接口到大于3个圈子'
         self.log.info('测试发布图片接口到大于3个圈子')
@@ -90,9 +93,9 @@ class Feed(unittest.TestCase):
         json_data = {
             "pic":[
                 {
-                    "path":"test\/sns\/2018\/6\/5\/61676081536705472720180605155604.png",
+                    "path":"test\/sns\/2018\/6\/6\/53662686527481317220180606110250.png",
                     "width":828,
-                    "height":1107
+                    "height":618
                 }
             ],
             "groups":['G00009','G00008','G00007','G00006'],
@@ -104,43 +107,42 @@ class Feed(unittest.TestCase):
         self.assertEqual('最多只能分享到 3 个圈子.',r.json()['note'])
         self.log.info('测试发布图片接口到大于3个圈子结束！\n')
 
+    @unittest.skip('无理由跳过')
     def test_post_artical(self):
-        u'测试发布内容-introduction摘要为空'
-        self.log.info('测试发布内容接口-introduction摘要为空')
+        u'发布文章接口-纯文字'
+        self.log.info('测试发布文章接口-纯文字')
         url = 'http://api.sns.sunnycare.cc/v1/post/add'
         json_data = {
-                    "token": self.auto_login_token,
-                    "title": "标题ssss1",
-                    "cover": 'test\/sns\/2018\/6\/5\/61676081536705472720180605155604.png',
-                    #"introduction": "简介",
-                    "content": [
-                        {
-                            "sort":"0",
-                            "type":"0",
-                            "value": "文本内容001"
-                         },
-                        {
-                            "sort":"1",
-                            "type":"1",
-                            "value": "sns/2018/05/15/013.jpg",
-                             "width": "640",
-                             "height": "480",
-                             "remark": "注释"
-                         },
-                        {
-                            "sort":"2",
-                             "type":"2",
-                             "value": "dcc885ea85824089ba8129761f3925fe",
-                             "cover": "sns/2018/05/15/013.jpg",
-                             "remark": "注释", "width": "1024", "height": "764", "size": "1024", "second": "30"
-                         }
-                    ],
-                    "groups": ["G00001", "G00002", "G00003"]
-                }
+            "token": self.auto_login_token,
+            "title": "我的文章",
+            "cover": 'test\/sns\/2018\/6\/6\/53662686527481317220180606110250.png',
+            "introduction": "这里是摘要",
+            "content": [
+                {
+                    "sort":"0",
+                    "type":"0",
+                    "value": "这是文本内容"
+                 },
+                #{
+                #    "sort":"1",
+                #    "type":"1",
+                #    "value": "sns/2018/05/15/013.jpg",
+                #     "width": "640",
+                #     "height": "480",
+                 #    "remark": "注释"
+                 #},
+                {
+                    "sort":"1",
+                    "type":"0",
+                    "value": "这是第二个文本内容"
+                 }
+            ],
+            "groups": ["G00001", "G00002", "G00003"]
+        }
         #for i in range(1,100):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是是：%s' % r.json())
-        self.log.info('测试发布内容接口-introduction摘要为空情况测试结束\n')
+        self.log.info('测试发布文章接口-纯文字情况测试结束\n')
 
     def tearDown(self):
         self.s.close()
