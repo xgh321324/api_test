@@ -25,7 +25,7 @@ class Feed(unittest.TestCase):
         self.excel = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
 
     def test_user_feed01(self):
-        u'测试发布文字-不发布到圈子'
+        u'测试发布文字-不发布到圈子-参数正常'
         self.log.info('测试发布文字接口-不发布到圈子')
         url = 'http://api.sns.sunnycare.cc/v1/feed/add'
         json_data = {"token":self.auto_login_token,
@@ -64,12 +64,31 @@ class Feed(unittest.TestCase):
         self.log.info('测试用户动态接口-参数正常情况结束！\n')
 
     def test_user_feed03(self):
+        u'feed详情接口-参数正常'
+        url = 'http://api.sns.sunnycare.cc/v1/feed/record'
+        self.log.info('开始测试feed详情接口')
+        read_feed_ids = self.excel.read_value(12,6)
+        feed_ids = json.loads(read_feed_ids)
+        #print(type(feed_ids))
+        #迭代字典的value
+        for x in feed_ids.values():
+            json_data = {
+            "feed_id":x,
+            "token":self.auto_login_token}
+            r = self.s.post(url,headers = self.header,json=json_data)
+            self.log.info('该次详情返回的内容：%s' % r.json())
+            self.assertEqual(200,r.json()['code'])
+            self.assertEqual('请求成功.',r.json()['note'])
+            self.assertTrue(r.json()['data']) #判断data不为空
+        self.log.info('feed详情接口测试结束！\n')
+
+    def test_user_feed04(self):
         u'删除动态接口-参数正常'
         self.log.info('测试删除动态接口-参数正常')
         url = 'http://api.sns.sunnycare.cc/v1/feed/delete'
         read_feed_ids = self.excel.read_value(12,6)
         feed_ids = json.loads(read_feed_ids)
-        print(type(feed_ids))
+        #print(type(feed_ids))
         #迭代字典的value
         for x in feed_ids.values():
             json_data = {
