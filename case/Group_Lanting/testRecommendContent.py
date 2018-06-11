@@ -3,6 +3,7 @@ import requests,unittest
 from common.login_lanting import auto_login_by_UID
 from common.logger import Log
 import urllib3
+from common.Excel import Excel_util
 urllib3.disable_warnings()
 
 class Recommend(unittest.TestCase):
@@ -20,6 +21,7 @@ class Recommend(unittest.TestCase):
                        'Connection': 'keep-alive'
                        }
         self.log = Log()
+        self.excel = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
 
     def test_recommend(self):
         u'推荐内容接口-参数正常'
@@ -32,6 +34,13 @@ class Recommend(unittest.TestCase):
         }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是：%s' % r.json())
+        con = r.json()['data']['content']
+        d = {}
+        n = 1
+        for i in con:
+            d['feed_id_'+str(n)] = i['id']
+            n += 1
+        self.excel.write_value(13,6,d)
         self.assertEqual(200,r.json()['code'])
         self.assertEqual('请求成功.',r.json()['note'])
         self.assertTrue(r.json()['data']) #判断data不为空
