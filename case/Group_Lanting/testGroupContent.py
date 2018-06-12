@@ -28,7 +28,7 @@ class Content(unittest.TestCase):
         json_data = {"page":1,
                      "token":self.auto_login_token,
                      "time":0,
-                     "group_id":"G00009"
+                     "group_id":"G00001"
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         print(r.status_code)
@@ -44,7 +44,7 @@ class Content(unittest.TestCase):
         json_data = {"page":1,
                      #"token":self.auto_login_token,
                      "time":0,
-                     "group_id":"G00009"
+                     "group_id":"G00001"
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回内容是：%s' % r.json())
@@ -59,7 +59,7 @@ class Content(unittest.TestCase):
         json_data = {"page":'',
                      "token":self.auto_login_token,
                      "time":0,
-                     "group_id":"G00009"
+                     "group_id":"G00001"
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回内容是：%s' % r.json())
@@ -74,7 +74,7 @@ class Content(unittest.TestCase):
         json_data = {"page":10,
                      "token":self.auto_login_token,
                      "time":0,
-                     "group_id":"G00009"
+                     "group_id":"G00001"
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回内容是：%s' % r.json())
@@ -89,7 +89,7 @@ class Content(unittest.TestCase):
         json_data = {"page":1,
                      "token":self.auto_login_token,
                      "time":0,
-                     "group_id":"G10009"
+                     "group_id":"G10001"
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回内容是：%s' % r.json())

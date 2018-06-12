@@ -26,7 +26,7 @@ class Detail(unittest.TestCase):
         self.log.info('圈子详情接口-参数正确')
         url = 'http://api.sns.sunnycare.cc/v1/group/record'
         json_data = {"token":self.auto_login_token,
-                     "group_id":"G00009"
+                     "group_id":"G00001"
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是：%s' % r.json())
@@ -39,7 +39,7 @@ class Detail(unittest.TestCase):
         self.log.info('圈子详情接口-无token')
         url = 'http://api.sns.sunnycare.cc/v1/group/record'
         json_data = {#"token":self.auto_login_token,
-                     "group_id":"G00008"
+                     "group_id":"G00001"
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是：%s' % r.json())

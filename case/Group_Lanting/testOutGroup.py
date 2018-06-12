@@ -26,7 +26,7 @@ class Group(unittest.TestCase):
         self.log.info('退出圈子接口-参数正确')
         url = 'http://api.sns.sunnycare.cc/v1/group/out'
         json_data = {"token":self.auto_login_token,
-                     "group_id":"G00009"
+                     "group_id":"G00001"
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回内容是:%s' % r.json())
