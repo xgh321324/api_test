@@ -5,6 +5,7 @@ from common.logger import Log
 import urllib3
 from common.Excel import Excel_util
 import json
+from common.Read_config import get_content
 urllib3.disable_warnings()
 
 class Search(unittest.TestCase):
@@ -27,7 +28,7 @@ class Search(unittest.TestCase):
     def test_search01(self):
         u'测试搜索接口'
         self.log.info('搜索接口-参数正常')
-        url = 'http://api.sns.sunnycare.cc/v1/search'
+        url = get_content('sns_base_url')+'/v1/search'
         json_data = {"keyword":"爱",
                      "token":self.auto_login_token,
                      "page":1
@@ -41,7 +42,7 @@ class Search(unittest.TestCase):
     def test_search02(self):
         u'测试搜索接口-搜索内容不存在'
         self.log.info('搜索接口-搜索内容不存在')
-        url = 'http://api.sns.sunnycare.cc/v1/search'
+        url = get_content('sns_base_url')+'/v1/search'
         json_data = {"keyword":"asdjas",
                      "token":self.auto_login_token,
                      "page":1
@@ -57,7 +58,7 @@ class Search(unittest.TestCase):
     def test_search03(self):
         u'测试搜索接口-搜索内容为空'
         self.log.info('搜索接口-搜索内容为空')
-        url = 'http://api.sns.sunnycare.cc/v1/search'
+        url = get_content('sns_base_url')+'/v1/search'
         json_data = {"keyword":'',
                      "token":self.auto_login_token,
                      "page":1

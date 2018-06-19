@@ -3,6 +3,7 @@ import requests,unittest
 from common.login_lanting import auto_login_by_UID
 from common.logger import Log
 import urllib3
+from common.Read_config import get_content
 urllib3.disable_warnings()
 
 class Content(unittest.TestCase):
@@ -24,7 +25,7 @@ class Content(unittest.TestCase):
     def test_group_content(self):
         u'圈子内容接口-参数正确'
         self.log.info('测试圈子内容接口-参数正确')
-        url = 'http://api.sns.sunnycare.cc/v1/group/content'
+        url = get_content('sns_base_url')+'/v1/group/content'
         json_data = {"page":1,
                      "token":self.auto_login_token,
                      "time":0,
@@ -40,7 +41,7 @@ class Content(unittest.TestCase):
     def test_group_content2(self):
         u'圈子内容接口-参数无token'
         self.log.info('测试圈子内容接口-无token')
-        url = 'http://api.sns.sunnycare.cc/v1/group/content'
+        url = get_content('sns_base_url')+'/v1/group/content'
         json_data = {"page":1,
                      #"token":self.auto_login_token,
                      "time":0,
@@ -55,7 +56,7 @@ class Content(unittest.TestCase):
     def test_group_content3(self):
         u'圈子内容接口-参数page为空'
         self.log.info('测试圈子内容接口-page为空')
-        url = 'http://api.sns.sunnycare.cc/v1/group/content'
+        url = get_content('sns_base_url')+'/v1/group/content'
         json_data = {"page":'',
                      "token":self.auto_login_token,
                      "time":0,
@@ -70,7 +71,7 @@ class Content(unittest.TestCase):
     def test_group_content4(self):
         u'圈子内容接口-参数page页码不存在'
         self.log.info('测试圈子内容接口-page页码不存在')
-        url = 'http://api.sns.sunnycare.cc/v1/group/content'
+        url = get_content('sns_base_url')+'/v1/group/content'
         json_data = {"page":10,
                      "token":self.auto_login_token,
                      "time":0,
@@ -85,7 +86,7 @@ class Content(unittest.TestCase):
     def test_group_content5(self):
         u'圈子内容接口-参数圈子id不存在'
         self.log.info('测试圈子内容接口-圈子id不存在')
-        url = 'http://api.sns.sunnycare.cc/v1/group/content'
+        url = get_content('sns_base_url')+'/v1/group/content'
         json_data = {"page":1,
                      "token":self.auto_login_token,
                      "time":0,
@@ -101,7 +102,7 @@ class Content(unittest.TestCase):
         u'圈子内容接口-参数圈子id为空'
         #groupid为空时服务器报错了 code500
         self.log.info('测试圈子内容接口-圈子id为空')
-        url = 'http://api.sns.sunnycare.cc/v1/group/content'
+        url = get_content('sns_base_url')+'/v1/group/content'
         json_data = {"page":1,
                      "token":self.auto_login_token,
                      "time":0,

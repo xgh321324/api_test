@@ -3,10 +3,12 @@ import requests,unittest
 from common.login_lanting import auto_login_by_UID
 from common.logger import Log
 import urllib3
+from common.Excel import Excel_util
+import json
 from common.Read_config import get_content
 urllib3.disable_warnings()
 
-class Detail(unittest.TestCase):
+class UserFans(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
         self.auto_login_token = auto_login_by_UID()  #auto_login_by_UID返回的token
@@ -21,33 +23,41 @@ class Detail(unittest.TestCase):
                        'Connection': 'keep-alive'
                        }
         self.log = Log()
+        self.excel = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
 
-    def test_group_details(self):
-        u'圈子详情接口-参数正确'
-        self.log.info('圈子详情接口-参数正确')
-        url = get_content('sns_base_url')+'/v1/group/record'
-        json_data = {"token":self.auto_login_token,
-                     "group_id":"G00001"
-                     }
+    def test_user_fans01(self):
+        u'用户的粉丝接口'
+        self.log.info('开始测试粉丝的接口')
+        url = get_content('sns_base_url')+'/v1/user/fans'
+        json_data = {
+            "user_id":"U00003",
+            "time":"0",
+            "page":1,
+            "token":self.auto_login_token
+        }
+
         r = self.s.post(url,headers = self.header,json=json_data)
-        self.log.info('返回的内容是：%s' % r.json())
+        self.log.info('粉丝接口返回内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
         self.assertEqual('请求成功.',r.json()['note'])
-        self.log.info('圈子详情接口-参数正确情况测试结束！\n')
+        self.log.info('粉丝的接口测试结束\n')
 
-    def test_group_details2(self):
-        u'圈子详情接口-无token'
-        self.log.info('圈子详情接口-无token')
-        url = get_content('sns_base_url')+'/v1/group/record'
-        json_data = {#"token":self.auto_login_token,
-                     "group_id":"G00001"
-                     }
+    def test_user_fans02(self):
+        u'用户的粉丝接口-无token'
+        self.log.info('开始测试粉丝的接口-无token')
+        url = get_content('sns_base_url')+'/v1/user/fans'
+        json_data = {
+            "user_id":"U00003",
+            "time":"0",
+            "page":1,
+            #"token":self.auto_login_token
+        }
+
         r = self.s.post(url,headers = self.header,json=json_data)
-        self.log.info('返回的内容是：%s' % r.json())
+        self.log.info('粉丝接口返回内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
         self.assertEqual('请求成功.',r.json()['note'])
-        self.log.info('圈子详情接口-无token情况测试结束！\n')
-
+        self.log.info('粉丝的接口-无token测试结束\n')
 
 
     def tearDown(self):
@@ -55,5 +65,3 @@ class Detail(unittest.TestCase):
 
 if __name__=='__main__':
     unittest.main()
-
-

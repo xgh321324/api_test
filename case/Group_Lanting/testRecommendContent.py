@@ -4,6 +4,7 @@ from common.login_lanting import auto_login_by_UID
 from common.logger import Log
 import urllib3
 from common.Excel import Excel_util
+from common.Read_config import get_content
 urllib3.disable_warnings()
 
 class Recommend(unittest.TestCase):
@@ -26,7 +27,7 @@ class Recommend(unittest.TestCase):
     def test_recommend(self):
         u'推荐内容接口-参数正常'
         self.log.info('测试推荐内容接口-参数正常')
-        url = 'http://api.sns.sunnycare.cc/v1/recommend/content'
+        url = get_content('sns_base_url')+'/v1/recommend/content'
         json_data = {
             "token":self.auto_login_token,
             "time":0,
@@ -49,7 +50,7 @@ class Recommend(unittest.TestCase):
     def test_recommend2(self):
         u'推荐内容接口-无token'
         self.log.info('测试推荐内容接口-无token')
-        url = 'http://api.sns.sunnycare.cc/v1/recommend/content'
+        url = get_content('sns_base_url')+'/v1/recommend/content'
         json_data = {
             #"token":self.auto_login_token,
             "time":0,
@@ -65,7 +66,7 @@ class Recommend(unittest.TestCase):
     def test_recommend_user(self):
         u'推荐用户接口-参数正常'
         self.log.info('测试推荐用户接口-参数正常')
-        url = 'http://api.sns.sunnycare.cc/v1/recommend/user'
+        url = get_content('sns_base_url')+'/v1/recommend/user'
         json_data = {
             "token":self.auto_login_token,
             "time":0,
@@ -81,7 +82,7 @@ class Recommend(unittest.TestCase):
     def test_recommend_user2(self):
         u'推荐用户接口-无token'
         self.log.info('测试推荐用户接口-无token')
-        url = 'http://api.sns.sunnycare.cc/v1/recommend/user'
+        url = get_content('sns_base_url')+'/v1/recommend/user'
         json_data = {
             #"token":self.auto_login_token,
             "time":0,

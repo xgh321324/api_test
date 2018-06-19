@@ -5,6 +5,7 @@ from common.logger import Log
 import urllib3
 from common.Excel import Excel_util
 import json
+from common.Read_config import get_content
 urllib3.disable_warnings()
 
 class Like(unittest.TestCase):
@@ -29,18 +30,18 @@ class Like(unittest.TestCase):
         u'点赞接口'
         self.log.info('开始测试点赞接口')
         #点赞接口
-        url = 'http://api.sns.sunnycare.cc/v1/like/add'
+        url = get_content('sns_base_url')+'/v1/like/add'
         #取消点赞接口
-        url02 = 'http://api.sns.sunnycare.cc/v1/like/delete'
+        url02 = get_content('sns_base_url')+'/v1/like/delete'
         #推荐的内容接口
-        url01 = 'http://api.sns.sunnycare.cc/v1/recommend/content'
+        url01 = get_content('sns_base_url')+'/v1/recommend/content'
         #读取关联参数-推荐的动态的id，再循环去点赞，断言结果
         #read_recommened_ids = self.excel.read_value(13,6)
         #feed_ids = json.loads(read_recommened_ids)
         json_data01 = {
             "token":self.auto_login_token,
             "time":0,
-            "page":2
+            "page":1
         }
         r1 = self.s.post(url01,headers = self.header,json=json_data01)
         con = r1.json()['data']['content']
@@ -67,18 +68,18 @@ class Like(unittest.TestCase):
         u'取消点赞接口'
         self.log.info('开始测试取消点赞接口')
         #点赞接口
-        url = 'http://api.sns.sunnycare.cc/v1/like/add'
+        url = get_content('sns_base_url')+'/v1/like/add'
         #取消点赞接口
-        url02 = 'http://api.sns.sunnycare.cc/v1/like/delete'
+        url02 = get_content('sns_base_url')+'/v1/like/delete'
         #推荐的内容接口
-        url01 = 'http://api.sns.sunnycare.cc/v1/recommend/content'
+        url01 = get_content('sns_base_url')+'/v1/recommend/content'
         #读取关联参数-推荐的动态的id，再循环去点赞，断言结果
         #read_recommened_ids = self.excel.read_value(13,6)
         #feed_ids = json.loads(read_recommened_ids)
         json_data01 = {
             "token":self.auto_login_token,
             "time":0,
-            "page":2
+            "page":1
         }
         r1 = self.s.post(url01,headers = self.header,json=json_data01)
         con = r1.json()['data']['content']

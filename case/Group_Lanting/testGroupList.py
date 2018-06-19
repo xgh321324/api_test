@@ -3,6 +3,7 @@ import requests,unittest
 import common.login_lanting
 from common.logger import Log
 import urllib3
+from common.Read_config import get_content
 urllib3.disable_warnings()
 
 class Groupinfo(unittest.TestCase):
@@ -24,7 +25,7 @@ class Groupinfo(unittest.TestCase):
     def test_group_info(self):
         u'圈子的列表记录接口'
         self.log.info('开始测试按分页获取圈子的列表记录接口')
-        url = 'http://api.sns.sunnycare.cc/v1/group/records'
+        url = get_content('sns_base_url')+'/v1/group/records'
         json_data = {"token":self.auto_login_token,
                      "time":0,"page":1
                      }
@@ -42,7 +43,7 @@ class Groupinfo(unittest.TestCase):
     def test_group_info2(self):
         u'圈子的列表记录第二页'
         self.log.info('开始测试按分页获取圈子的列表记录接口2')
-        url = 'http://api.sns.sunnycare.cc/v1/group/records'
+        url = get_content('sns_base_url')+'/v1/group/records'
         json_data = {"token":self.auto_login_token,
                      "time":0,"page":2
                      }
@@ -60,7 +61,7 @@ class Groupinfo(unittest.TestCase):
     def test_group_info3(self):
         u'圈子的列表记录,page为空'
         self.log.info('开始测试按分页获取圈子的列表记录接口3')
-        url = 'http://api.sns.sunnycare.cc/v1/group/records'
+        url = get_content('sns_base_url')+'/v1/group/records'
         json_data = {"token":self.auto_login_token,
                      "time":0,"page":''
                      }

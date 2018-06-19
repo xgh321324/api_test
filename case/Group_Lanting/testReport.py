@@ -5,6 +5,7 @@ from common.logger import Log
 import urllib3
 from common.Excel import Excel_util
 import json
+from common.Read_config import get_content
 urllib3.disable_warnings()
 
 class Report(unittest.TestCase):
@@ -27,7 +28,7 @@ class Report(unittest.TestCase):
     def test_report01(self):
         u'举报渟说接口'
         self.log.info('测试举报接口-参数正确')
-        url = 'http://api.sns.sunnycare.cc/v1/report'
+        url = get_content('sns_base_url')+'/v1/report'
         json_data = {
             "token":self.auto_login_token,
             "id":"P00001",

@@ -5,6 +5,7 @@ from common.logger import Log
 import urllib3
 from common.Excel import Excel_util
 import json
+from common.Read_config import get_content
 urllib3.disable_warnings()
 
 class Comment(unittest.TestCase):
@@ -27,7 +28,7 @@ class Comment(unittest.TestCase):
     def test_comment01(self):
         u'测试评论接口-评论内容正常'
         self.log.info('开始测试评论渟说接口-评论内容正常')
-        url = 'http://api.sns.sunnycare.cc/v1/comment/add'
+        url = get_content('sns_base_url')+'/v1/comment/add'
         #读取关联参数-推荐的动态的id
         read_recommened_ids = self.excel.read_value(13,6)
         feed_ids = json.loads(read_recommened_ids)
@@ -49,7 +50,7 @@ class Comment(unittest.TestCase):
     def test_comment02(self):
         u'测试评论接口-评论内容为空'
         self.log.info('开始测试评论渟说接口-评论内容为空')
-        url = 'http://api.sns.sunnycare.cc/v1/comment/add'
+        url = get_content('sns_base_url')+'/v1/comment/add'
         #读取关联参数-推荐的动态的id
         read_recommened_ids = self.excel.read_value(13,6)
         feed_ids = json.loads(read_recommened_ids)
@@ -72,9 +73,9 @@ class Comment(unittest.TestCase):
         u'删除评论接口'
         self.log.info('开始测试删除评论接口')
         #删除评论接口
-        url = 'http://api.sns.sunnycare.cc/v1/comment/delete'
+        url = get_content('sns_base_url')+'/v1/comment/delete'
         #评论记录接口
-        pre_url = 'http://api.sns.sunnycare.cc/v1/comment/records'
+        pre_url = get_content('sns_base_url')+'/v1/comment/records'
         #读取关联参数-推荐的动态的id
         read_recommened_ids = self.excel.read_value(13,6)
         feed_ids = json.loads(read_recommened_ids)

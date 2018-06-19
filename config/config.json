@@ -1,6 +1,19 @@
 {
   "base_url":"https://api.sns.wrightin.com",
-  "database":{"host":"120.26.40.252","port":"3306","user":"root","password":"MedLander","database":"school"},
-  "database2":{"host":"120.26.40.252","port":"3306","user":"root","password":"MedLander","database":"Lesson"}
+  "sns_base_url":"http://api.feed.sunnycare.cc",
+  "database":{
+    "host":"120.26.40.252",
+    "port":"3306",
+    "user":"root",
+    "password":"MedLander",
+    "database":"school"
+  },
+  "database2":{
+    "host":"120.26.40.252",
+    "port":"3306",
+    "user":"root",
+    "password":"MedLander",
+    "database":"Lesson"
+  }
 
 }

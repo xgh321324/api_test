@@ -4,6 +4,7 @@ from common.login_lanting import auto_login_by_UID
 from common.logger import Log
 import urllib3
 from common.Excel import Excel_util
+from common.Read_config import get_content
 import json
 urllib3.disable_warnings()
 
@@ -27,10 +28,10 @@ class Feed(unittest.TestCase):
     def test_follow_user(self):
         u'关注某一用户和取消关注某用户接口-参数正常'
         self.log.info('开始测试关注用户接口')
-        follow_url = 'http://api.sns.sunnycare.cc/v1/follow'
-        cancle_url = 'http://api.sns.sunnycare.cc/v1/cancel'
+        follow_url = get_content('sns_base_url')+'/v1/follow'
+        cancle_url = get_content('sns_base_url')+'/v1/cancel'
         #这是推荐用户列表接口
-        pre_url = 'http://api.sns.sunnycare.cc/v1/recommend/user'
+        pre_url = get_content('sns_base_url')+'/v1/recommend/user'
         pre_json_data = {
             "token":self.auto_login_token,
             "time":0,

@@ -3,6 +3,7 @@ import unittest,requests
 from common.logger import Log
 from common.login_lanting import auto_login_by_UID
 import urllib3
+from common.Read_config import get_content
 
 urllib3.disable_warnings()
 
@@ -25,7 +26,8 @@ class Add_Group(unittest.TestCase):
     def test_add_group(self):
         u'加入圈子接口'
         self.log.info('测试加入圈子接口之数据正常')
-        url = 'http://api.sns.sunnycare.cc/v1/group/add'
+        #读取base_url后拼接
+        url =  get_content('sns_base_url')+'/v1/group/add'
         json_data = {
                     "token": self.auto_login_token,
                     "group_id": "G00001"
@@ -40,7 +42,7 @@ class Add_Group(unittest.TestCase):
     def test_add_group2(self):
         u'加入圈子接口'
         self.log.info('测试加入圈子接口之group-id为空')
-        url = 'http://api.sns.sunnycare.cc/v1/group/add'
+        url = get_content('sns_base_url')+'/v1/group/add'
         json_data = {
                     "token": self.auto_login_token,
                     "group_id": ''
@@ -53,7 +55,7 @@ class Add_Group(unittest.TestCase):
     def test_add_group3(self):
         u'加入圈子接口'
         self.log.info('测试加入圈子接口之group-id不存在')
-        url = 'http://api.sns.sunnycare.cc/v1/group/add'
+        url = get_content('sns_base_url')+'/v1/group/add'
         json_data = {
                     "token": self.auto_login_token,
                     "group_id": 'G90001'

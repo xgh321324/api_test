@@ -8,10 +8,11 @@ def get_content(key):
     with open(r'C:\Users\Administrator\Documents\GitHub\Medohealth\config\config.json') as f:
         #先读取
         text = json.load(f)
-    print(type(text)) #此时数据已经是dict
-    print(text[key])
+    #print(type(text)) #此时数据已经是dict
+    #print(text[key])
     return text[key] #返回dict的value
 
 
 if __name__=='__main__':
-    get_content('base_url')
+    x = get_content('sns_base_url')+'/v1/group/add'
+    print(x)

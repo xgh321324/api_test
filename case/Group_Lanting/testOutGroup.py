@@ -3,6 +3,7 @@ import requests,unittest
 from common.login_lanting import auto_login_by_UID
 from common.logger import Log
 import urllib3
+from common.Read_config import get_content
 urllib3.disable_warnings()
 
 class Group(unittest.TestCase):
@@ -24,7 +25,7 @@ class Group(unittest.TestCase):
     def test_out_group(self):
         u'退出圈子接口-参数正确'
         self.log.info('退出圈子接口-参数正确')
-        url = 'http://api.sns.sunnycare.cc/v1/group/out'
+        url = get_content('sns_base_url')+'/v1/group/out'
         json_data = {"token":self.auto_login_token,
                      "group_id":"G00001"
                      }
@@ -37,7 +38,7 @@ class Group(unittest.TestCase):
     def test_out_group2(self):
         u'退出圈子接口-参数groupid不存在'
         self.log.info('退出圈子接口-roupid不存在')
-        url = 'http://api.sns.sunnycare.cc/v1/group/out'
+        url = get_content('sns_base_url')+'/v1/group/out'
         json_data = {"token":self.auto_login_token,
                      "group_id":"G10000"
                      }

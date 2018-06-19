@@ -5,6 +5,8 @@ from common.logger import Log
 import urllib3
 from common.Excel import Excel_util
 import json
+from common.Read_config import get_content
+
 urllib3.disable_warnings()
 
 class Feed(unittest.TestCase):
@@ -29,7 +31,7 @@ class Feed(unittest.TestCase):
         u'测试收藏接口'
         #读取关联参数-用户的动态的id，再循环去收藏，断言结果
         self.log.info('开始测试收藏动态接口！')
-        url = 'http://api.sns.sunnycare.cc/v1/collect/add'
+        url = get_content('sns_base_url')+'/v1/collect/add'
         read_feed_ids = self.excel.read_value(12,6)
         feed_ids = json.loads(read_feed_ids)
         #print(type(feed_ids))
@@ -49,7 +51,7 @@ class Feed(unittest.TestCase):
     def test_collect02(self):
         u'测试取消收藏接口'
         self.log.info('开始测试取消收藏动态接口！')
-        url = 'http://api.sns.sunnycare.cc/v1/collect/delete'
+        url = get_content('sns_base_url')+'/v1/collect/delete'
         read_feed_ids = self.excel.read_value(12,6)
         feed_ids = json.loads(read_feed_ids)
         #print(type(feed_ids))
