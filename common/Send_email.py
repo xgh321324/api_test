@@ -1,5 +1,5 @@
 #coding:utf-8
-import os,time,smtplib
+import time,smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 from email.mime.multipart import MIMEMultipart  #发送附件用的
@@ -41,9 +41,10 @@ class Send_email():
         smtp.sendmail(self.sender,self.receivers,msg.as_string())  #发送
         smtp.quit()#关闭
 if __name__=='__main__':
-    Send_email('15651797525@163.com',
-               '15651797525@163.com',
-               'xgh321324',
-               ['15651797525@139.com','970185127@qq.com'],
-               r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\33.html').send()
+    Send_email(
+            '15651797525@163.com',
+            '15651797525@163.com',
+            'xgh321324',
+            ['15651797525@139.com','970185127@qq.com'],
+            r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\33.html').send()
     print('发送成功！')

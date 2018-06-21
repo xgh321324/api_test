@@ -100,9 +100,13 @@ class Feed(unittest.TestCase):
                 "token":self.auto_login_token,
                 "feed_id":x
             }
-            r = self.s.post(url,headers = self.header,json=json_data)
-            self.log.info('返回的内容是：%s' % r.json())
-            self.assertEqual(200,r.json()['code'])
+            #需要保留一个动态不删除，后面的接口要用到这条动态中的图片地址
+            if json_data['feed_id'] == 'F00083':
+                pass
+            else:
+                r = self.s.post(url,headers = self.header,json=json_data)
+                self.log.info('返回的内容是：%s' % r.json())
+                self.assertEqual(200,r.json()['code'])
         self.log.info('测试删除动态接口-参数正常情况测试结束！\n')
 
     def tearDown(self):

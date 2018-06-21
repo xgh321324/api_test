@@ -16,3 +16,8 @@ def get_content(key):
 if __name__=='__main__':
     x = get_content('sns_base_url')+'/v1/group/add'
     print(x)
+    y = get_content('database')
+    print(y)
+    print(type(y))
+    print(y['port'])
+

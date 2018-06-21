@@ -76,7 +76,6 @@ class Sqldriver(object):
             #sql = 'insert into table_a (realname,phone,email,sign,event_id) values ("'+realname+'",' +str(phone)+ ',"'+email+'",0,1);'
             #不过还是下面的方法好用
             sql = "insert into sign_gust (realname,phone,email,sign,event_id) VALUES (%s,%s,%s,%s,%s)" % (real_name,phone,email,0,1)
-
             #生成完毕sql后开始执行
             self.exec_mysql(sql)
 

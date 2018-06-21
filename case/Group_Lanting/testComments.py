@@ -39,7 +39,7 @@ class Comment(unittest.TestCase):
             "id":L[0],
             "type":"1",
             "token":self.auto_login_token,
-            "text":"款号"
+            "text":"很棒！"
         }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('评论feed返回的内容是：%s' % r.json())
