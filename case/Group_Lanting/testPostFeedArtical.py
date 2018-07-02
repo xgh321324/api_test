@@ -131,6 +131,8 @@ class Feed(unittest.TestCase):
             "groups": ["G00001"]
         }
         #for i in range(1,100):
+
+
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是是：%s' % r.json())
         #self.assertEqual('文章发布成功.',r.json()['note'])
