@@ -7,7 +7,7 @@ from common.login import LG
 class SystemInfo(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
-        self.lgin = LG() #实例化登录类
+        self.lgin = LG(self.s) #实例化登录类
         self.lgin.login()
         self.uid_token = self.lgin.gettoken_loginbyUID() #直接取第二部登录
         self.header = {'User-Agent': 'LanTingDoctor/2.0.0 (iPad; iOS 10.1.1; Scale/2.00)',

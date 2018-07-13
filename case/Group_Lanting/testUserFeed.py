@@ -30,7 +30,7 @@ class Feed(unittest.TestCase):
         self.log.info('测试发布文字接口-不发布到圈子')
         url = get_content('sns_base_url')+'/v1/feed/add'
         json_data = {"token":self.auto_login_token,
-                     "text":"不知道自己的心"
+                     "text":"你知道我在等你吗"
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是是：%s' % r.json())
@@ -42,7 +42,7 @@ class Feed(unittest.TestCase):
         u'获取用户动态接口-参数正常'
         self.log.info('测试用户动态接口-参数正常')
         url = get_content('sns_base_url')+'/v1/user/feed'
-        json_data = {"user_id":"U00003","time":0,"page":1}
+        json_data = {"user_id":"U00060","time":0,"page":1}
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
@@ -105,7 +105,7 @@ class Feed(unittest.TestCase):
                 pass
             else:
                 r = self.s.post(url,headers = self.header,json=json_data)
-                self.log.info('返回的内容是：%s' % r.json())
+                self.log.info('%s返回的内容是：%s' % (x,r.json()))
                 self.assertEqual(200,r.json()['code'])
         self.log.info('测试删除动态接口-参数正常情况测试结束！\n')
 

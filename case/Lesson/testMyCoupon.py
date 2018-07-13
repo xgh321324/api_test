@@ -10,7 +10,7 @@ class LessonInfo(unittest.TestCase):
     log = Log()#实例化记录日志的类
     def setUp(self):
         self.s = requests.session()
-        self.lgin = LG() #实例化登录类
+        self.lgin = LG(self.s) #实例化登录类
         self.uid_token = self.lgin.gettoken_loginbyUID() #直接取第二部登录
         self.header = {'User-Agent': 'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)',
                        'Accept-Encoding': 'gzip, deflate',

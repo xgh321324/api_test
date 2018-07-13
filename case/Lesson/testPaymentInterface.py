@@ -5,7 +5,7 @@ from common.login import LG
 class Test_pay(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
-        self.lgin = LG() #实例化登录类
+        self.lgin = LG(self.s) #实例化登录类
         self.lgin.login()
         self.token = self.lgin.get_token()
         self.duid = self.lgin.get_duid()  #取登录成功后的uid
@@ -79,7 +79,7 @@ class Test_pay(unittest.TestCase):
                       "user_source":"1",
                       "product_type":"3",
                       "token":t,
-                      "product_code":"Z00001"
+                      "product_code":"Z00020"
                       }
         url2 ='http://api.exam.sunnycare.cc/v1/mldProductPay'#支付接口地址
         r2 = self.s.post(url2,headers=self.header,json=json_data2)

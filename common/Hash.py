@@ -26,8 +26,6 @@ def get_str():
 
 def get_digit():
     u'随机生成32位数字的方法'
-
-
     d =''.join(random.sample(string.digits,8))
     d1 = ''.join(random.sample(string.digits,8))
     d2 = ''.join(random.sample(string.digits,8))
@@ -37,13 +35,12 @@ def get_digit():
     print(final_d)
     return final_d
 
-
 def get_md5(target):
     u'传入参数，将此参数进行MD5加密'
     m = hashlib.md5()  #创建Md5对象
     m.update(target.encode('utf-8')) #生成加密串，其中target是要加密的字符串
     result = m.hexdigest()
-    #print(result)
+    print(result)
     return result
 
 def get_sha1(target):
@@ -54,7 +51,16 @@ def get_sha1(target):
     print(result)
     return result
 
+def phone_nember():
+    pre_list = ["130","131","132","133","134","135","136","137","138","139","147","150","151","152","153","155","156","157","158","159","186","187","188"]
+    num = random.choice(pre_list) + ''.join(random.sample(string.digits,8))
+    #print(num)
+    return num
+
+
 if __name__ == '__main__':
-    get_digit()
+    phone_nember()
+
+
 
 

@@ -42,9 +42,12 @@ class Send_email():
         smtp.quit()#关闭
 if __name__=='__main__':
     Send_email(
-            '15651797525@163.com',
-            '15651797525@163.com',
-            'xgh321324',
-            ['15651797525@139.com','970185127@qq.com'],
-            r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\33.html').send()
+        '15651797525@163.com',
+        '15651797525@163.com',
+        'xgh321324',
+        [
+            '15651797525@139.com',
+            '970185127@qq.com'
+        ],
+        r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\33.html').send()
     print('发送成功！')

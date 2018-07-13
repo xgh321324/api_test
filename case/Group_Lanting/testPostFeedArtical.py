@@ -34,13 +34,13 @@ class Feed(unittest.TestCase):
             "introduction": "文字文字文字",
             "content": [
                 {
-                    "sort":"0",
-                    "type":"0",
+                    "sort": "0",
+                    "type": "0",
                     "value": "这是第一个文本内容这是第一个文本内容这是第一个文本内容这是第一个文本内容"
                  },
                 {
-                    "sort":"1",
-                    "type":"0",
+                    "sort": "1",
+                    "type": "0",
                     "value": "这是第二个文本内容这是第二个文本内容这是第二个文本内容"
                  }
             ],
@@ -63,25 +63,25 @@ class Feed(unittest.TestCase):
             "introduction": "图片图片",
             "content": [
                 {
-                    "sort":"0",
-                    "type":"1",
+                    "sort": "0",
+                    "type": "1",
                     "value": "TestObjectFiles/TestObjectFiles/1529560739750727.jpg",
-                    "width":"4032",
-                    "height":"3024"
+                    "width": "4032",
+                    "height": "3024"
                  },
                 {
-                    "sort":"1",
-                    "type":"1",
+                    "sort": "1",
+                    "type": "1",
                     "value": "/TestObjectFiles/TestObjectFiles/1529561900655548.jpg",
-                    "width":"4032",
-                    "height":"3024"
+                    "width": "4032",
+                    "height": "3024"
                  },
                 {
-                    "sort":"2",
-                    "type":"1",
-                    "value": "/TestObjectFiles/TestObjectFiles/1529561901530700.jpg",
-                    "width":"4032",
-                    "height":"3024"
+                    "sort": "2",
+                    "type": "1",
+                    "value":  "/TestObjectFiles/TestObjectFiles/1529561901530700.jpg",
+                    "width": "4032",
+                    "height": "3024"
                  }
             ],
             "groups": ["G00001"]
@@ -120,8 +120,8 @@ class Feed(unittest.TestCase):
                     "value": "这是第二段文本内容",
                  },
                 {
-                    "sort":3,
-                    "type":1,
+                    "sort":'3',
+                    "type":'1',
                     "path":"/TestObjectFiles/TestObjectFiles/152956190416515.jpg",
                     "width":"4032",
                     "height":"3024"
