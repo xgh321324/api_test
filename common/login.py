@@ -18,6 +18,7 @@ class LG():
 
     def login(self):
         '''登录方法'''
+        #澜渟医生测试环境
         url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/loginByUsername'
         #利用自己固定的账号密码登录
         t = {"username":"15651797525","password":"123456","loginDevice":"2","loginCity":"南京市"}
@@ -62,7 +63,7 @@ class LG():
     def gettoken_loginbyUID(self):
         u'取第二部UID登录成功后的token'
         #url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'  #医生用uid自动登录接口'  测试环境
-        url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'
+        url = 'http://121.43.168.217/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'
         json_data1 = {
             "UID": str(self.get_duid()),
             "loginDevice": "1",
@@ -74,6 +75,7 @@ class LG():
         return UID_token
 
     def get_autologin_token(self):
+        #澜渟医生正式环境
         url = 'http://api.rih.medohealth.com/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'
         json_data = {
             "UID": str(self.get_duid())

@@ -7,7 +7,7 @@ class Test_pay(unittest.TestCase):
         self.s = requests.session()
         self.lgin = LG(self.s) #实例化登录类
         self.lgin.login()
-        self.token = self.lgin.login()
+        self.token = self.lgin.gettoken_loginbyUID()
         self.duid = self.lgin.get_duid()  #取登录成功后的uid
         self.header = {'User-Agent': 'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)',
                        'Accept-Encoding': 'gzip, deflate',
