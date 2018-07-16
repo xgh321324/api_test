@@ -1,12 +1,12 @@
 #coding:utf-8
 import requests
 import unittest
-import time
+import time,json
 from common.login import LG
 from common.logger import Log
 from common.Excel import Excel_util
-class Tickets(unittest.TestCase):
 
+class Tickets(unittest.TestCase):
 
     def setUp(self):
         self.s = requests.session()
@@ -24,29 +24,27 @@ class Tickets(unittest.TestCase):
         self.log = Log()#实例化日志的类
         self.excel = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
 
-    def test_tickets(self):
-        u'我的会议门票接口'
-        self.log.info('开始测试会议门票接口！')
-        url = 'http://api.meet.sunnycare.cc/v2/ticket/mine'
-        json_data = {
-            "token":self.uid_token
-        }
-        r = self.s.post(url,headers = self.header,json=json_data)
-        self.log.info('会议门票返回的结果是：%s' % r.json())
-        self.assertEqual('请求成功.',r.json()['note'])
-        #取出ticket_code供门票详情接口调用
-        ticket_code = r.json()['data']['content']
-        code = {}
-        j = 1
-        for i in ticket_code:
-            code['ticket_co'+str(j)] = (i['ticket_order_code'])
-        self.excel.write_value(16,6,code)
+    def test_ticke_info(self):
+        u'会议门票详情接口'
+        self.log.info('开始测试会议门票详情接口')
+        url = 'http://api.meet.sunnycare.cc/v2/ticket/order'
+        #读取ticket_order_code
+        read_code = self.excel.read_value(16,6)
+        be_use_code = json.loads(read_code)
+        for v in be_use_code.values():
+            json_data = {
+                "token":self.uid_token,
+                "ticket_order_code":v
+            }
+            r = self.s.post(url,headers = self.header,json=json_data)
+            self.log.info('%s的门票详情返回的结果是：%s' % (v,r.json()))
+            self.assertEqual('请求成功.',r.json()['note'])
 
-        self.log.info('会议门票接口测试结束！')
-
+        self.log.info('会议门票详情接口测试结束！')
 
     def tearDown(self):
         self.s.close()
 
 if __name__=='__main__':
     unittest.main()
+

@@ -5,7 +5,7 @@ import time,json
 from common.login import LG
 from common.logger import Log
 from common.Excel import Excel_util
-from case.Meet.testContactsList import Contact
+from case.Meet.testAEContactsList import Contact
 
 class Con(unittest.TestCase):
 
