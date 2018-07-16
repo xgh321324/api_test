@@ -7,7 +7,7 @@ from common.logger import Log
 class Attach(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
-        self.lgin = LG() #实例化登录类
+        self.lgin = LG(self.s) #实例化登录类
         self.uid_token = self.lgin.gettoken_loginbyUID() #直接取第二部登录
         self.header = {'User-Agent': 'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)',
                        'Accept-Encoding': 'gzip, deflate',
@@ -22,13 +22,16 @@ class Attach(unittest.TestCase):
 
     def test_attach_list(self):
         u'讲义列表接口'
-        url = 'http://api.meet.sunnycare.com/v2/attach/list'
+        self.log.info('开始测试讲义列表接口')
+        url = 'http://api.meet.sunnycare.cc/v2/attach/list'
         json_data = {
             "token":self.uid_token,
-            "attach_code":''
+            "meet_code":'M2018071319714'
         }
         r = self.s.post(url,headers = self.header,json=json_data)
-        self.assertEqual('请求成功',r.json()['note'])
+        self.log.info('该会议讲义列表接口返回内容是：%s' % r.json())
+        self.assertEqual('请求成功.',r.json()['note'])
+        self.log.info('讲义接口测试结束！')
 
     def tearDown(self):
         self.s.close()

@@ -68,7 +68,7 @@ class Meet(unittest.TestCase):
                 }
             #print(self.uid_token)
             r2 = self.s.post(info_url,headers = self.header,json=info_json_data)
-            self.log.info('会议：%s返回结果是：%s' % (v,r2.json()))
+            self.log.info('会议：%s返回详情是：%s' % (v,r2.json()))
             self.assertEqual('请求成功.',r2.json()['note'])
         self.log.info('会议详情接口测试结束！！')
 

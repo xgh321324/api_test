@@ -5,8 +5,9 @@ import time,json
 from common.login import LG
 from common.logger import Log
 from common.Excel import Excel_util
+from case.Meet.testContactsList import Contact
 
-class Contact(unittest.TestCase):
+class Con(unittest.TestCase):
 
     def setUp(self):
         self.s = requests.session()

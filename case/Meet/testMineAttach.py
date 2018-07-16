@@ -25,7 +25,8 @@ class Attach(unittest.TestCase):
         self.log.info('开始测试我的讲义接口')
         url = 'http://api.meet.sunnycare.cc/v2/attach/mine'
         json_data = {
-            "token":self.uid_token
+            "token":self.uid_token,
+            #""
         }
         r = self.s.post(url,headers= self.header,json=json_data)
         self.log.info('我的讲义返回的结果是：%s' % r.json())
