@@ -1,10 +1,11 @@
 #coding:utf-8
 import requests
 import unittest
-import time
+import time,json
 from common.Hash import phone_nember #生成随机手机号
 from common.login import LG
 from common.logger import Log
+from common.Excel import Excel_util
 class Contact(unittest.TestCase):
 
 
@@ -22,9 +23,12 @@ class Contact(unittest.TestCase):
                        'Authorization':  'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
                        'Connection':  'keep-alive'}
         self.log = Log()#实例化日志的类
+        self.exel = Excel_util(r'C:\Users\Administrator\Desktop\interface_testcase.xls')
+
 
     def test_add_contacts01(self):
         u'添加联系人-各个入参正常'
+
         self.log.info('开始测试添加参会人接口-参数正常')
         url = 'http://api.meet.sunnycare.cc/v2/contact/add'
         #for i in range(3):
@@ -105,6 +109,7 @@ class Contact(unittest.TestCase):
         self.assertEqual(201, r.json()['code'])
         self.log.info('新增参会人-地址为空情况测试结束！')
 
+    @unittest.skip('无理由')
     def test_add_contacts05(self):
         u'添加联系人-新增人数过多'
         self.log.info('新增参会人-新增人数过多')
@@ -126,7 +131,6 @@ class Contact(unittest.TestCase):
                 self.assertEqual('数量达到上限',r.json()['note'])
                 self.log.info('新增参会人-新增人数过多返回结果是：%s' % r.json())
                 break
-
         self.log.info('新增参会人-新增人数过多情况测试结束！')
 
     def tearDown(self):

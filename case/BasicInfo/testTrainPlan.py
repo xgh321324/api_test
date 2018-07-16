@@ -8,7 +8,7 @@ class Trian(unittest.TestCase):
 
     def setUp(self):
         self.s = requests.session()
-        self.lgin = LG() #实例化登录类
+        self.lgin = LG(self.s) #实例化登录类
         self.uid_token = self.lgin.get_token() #直接取账号登录的token
         self.auto_login_token = self.lgin.get_autologin_token() #取自动登录的token
         self.header = {'User-Agent': 'LanTingDoctor/2.0.2 (iPad; iOS 10.1.1; Scale/2.00)',
