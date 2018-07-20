@@ -2,6 +2,10 @@
 import time
 import unittest
 import requests
+
+
+#澜渟医生app的登录脚本
+
 class LG():
 
     def __init__(self,s):

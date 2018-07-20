@@ -21,6 +21,7 @@ class ConfigInfo(unittest.TestCase):
                        'Connection': 'keep-alive'
                        }
         self.log = Log()
+
     @unittest.skip('无条件跳过')
     def test_config_info(self):
         u'设置医生实名认证信息接口'
@@ -32,7 +33,7 @@ class ConfigInfo(unittest.TestCase):
                      "key":random.randint(0,9),
                      "token":self.auto_login_token,
                      "kuid":"457BDE586E8AD22B683AB5740EDBA9F9",
-                     "name":"许牛逼"
+                     "name":"许家印"
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         print(r.json())

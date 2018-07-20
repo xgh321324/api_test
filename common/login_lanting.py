@@ -2,6 +2,9 @@
 import requests
 from common.Read_config import get_content
 
+
+#这是澜渟app的登录脚本
+
 def auto_login_by_UID():
     header = {'User-Agent': 'LanTingDoctor/2.0.2 (iPad; iOS 10.1.1; Scale/2.00)',
                        'Accept-Encoding': 'gzip, deflate',

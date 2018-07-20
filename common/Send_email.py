@@ -50,4 +50,4 @@ if __name__=='__main__':
             '970185127@qq.com'
         ],
         r'C:\Users\Administrator\Documents\GitHub\Medohealth\report\33.html').send()
-    print('发送成功！')
+    print(' 邮件发送成功！')

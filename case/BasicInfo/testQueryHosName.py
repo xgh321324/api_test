@@ -27,7 +27,10 @@ class Query(unittest.TestCase):
 
         for i in content:
             print(i)
-            json_data = {"token":self.uid_token,"query":i}
+            json_data = {
+                "token":self.uid_token,
+                "query":i
+            }
             print(json_data)
 
             r = self.s.post(url,headers = self.header,json=json_data)

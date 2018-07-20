@@ -27,27 +27,31 @@ class Banner(unittest.TestCase):
         u'首页banner接口'
         self.s = requests.session()
         lgin = LG(self.s) #实例化登录类
-        uid_token = lgin.gettoken_loginbyUID() #直接取第二部登录
+        uid_token = lgin.login() #直接取第二部登录
         url = 'http://api.meet.sunnycare.cc/v2/banner'
         json_data = {
-            "token": uid_token
+            "token": uid_token,
+            "timestamp":int(time.time())
         }
         r = self.s.post(url,headers = self.header,json=json_data)
-        #self.assertEqual(200,r.json()['code'])
         d = r.json()['data']
         #取出链接,打开，判断状态码
         print(d)
 
+        '''
         links = [x['link'] for x in d]
         for n in links:
             re = self.s.get(n)
             self.assertEqual(200,re.status_code,msg='这个链接有问题'+n+'!')
-
+        '''
         #取出图片链接,打开，判断状态码
         image_links = [x['image'] for x in d]
-        for y in links:
+
+        for y in image_links:
             re = self.s.get(y)
-            self.assertEqual(200,re.status_code,msg='这个链接有问题'+n+'!')
+            self.assertEqual(200,re.status_code,msg='这个链接有问题'+y+'!')
+
+
 
     def tearDown(self):
         self.s.close()

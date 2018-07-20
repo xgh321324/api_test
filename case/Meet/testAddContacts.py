@@ -109,7 +109,7 @@ class Contact(unittest.TestCase):
         self.assertEqual(201, r.json()['code'])
         self.log.info('新增参会人-地址为空情况测试结束！')
 
-    @unittest.skip('无理由')
+    #@unittest.skip('无理由')
     def test_add_contacts05(self):
         u'添加联系人-新增人数过多'
         self.log.info('新增参会人-新增人数过多')

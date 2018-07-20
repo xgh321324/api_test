@@ -22,10 +22,11 @@ class Account_login(unittest.TestCase):
     def test_account_login(self):
         u'测试账号登录-正确账号正确密码'
         self.log.info('开始测试正确账号正确密码登录.....')
-        json_data = {"username":"15651797525",
-                     "password":"123456",
-                     "loginDevice":"2",
-                     "loginCity":"南京市"
+        json_data = {
+            "username":"15651797525",
+            "password":"123456",
+            "loginDevice":"2",
+            "loginCity":"南京市"
                      }
         r = self.s.post(self.url,headers=self.header,json=json_data)
         self.assertEqual('登录成功',r.json()['msg'],msg='正确账号密码没有登录成功！！')
@@ -34,10 +35,11 @@ class Account_login(unittest.TestCase):
     def test_account_login2(self):
         u'测试账号登录-正确账号错误密码'
         self.log.info('开始测试正确账号错误密码登录.....')
-        json_data = {"username":"15651797525",
-                     "password":"123458",
-                     "loginDevice":"2",
-                     "loginCity":"南京市"
+        json_data = {
+            "username":"15651797525",
+            "password":"123458",
+            "loginDevice":"2",
+            "loginCity":"南京市"
                      }
         r = self.s.post(self.url,headers=self.header,json=json_data)
         self.assertEqual('登录失败，请检查用户名或密码是否正确.',r.json()['msg'],msg='正确账号错误密码登录有问题！！')
@@ -46,10 +48,11 @@ class Account_login(unittest.TestCase):
     def test_account_login3(self):
         u'测试账号登录-错误账号正确密码'
         self.log.info('开始测试错误账号正确密码登录.....')
-        json_data = {"username":"15651797526",
-                     "password":"123456",
-                     "loginDevice":"2",
-                     "loginCity":"南京市"
+        json_data = {
+            "username":"15651797526",
+            "password":"123456",
+            "loginDevice":"2",
+            "loginCity":"南京市"
                      }
         r = self.s.post(self.url,headers=self.header,json=json_data)
         self.assertEqual('登录失败，请检查用户名或密码是否正确.',r.json()['msg'],msg='错误账号正确密码登录有问题！！')

@@ -43,8 +43,9 @@ class Trian(unittest.TestCase):
             #当绑定不为空时，医生再去获取用户的方案
             for id in User_UID:
                 url_2 = 'http://api.rih.medohealth.com/API/V1/UserTrainCourse/getUserTrainCourseByDoctor'
-                json_data_2 = {"token":self.auto_login_token,
-                             "userUID":id
+                json_data_2 = {
+                    "token":self.auto_login_token,
+                    "userUID":id
                              }
                 r2 = self.s.post(url_2,headers = self.header,json=json_data_2)
                 self.assertEqual(200,r2.json()['code'])

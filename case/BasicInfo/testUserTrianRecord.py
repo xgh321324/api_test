@@ -11,11 +11,11 @@ class Trian_record(unittest.TestCase):
         self.lgin = LG(self.s) #实例化登录类
         self.uid_token = self.lgin.get_token() #直接取账号登录的token
         self.auto_login_token = self.lgin.get_autologin_token() #取自动登录的token
-        self.header = {'User-Agent': 'LanTingDoctor/2.0.2 (iPad; iOS 10.1.1; Scale/2.00)',
-                       'Accept-Encoding': 'gzip, deflate',
-                       'Accept-Language': 'zh-Hans-CN;q=1',
-                       'Content-Type': 'application/json',
-                       'requestApp': '3',
+        self.header = {'User-Agent':  'LanTingDoctor/2.0.2 (iPad; iOS 10.1.1; Scale/2.00)',
+                       'Accept-Encoding':  'gzip, deflate',
+                       'Accept-Language':  'zh-Hans-CN;q=1',
+                       'Content-Type':  'application/json',
+                       'requestApp':  '3',
                        'requestclient': '2',
                        'versionForApp': '2.0',
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
@@ -31,7 +31,9 @@ class Trian_record(unittest.TestCase):
 
         #'这是获取已绑定的列表'
         url = 'http://api.rih.medohealth.com/API/V1/DoctorToUserReleationShip/getReleathionShipInfo'
-        json_data = {"token":self.auto_login_token}
+        json_data = {
+            "token":self.auto_login_token
+        }
         r = self.s.post(url,headers = self.header,json=json_data)
         Patients = r.json()['data']
         User_UID = []
@@ -46,10 +48,11 @@ class Trian_record(unittest.TestCase):
             #列表存的是月份
             L = ['01','02','03','04','05','06']
             for i in L:
-                json_data2 = {"userUID":"Y7xdvSRFmWiKqEM195u6CNyt8kfrLJBH",
-                             "year":"2018",
-                             "token":self.auto_login_token,
-                             "month":i
+                json_data2 = {
+                    "userUID":"Y7xdvSRFmWiKqEM195u6CNyt8kfrLJBH",
+                    "year":"2018",
+                    "token":self.auto_login_token,
+                    "month":i
                              }
                 r2 = self.s.post(url2,headers = self.header,json=json_data2)
                 print(r2.json())
@@ -66,7 +69,9 @@ class Trian_record(unittest.TestCase):
 
          #'这是获取已绑定的列表'
         url = 'http://api.rih.medohealth.com/API/V1/DoctorToUserReleationShip/getReleathionShipInfo'
-        json_data = {"token":self.auto_login_token}
+        json_data = {
+            "token":self.auto_login_token
+        }
         r = self.s.post(url,headers = self.header,json=json_data)
         Patients = r.json()['data']
         User_UID = []
@@ -85,9 +90,10 @@ class Trian_record(unittest.TestCase):
 
             for c in need_course_id.values():
                 url3 = 'http://api.rih.medohealth.com/API/V1/UserTrainRecord/getUserTrainRecordByCourseUIDForDoctor'
-                json_data3 = {"token":self.auto_login_token,
-                             "userUID":User_UID[0],
-                             "courseUID":c
+                json_data3 = {
+                    "token":self.auto_login_token,
+                    "userUID":User_UID[0],
+                    "courseUID":c
                              }
                 r3 = self.s.post(url3,headers = self.header,json=json_data3)
                 #断言结果

@@ -26,7 +26,7 @@ class Attach(unittest.TestCase):
         url = 'http://api.meet.sunnycare.cc/v2/attach/list'
         json_data = {
             "token":self.uid_token,
-            "meet_code":'M2018071319714'
+            "meet_code":'M2018072025468'
         }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('该会议讲义列表接口返回内容是：%s' % r.json())

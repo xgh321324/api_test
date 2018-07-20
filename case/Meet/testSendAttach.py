@@ -35,8 +35,9 @@ class Meet(unittest.TestCase):
         url = 'http://api.meet.sunnycare.cc/v2/attach/email'
         json_data = {
             "token": self.uid_token,
-            "attach_code": 'A2018071382819',
-            "email": '970185127@qq.com'
+            "attach_code": 'A2018072075966',
+            "email": '970185127@qq.com',
+            "timestamp":int(time.time())
         }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('发送讲义到邮箱返回：%s' % r.json())
@@ -49,8 +50,9 @@ class Meet(unittest.TestCase):
         url = 'http://api.meet.sunnycare.cc/v2/attach/email'
         json_data = {
             "token": self.uid_token,
-            "attach_code": 'A2018071382819',
-            "email": '15651797525@163.com'
+            "attach_code": 'A2018072075966',
+            "email": '15651797525@163.com',
+            "timestamp":int(time.time())
         }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('发送讲义到163邮箱返回：%s' % r.json())

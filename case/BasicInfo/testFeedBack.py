@@ -23,6 +23,7 @@ class Feedback(unittest.TestCase):
                        }
         self.log = Log()
 
+    @unittest.skip('无理由跳过！')
     def test_feedback(self):
         u'测试一键反馈接口'
         self.log.info('测试意见反馈只反馈文字')
