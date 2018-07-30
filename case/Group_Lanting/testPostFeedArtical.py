@@ -29,7 +29,7 @@ class Feed(unittest.TestCase):
         url = get_content('sns_base_url')+'/v1/post/add'
         json_data = {
             "token": self.auto_login_token,
-            "title": "我的文章-纯文字",
+            "title": "测试发布文章-纯文字",
             "cover": '/TestObjectFiles/TestObjectFiles/1529561033505542.jpg',
             "introduction": "文字文字文字",
             "content": [
@@ -46,7 +46,7 @@ class Feed(unittest.TestCase):
             ],
             "groups": ["G00001"]
         }
-        #for i in range(1,100):
+        #for i in range(1,10000):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是是：%s' % r.json())
         self.assertEqual('文章发布成功.',r.json()['note'])

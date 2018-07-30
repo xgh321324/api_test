@@ -37,12 +37,13 @@ class Sqldriver(object):
     # 执行Mysql查询
     def exec_mysql(self, sql):
         try:
-            connect = pymysql.connect(host=self.host,
-                                   port=self.port,
-                                   user=self.user,
-                                   passwd=self.password,
-                                   db=self.database,
-                                   charset='utf8'
+            connect = pymysql.connect(
+                    host=self.host,
+                    port=self.port,
+                    user=self.user,
+                    passwd=self.password,
+                    db=self.database,
+                    charset='utf8'
                                    )
             #创建游标
             cur = connect.cursor()

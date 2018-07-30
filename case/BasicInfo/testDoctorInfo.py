@@ -20,7 +20,7 @@ class Doctor(unittest.TestCase):
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
                        'Connection': 'keep-alive'
                        }
-
+    @unittest.skip('无条件跳过')
     def test_update_good_at(self):
         u'更新专业擅长接口'
         '''专业擅长内容：10 至 512 个字符'''
@@ -41,7 +41,7 @@ class Doctor(unittest.TestCase):
 
         self.log.info('测试更新专业擅长接口结束！')
 
-
+    @unittest.skip('无条件跳过')
     def test_update_person_info(self):
         u'更新个人简介接口'
         '''简介内容：10 至 512 个字符'''
@@ -64,6 +64,7 @@ class Doctor(unittest.TestCase):
 
         self.log.info('测试更新个人简介接口结束')
 
+    @unittest.skip('无条件跳过')
     def test_update_born_date(self):
         u'测试更新出生日期接口'
         self.log.info('开始测试更新出生日期接口')
@@ -75,6 +76,7 @@ class Doctor(unittest.TestCase):
         self.assertEqual('Success.',r.json()['msg'],msg='更新出生日期失败')
         self.log.info('测试更新出生日期接口结束')
 
+    @unittest.skip('无条件跳过')
     def test_uphospital_department(self):
         u'测试更新医院和科室接口'
         self.log.info('开始测试更新医院和科室接口')

@@ -59,7 +59,8 @@ def phone_nember():
 
 
 if __name__ == '__main__':
-    phone_nember()
+    for i in range(30):
+        phone_nember()
 
 
 

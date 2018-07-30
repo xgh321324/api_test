@@ -20,6 +20,7 @@ class Attach(unittest.TestCase):
                        'Connection': 'keep-alive'}
         self.log = Log()#实例化日志的类
 
+    @unittest.skip('无理由')
     def test_download_attach(self):
         u'下载讲义接口'
         url = 'http://api.meet.sunnycare.com/v2/attach/mine'
