@@ -26,8 +26,12 @@ class LessonInfo(unittest.TestCase):
     def testLessonList(self):
         u'测试课程列表'
         self.log.info('-----开始测试课程列表接口-----')
-        url = 'https://api.lesson.wrightin.com/v1/lesson/list'
-        json_data = {"timestamp":str(time.time()),"token":self.uid_token,"time":"0"}
+        url = 'http://api.lesson.sunnycare.cc/v1/lesson/list'
+        json_data = {
+            "timestamp":int(time.time()),
+            "token":self.uid_token,
+            "time":"0"
+        }
         r = self.s.post(url,headers = self.header,json=json_data,verify=False)
         self.log.info('课程列表返回：%s' % r.json())
         #判断课程列表获取是否成功
@@ -41,7 +45,7 @@ class LessonInfo(unittest.TestCase):
     def testLessonInfo(self):
         u'测试课程信息'
         self.log.info('------开始测试课程信息接口---------')
-        url = 'https://api.lesson.wrightin.com/v1/lesson'
+        url = 'http://api.lesson.sunnycare.cc/v1/lesson'
 
         #从txt读取上个接口的lesson_codes来循环post
         with open(r'C:\Users\Administrator\Desktop\test_data.txt','r') as f:

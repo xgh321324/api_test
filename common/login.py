@@ -34,7 +34,7 @@ class LG():
 
 
     def get_token(self):
-        '''取第一步登录成功后的token作为下一步的请求体'''
+        '''取账号密码登录成功后的token作为下一步的请求体'''
         url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/loginByUsername'
         #利用自己固定的账号密码登录
         t = {
@@ -47,9 +47,9 @@ class LG():
         success_token = r.json()['data']['Token']  #后面的很多操作会用到这个token，该token在登录成功后的步骤中作为请求的数据
         #print('success token:%s' % success_token)
         return success_token
-
+    '''
     def get_duid(self):
-        '''取第一步登录成功后的duid作为第二部登录的请求体'''
+        #取第一步登录成功后的duid作为第二部登录的请求体
         #url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/loginByUsername' #测试环境
         url = 'http://api.rih.medohealth.com/API/V1/DoctorLoginForToken/loginByUsername'
         t = {
@@ -87,6 +87,7 @@ class LG():
         r = self.s.post(url,headers = self.header,json=json_data)
         t = r.json()['data']['Token']
         return t
+    '''
 
 
 if __name__=='__main__':

@@ -2,6 +2,7 @@
 import requests,unittest
 from common.login import LG
 from common.logger import Log
+from common.logger import Log
 
 class Wechat_login(unittest.TestCase):
     '''
@@ -24,6 +25,7 @@ class Wechat_login(unittest.TestCase):
                        'Authorization': 'Basic YXBpTGFudGluZ0BtZWRsYW5kZXIuY29tOkFwaVRobWxkTWxkQDIwMTM=',
                        'Connection': 'keep-alive'
                        }
+        self.log = Log()
 
     def test_login_by_wechat(self):
         u'测试澜渟医生IOS微信登录接口'
@@ -46,6 +48,7 @@ class Wechat_login(unittest.TestCase):
                      "WeChatUnionID":"oh3fH06yJfDB6smX6kJACRNlglVY"
                      }
         r = self.s.post(url,headers = self.header1,json=json_data)
+        self.log.info('澜渟医生Andriod微信登录返回：%s' % r.json())
         self.assertEqual('登录成功',r.json()['msg'],msg='澜渟医生Andriod微信方式登录失败')
 
         self.log.info('澜渟医生Andriod微信登录接口测试结束')
@@ -59,6 +62,7 @@ class Wechat_login(unittest.TestCase):
                      "WeChatUnionID":"oh3fH06yJfDB6smX6kJACRNlglVY"
                      }
         r = self.s.post(url,headers = self.header1,json=json_data)
+        self.log.info('澜渟Andriod微信登录返回：%s' % r.json())
         self.assertEqual('登录成功',r.json()['msg'],msg='澜渟Andriod微信方式登录失败')
 
         self.log.info('澜渟Andriod微信登录接口测试结束')

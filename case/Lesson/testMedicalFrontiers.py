@@ -35,6 +35,7 @@ class Medical_front(unittest.TestCase):
                     f.write(j.content)
                 '''
         except Exception as e:
+            raise AssertionError
             print(e)
     def test_link(self):
         u'测试返回数据中的链接'

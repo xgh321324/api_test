@@ -7,7 +7,7 @@ class AddLearnRecord(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
         self.lgin = LG(self.s) #实例化登录类
-        self.uid_token = self.lgin.gettoken_loginbyUID() #直接取第二部登录
+        self.uid_token = self.lgin.login() #直接取第二部登录
         self.header = {'User-Agent': 'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)',
                        'Accept-Encoding': 'gzip, deflate',
                        'Accept-Language': 'zh-Hans-CN;q=1',
@@ -23,7 +23,7 @@ class AddLearnRecord(unittest.TestCase):
     def test_addlearn_record(self):
         u'测试增加学习记录接口'
         self.log.info('--------开始测试增加学习记录接口---------')
-        url = 'http://api.lesson.wrightin.com/v1/learn/chapadd'
+        url = 'http://api.lesson.sunnycare.cc/v1/learn/chapadd'
         L = ['J00035','J00036','J00001','J00013','J00014','J00016','J00007','J00008']
         for i in L:
             json_data = {"chap_code":i,
@@ -36,6 +36,7 @@ class AddLearnRecord(unittest.TestCase):
                 self.log.info('请求返回的数据是%s' % r.json())
                 self.assertEqual('请求成功',r.json()['note'])
             except Exception as e:
+                raise AssertionError
                 self.log.error('增加章节学习记录请求失败，原因是：%s' % e )
 
         '''

@@ -66,7 +66,7 @@ class Comment(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('评论为空feed返回的内容是：%s' % r.json())
         self.assertEqual(501,r.json()['code'])
-        self.assertEqual('text 的长度要求为 1 - 140.',r.json()['note'])
+        self.assertEqual('text 的长度要求为 1 - 800.',r.json()['note'])
         self.log.info('评论渟说-评论内容为空测试结束\n')
 
     def test_comment03(self):

@@ -11,7 +11,7 @@ class LessonInfo(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
         self.lgin = LG(self.s) #实例化登录类
-        self.uid_token = self.lgin.gettoken_loginbyUID() #直接取第二部登录
+        self.uid_token = self.lgin.login()
         self.header = {'User-Agent': 'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)',
                        'Accept-Encoding': 'gzip, deflate',
                        'Accept-Language': 'zh-Hans-CN;q=1',
@@ -24,7 +24,7 @@ class LessonInfo(unittest.TestCase):
     def testMyCouponList(self):
         u'测试我的优惠券列表接口--可用'
         self.log.info('-----------开始测试我的可用优惠券列表接口-------------')
-        url = 'https://api.lesson.wrightin.com/v1/coupon/mine'
+        url = 'http//api.lesson.sunnycare.cc/v1/coupon/mine'
         #0.不可用/1.可用
         json_data = {"can_use":"1","timestamp":str(time.time()),"token":self.uid_token,"time":"0"}
         r = self.s.post(url,headers = self.header,json=json_data,verify=False)
@@ -32,6 +32,7 @@ class LessonInfo(unittest.TestCase):
         try:
             self.assertEqual('请求成功.',r.json()['note'])
         except Exception as e:
+            raise AssertionError
             self.log.error('请求可用优惠券列表没有成功：%s' % e)
         #判断优惠券个数，如果个数不为0 ，那么优惠券不能重复！
         L = []
@@ -52,7 +53,7 @@ class LessonInfo(unittest.TestCase):
     def testMyCouponList2(self):
         u'测试我的优惠券列表接口--不可用'
         self.log.info('-----------开始测试我的不可用优惠券列表接口-------------')
-        url = 'https://api.lesson.wrightin.com/v1/coupon/mine'
+        url = 'http//api.lesson.sunnycare.cc/v1/coupon/mine'
         #0.不可用/1.可用
         json_data = {"can_use":"0","timestamp":str(time.time()),"token":self.uid_token,"time":"0"}
         r = self.s.post(url,headers = self.header,json=json_data,verify=False)
@@ -60,6 +61,7 @@ class LessonInfo(unittest.TestCase):
         try:
             self.assertEqual('请求成功.',r.json()['note'])
         except Exception as e:
+            raise AssertionError
             self.log.error('请求不可用优惠券列表没有成功：%s' % e)
         #判断优惠券个数，如果个数不为0 ，那么优惠券不能重复！
         L = []

@@ -1,6 +1,7 @@
 #coding:utf-8
 import requests,unittest,time
 from common.login_lanting import auto_login_by_UID
+from common.login import LG
 from common.logger import Log
 import urllib3
 from common.Read_config import get_content
@@ -9,6 +10,7 @@ urllib3.disable_warnings()
 class Feed(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
+        #l澜渟登录token
         self.auto_login_token = auto_login_by_UID()  #auto_login_by_UID返回的token
         self.header = {'User-Agent': 'PelvicFloorPersonal/4.1.1 (iPad; iOS 10.1.1; Scale/2.00)',
                        'Accept-Encoding': 'gzip, deflate',

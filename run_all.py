@@ -23,10 +23,7 @@ def all_case():
         for i in case:
             test_case.addTest(i)
     '''
-
-
     return test_case
-
 
 
 if __name__ == '__main__':

@@ -54,13 +54,32 @@ def get_sha1(target):
 def phone_nember():
     pre_list = ["130","131","132","133","134","135","136","137","138","139","147","150","151","152","153","155","156","157","158","159","186","187","188"]
     num = random.choice(pre_list) + ''.join(random.sample(string.digits,8))
-    #print(num)
+    print(num)
     return num
 
+#API签名算法
+def get_sign(t):
+    #t是一个字典
+    result = sorted(t.items(),key = lambda x:x[0],reverse=False)
+    #print(result)
+    target2 = ''
+    for i in result:
+        target1 = i[0]+'='+i[1]+'&'
+        target2 += target1
+    #print(target2)
+    #拼接密钥
+    target3 = target2+'secret=BCy94HkqITdAJDCPhw9Sjd6TwLoV8igR'
+    #print(target3)
+    #MD5加密
+    target4 = get_md5(target3)
+    #转换为大写
+    target5 = target4.upper()
+    #print(target5)
+    return target5
 
 if __name__ == '__main__':
-    for i in range(30):
-        phone_nember()
+    t = {"token":"dTWIlmcMRbEBAOhHUXQtoVjikJzvxwqC","time":"0","timestamp":"1533547784","nonce":"04383124914115851020180806172944"}
+    get_sign(t)
 
 
 

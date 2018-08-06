@@ -34,6 +34,7 @@ class MyInvitation(unittest.TestCase):
             self.assertEqual(200,r.json()['code'])
             self.log.info('我的邀请接口请求成功！')
         except Exception as e:
+            raise AssertionError
             print(e)
             self.log.error('我的邀请接口请求失败，原因：%s' % e)
 
