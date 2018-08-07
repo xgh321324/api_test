@@ -3,11 +3,13 @@ import requests
 import unittest
 import xlrd
 from common.login import LG
+from common.Hash import get_digit,get_sign
+
 class Test_pay(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
         self.lgin = LG(self.s) #实例化登录类
-        self.uid_token = self.lgin.gettoken_loginbyUID() #直接取第二部登录
+        self.uid_token = self.lgin.login() #登录
         self.header = {'User-Agent': 'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)',
                        'Accept-Encoding': 'gzip, deflate',
                        'Accept-Language': 'zh-Hans-CN;q=1',
@@ -20,16 +22,22 @@ class Test_pay(unittest.TestCase):
 
     def test_lesson_frontpage(self):
         u'测试课程首页接口'
-        #url = 'http://api.lesson.sunnycare.cc/v1/rec'#测试环境接口
-        url = 'https://api.lesson.wrightin.com/v1/rec'
+        url = 'http://api.lesson.sunnycare.cc/v1/rec'#测试环境接口
         json_data = {
             "timestamp":"1523937360",
-            "token":self.uid_token
+            "token":self.uid_token,
+            "nonce": get_digit()
                      }
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data,verify=False)
         print(r.json())
         #判断返回状态
-        self.assertEqual('请求成功.',r.json()['note'],msg='请求返回状态不是200，有问题')
+        try:
+            self.assertEqual('请求成功.',r.json()['note'],msg='请求返回状态不是200，有问题')
+        except Exception as e:
+            raise AssertionError
+            print('首页请求失败：%s' % e)
+
         imagelinks = []
         links= []
         L= r.json()['data']['banner_list']

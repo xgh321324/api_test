@@ -1,11 +1,12 @@
 #coding:utf-8
 import requests
-import unittest
+import unittest,time
 from common.login import LG
-import time
+from common.Hash import get_digit,get_sign
 from common.logger import Log
 import urllib3
 urllib3.disable_warnings()
+
 class LessonInfo(unittest.TestCase):
     log = Log()#实例化记录日志的类
     def setUp(self):
@@ -24,11 +25,19 @@ class LessonInfo(unittest.TestCase):
     def testMyCouponList(self):
         u'测试我的优惠券列表接口--可用'
         self.log.info('-----------开始测试我的可用优惠券列表接口-------------')
-        url = 'http//api.lesson.sunnycare.cc/v1/coupon/mine'
+        url = 'http://api.lesson.sunnycare.cc/v1/coupon/mine'
         #0.不可用/1.可用
-        json_data = {"can_use":"1","timestamp":str(time.time()),"token":self.uid_token,"time":"0"}
+        json_data = {
+            "can_use":"1",
+            "timestamp":str(int(time.time())),
+            "token":self.uid_token,
+            "time":"0",
+            "nonce": get_digit()
+        }
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data,verify=False)
         self.log.info('返回的可用优惠券参数是：%s' % r.json())
+
         try:
             self.assertEqual('请求成功.',r.json()['note'])
         except Exception as e:
@@ -53,11 +62,19 @@ class LessonInfo(unittest.TestCase):
     def testMyCouponList2(self):
         u'测试我的优惠券列表接口--不可用'
         self.log.info('-----------开始测试我的不可用优惠券列表接口-------------')
-        url = 'http//api.lesson.sunnycare.cc/v1/coupon/mine'
+        url = 'http://api.lesson.sunnycare.cc/v1/coupon/mine'
         #0.不可用/1.可用
-        json_data = {"can_use":"0","timestamp":str(time.time()),"token":self.uid_token,"time":"0"}
+        json_data = {
+            "can_use":"0",
+            "timestamp":str(int(time.time())),
+            "token":self.uid_token,
+            "time":"0",
+            "nonce": get_digit()
+        }
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data,verify=False)
         self.log.info('返回的不可用优惠券json是：%s' % r.json())
+
         try:
             self.assertEqual('请求成功.',r.json()['note'])
         except Exception as e:
@@ -66,6 +83,7 @@ class LessonInfo(unittest.TestCase):
         #判断优惠券个数，如果个数不为0 ，那么优惠券不能重复！
         L = []
         coupons = r.json()['data']['list']
+
         if len(coupons) != 0:
             for x in coupons:
                L.append(x['code'])

@@ -3,12 +3,14 @@ import requests
 import unittest
 from common.login import LG
 from common.Excel import Excel_util
+from common.Hash import get_digit,get_sign
+
 class TestInvoice(unittest.TestCase):
 
     def setUp(self):
         self.s = requests.session()
         self.lgin = LG(self.s) #实例化登录类
-        self.uid_token = self.lgin.gettoken_loginbyUID() #直接取第二部登录
+        self.uid_token = self.lgin.login() #登录
         self.excel = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
         self.header = {'User-Agent': 'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)',
                        'Accept-Encoding': 'gzip, deflate',
@@ -22,7 +24,7 @@ class TestInvoice(unittest.TestCase):
 
     def test_invoice(self):
         u'测试我的发票获取接口'
-        url = 'http://api.exam.wrightin.com/v1/myInvoices'
+        url = 'http://api.exam.sunnycare.cc/v1/myInvoices'
 
 
 
@@ -42,7 +44,7 @@ class TestInvoice(unittest.TestCase):
 
     def test_invoice_detail(self):
         u'测试查看发票详情接口'
-        url = 'http://api.exam.wrightin.com/v1/myInvoiceDetail'
+        url = 'http://api.exam.sunnycare.cc/v1/myInvoiceDetail'
 
         #for循环一次去请求每张发票详情
         for value in d.values():

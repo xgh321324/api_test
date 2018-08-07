@@ -4,12 +4,14 @@ import unittest
 from common.login import LG
 import time
 from common.logger import Log
+from common.Hash import get_digit,get_sign
+
 class ColumnInfo(unittest.TestCase):
 
     def setUp(self):
         self.s = requests.session()
         self.lgin = LG(self.s) #实例化登录类
-        self.uid_token = self.lgin.gettoken_loginbyUID() #直接取第二部登录
+        self.uid_token = self.lgin.login() #直接取第二部登录
         self.header = {'User-Agent': 'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)',
                        'Accept-Encoding': 'gzip, deflate',
                        'Accept-Language': 'zh-Hans-CN;q=1',
@@ -24,9 +26,14 @@ class ColumnInfo(unittest.TestCase):
         u'测试可领用优惠券列表接口'
         self.log.info('-----开始测试可领的优惠券列表接口-------')
         url = 'http://api.lesson.sunnycare.cc/v1/coupon/canget'
-        json_DATA = {"where_code":"Z2018041914505917219",
-                     "timestamp":str(time.time()),"for_where":"3",
-                     "token":self.uid_token}
+        json_DATA = {
+            "where_code":"K00112",
+            "timestamp":str(int(time.time())),
+            "for_where":"2",
+            "token":self.uid_token,
+            "nonce": get_digit()
+        }
+        json_DATA['sign'] = get_sign(json_DATA)
         r = self.s.post(url,headers = self.header,json=json_DATA)
         try:
             self.log.info('开始断言请求该接口返回的状态是否成功')

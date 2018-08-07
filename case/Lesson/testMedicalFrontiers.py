@@ -7,6 +7,8 @@ class Medical_front(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
         self.header = {'User-Agent':'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)'}
+
+    @unittest.skip
     def test_status(self):
         u'测试医学前沿中页面是否请求成功'
         url = 'http://api.sns.wrightin.com/v1/article/yixueqianyan/1'
@@ -15,6 +17,7 @@ class Medical_front(unittest.TestCase):
         response = r.json()
         status = response['note']
         self.assertEqual('请求成功.',status,msg='没有请求成功的标识，所以这是请求失败的！')
+    @unittest.skip
     def test_jpg(self):
         u'测试请求成功的数据中图片'
         url = 'http://api.sns.wrightin.com/v1/article/yixueqianyan/1'
@@ -37,6 +40,7 @@ class Medical_front(unittest.TestCase):
         except Exception as e:
             raise AssertionError
             print(e)
+    @unittest.skip
     def test_link(self):
         u'测试返回数据中的链接'
         url = 'http://api.sns.wrightin.com/v1/article/yixueqianyan/1'
@@ -56,4 +60,3 @@ class Medical_front(unittest.TestCase):
 if __name__=='__main__':
     unittest.main()
 
-#user_exam_code=54D227C9DE5BFCA9AF26B4EE72C71B39

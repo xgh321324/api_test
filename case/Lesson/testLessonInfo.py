@@ -1,18 +1,20 @@
 #coding:utf-8
 import requests
-import unittest
+import unittest,time
 from common.login import LG
-import time
+from common.Hash import get_digit,get_sign
 from common.logger import Log
 import urllib3
+
 urllib3.disable_warnings()
+
 class LessonInfo(unittest.TestCase):
     log = Log()#实例化记录日志的类
     def setUp(self):
         self.s = requests.session()
         self.lgin = LG(self.s) #实例化登录类
         self.lgin.login()
-        self.uid_token = self.lgin.gettoken_loginbyUID() #直接取第二部登录
+        self.uid_token = self.lgin.login() #登录
         self.header = {'User-Agent': 'LanTingDoctor/1.3.1 (iPad; iOS 10.1.1; Scale/2.00)',
                        'Accept-Encoding': 'gzip, deflate',
                        'Accept-Language': 'zh-Hans-CN;q=1',
@@ -28,10 +30,12 @@ class LessonInfo(unittest.TestCase):
         self.log.info('-----开始测试课程列表接口-----')
         url = 'http://api.lesson.sunnycare.cc/v1/lesson/list'
         json_data = {
-            "timestamp":int(time.time()),
+            "timestamp":str(int(time.time())),
             "token":self.uid_token,
-            "time":"0"
+            "time":"0",
+            "nonce": get_digit()
         }
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data,verify=False)
         self.log.info('课程列表返回：%s' % r.json())
         #判断课程列表获取是否成功
@@ -59,9 +63,15 @@ class LessonInfo(unittest.TestCase):
 
         #下面循环post课程 来断言课程详情是否获取成功
         for n in need_codes:
-            json_data = {"lesson_code":n,"token":self.uid_token}
+            json_data = {
+                "lesson_code":n,
+                "token":self.uid_token,
+                "timestamp": str(int(time.time())),
+                "nonce": get_digit()
+            }
+            json_data['sign'] = get_sign(json_data)
             r2 = self.s.post(url,headers = self.header,json=json_data,verify=False)
-            self.log.info('课程信息返回：%s' % r2.json())
+            self.log.info('%s课程信息返回：%s' % (n,r2.json()))
             self.assertEqual('请求成功.',r2.json()['note'])
 
         self.log.info('------------测试结束---------------')

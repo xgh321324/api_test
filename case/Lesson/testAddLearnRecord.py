@@ -2,6 +2,7 @@
 import requests,time,unittest
 from common.logger import Log
 from common.login import LG
+from common.Hash import get_sign,get_digit
 from common.Database import Sqldriver
 class AddLearnRecord(unittest.TestCase):
     def setUp(self):
@@ -24,14 +25,18 @@ class AddLearnRecord(unittest.TestCase):
         u'测试增加学习记录接口'
         self.log.info('--------开始测试增加学习记录接口---------')
         url = 'http://api.lesson.sunnycare.cc/v1/learn/chapadd'
-        L = ['J00035','J00036','J00001','J00013','J00014','J00016','J00007','J00008']
+        L = ['J00201']
         for i in L:
-            json_data = {"chap_code":i,
-                             "timestamp":str(time.time()),
-                             "token":self.uid_token
+            #加入nonce
+            json_data = {
+                "chap_code":i,
+                "timestamp":str(int(time.time())),
+                "token":self.uid_token,
+                "nonce": get_digit()
                          }
+            #加入sign
+            json_data['sign'] = get_sign(json_data)
             r = self.s.post(url,headers = self.header,json=json_data)
-
             try:
                 self.log.info('请求返回的数据是%s' % r.json())
                 self.assertEqual('请求成功',r.json()['note'])

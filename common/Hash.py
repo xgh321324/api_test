@@ -31,8 +31,8 @@ def get_digit():
     d2 = ''.join(random.sample(string.digits,8))
     d3 = ''.join(random.sample(string.digits,8))
     final_d = d + d1 +d2 + d3
-    print(type(final_d))
-    print(final_d)
+    #print(type(final_d))
+    #print(final_d)
     return final_d
 
 def get_md5(target):
@@ -40,7 +40,7 @@ def get_md5(target):
     m = hashlib.md5()  #创建Md5对象
     m.update(target.encode('utf-8')) #生成加密串，其中target是要加密的字符串
     result = m.hexdigest()
-    print(result)
+    #print(result)
     return result
 
 def get_sha1(target):
