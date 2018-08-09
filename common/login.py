@@ -85,10 +85,11 @@ class LG():
         }
         r = self.s.post(url,headers = self.header,json=json_data)
         t = r.json()['data']['Token']
+        print(t)
         return t
 
 if __name__=='__main__':
     s = requests.session()
     x = LG(s)
-    x.login()
+    x.get_autologin_token()
 
