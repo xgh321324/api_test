@@ -18,7 +18,6 @@ def get_str():
     print('z:',z)
 
     '''
-
     s = ''.join(random.sample(string.ascii_letters+string.digits,32))
     #random.sample()  从中随机选择多少长度的值
     #print(s)
@@ -31,8 +30,8 @@ def get_digit():
     d2 = ''.join(random.sample(string.digits,8))
     d3 = ''.join(random.sample(string.digits,8))
     final_d = d + d1 +d2 + d3
-    #print(type(final_d))
-    #print(final_d)
+    print(type(final_d))
+    print(final_d)
     return final_d
 
 def get_md5(target):
@@ -52,6 +51,7 @@ def get_sha1(target):
     return result
 
 def phone_nember():
+    u'随机产生合法格式的手机号码'
     pre_list = ["130","131","132","133","134","135","136","137","138","139","147","150","151","152","153","155","156","157","158","159","186","187","188"]
     num = random.choice(pre_list) + ''.join(random.sample(string.digits,8))
     print(num)
@@ -78,9 +78,7 @@ def get_sign(t):
     return target5
 
 if __name__ == '__main__':
-    t = {"token":"dTWIlmcMRbEBAOhHUXQtoVjikJzvxwqC","time":"0","timestamp":"1533547784","nonce":"04383124914115851020180806172944"}
-    get_sign(t)
-
+    get_digit()
 
 
 

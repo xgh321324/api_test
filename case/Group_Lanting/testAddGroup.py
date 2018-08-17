@@ -37,7 +37,7 @@ class Add_Group(unittest.TestCase):
         self.log.info('返回内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
         self.assertEqual('加入圈子成功.',r.json()['note'])
-        self.log.info('加入圈子接口之数据正常情况测试结束！')
+        self.log.info('加入圈子接口之数据正常情况测试结束！\n')
 
     def test_add_group2(self):
         u'加入圈子接口'
@@ -50,7 +50,7 @@ class Add_Group(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回状态码：%s' % r.status_code)
         self.assertEqual(500,r.status_code)
-        self.log.info('加入圈子接口之group-id情况为空测试结束！')
+        self.log.info('加入圈子接口之group-id情况为空测试结束！\n')
 
     def test_add_group3(self):
         u'加入圈子接口'
