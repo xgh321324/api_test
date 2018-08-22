@@ -2,13 +2,13 @@
 import requests
 import unittest
 import time,json
-from common.Hash import phone_nember #生成随机手机号
+from common.Hash import phone_nember,get_digit,get_sign #生成随机手机号
 from common.login import LG
 from common.logger import Log
 from common.Excel import Excel_util
+
+
 class Contact(unittest.TestCase):
-
-
     def setUp(self):
         self.s = requests.session()
         self.lgin = LG(self.s) #实例化登录类
@@ -36,18 +36,22 @@ class Contact(unittest.TestCase):
             "token": self.uid_token,
             "name": '你不知道我是谁',
             "phone": phone_nember(),
-            "sex": 0,
+            "sex": '0',
             "address": '江苏省南京市江宁区',
             "company": '南京麦澜德',
             "job": 'xxx',
             "job_title": 'sss',
-            "is_from_base": '1'
+            "is_from_base": '1',
+            "timestamp": str(int(time.time())),
+            "nonce": get_digit()
         }
+        #入参加密
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('添加参会人返回结果：%s' % r.json())
         self.assertEqual(200, r.json()['code'])
         self.assertEqual('请求成功.',r.json()['note'])
-        self.log.info('添加参会人接口-参数正常情况测试结束！')
+        self.log.info('添加参会人接口-参数正常情况测试结束！\n')
 
     def test_add_contacts02(self):
         u'添加联系人-姓名过长'
@@ -57,17 +61,20 @@ class Contact(unittest.TestCase):
             "token": self.uid_token,
             "name": '大于32个字的名字大于32个字的名字大于32个字的名字大于32个字的名字大于32个字的名字大于32个字的名字',
             "phone": phone_nember(),
-            "sex": 0,
+            "sex": '0',
             "address": '江苏省南京市江宁区',
             "company": '南京麦澜德',
             "job": 'xxx',
             "job_title": 'sss',
-            "is_from_base": '1'
+            "is_from_base": '1',
+            "timestamp": str(int(time.time())),
+            "nonce": get_digit()
         }
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('新增名字过长返回结果是：%s' % r.json())
         self.assertEqual('请求成功.',r.json()['note'])
-        self.log.info('新增参会人-名称过长情况测试结束！')
+        self.log.info('新增参会人-名称过长情况测试结束！\n')
 
     def test_add_contacts03(self):
         u'添加联系人-手机号码格式不正确'
@@ -76,18 +83,21 @@ class Contact(unittest.TestCase):
         json_data = {
             "token": self.uid_token,
             "name": '司马上官',
-            "phone": 6666111122,
-            "sex": 0,
+            "phone": '6666111122',
+            "sex": '0',
             "address": '江苏省南京市江宁区',
             "company": '南京麦澜德',
             "job": 'xxx',
             "job_title": 'sss',
-            "is_from_base": '1'
+            "is_from_base": '1',
+            "timestamp": str(int(time.time())),
+            "nonce": get_digit()
         }
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('新增手机号格式不正确返回结果是：%s' % r.json())
         self.assertEqual(201, r.json()['code'])
-        self.log.info('新增参会人-手机号格式不正确情况测试结束！')
+        self.log.info('新增参会人-手机号格式不正确情况测试结束！\n')
 
     def test_add_contacts04(self):
         u'添加联系人-地址为空'
@@ -97,17 +107,20 @@ class Contact(unittest.TestCase):
             "token": self.uid_token,
             "name": '司马上官',
             "phone": phone_nember(),
-            "sex": 0,
+            "sex": '0',
             "address": '  ',
             "company": '南京麦澜德',
             "job": 'xxx',
             "job_title": 'sss',
-            "is_from_base": '1'
+            "is_from_base": '1',
+            "timestamp": str(int(time.time())),
+            "nonce": get_digit()
         }
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('新增参会人-地址为空返回结果是：%s' % r.json())
         self.assertEqual(201, r.json()['code'])
-        self.log.info('新增参会人-地址为空情况测试结束！')
+        self.log.info('新增参会人-地址为空情况测试结束！\n')
 
     @unittest.skip('无理由')
     def test_add_contacts05(self):
@@ -119,13 +132,16 @@ class Contact(unittest.TestCase):
                 "token": self.uid_token,
                 "name": '司马上官',
                 "phone": phone_nember(),
-                "sex": 0,
+                "sex": '0',
                 "address": ' 南京南京',
                 "company": '南京麦澜德',
                 "job": 'xxx',
                 "job_title": 'sss',
-                "is_from_base": '1'
+                "is_from_base": '1',
+                "timestamp": str(int(time.time())),
+                "nonce": get_digit()
             }
+            json_data['sign'] = get_sign(json_data)
             r = self.s.post(url,headers = self.header,json=json_data)
             while  i == 101:
                 self.assertEqual('数量达到上限',r.json()['note'])

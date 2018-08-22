@@ -5,6 +5,8 @@ import time,json
 from common.login import LG
 from common.logger import Log
 from common.Excel import Excel_util
+from common.Hash import get_digit,get_sign
+
 class Meet(unittest.TestCase):
 
     @classmethod
@@ -37,8 +39,11 @@ class Meet(unittest.TestCase):
             "token": self.uid_token,
             "attach_code": 'A2018072075966',
             "email": '970185127@qq.com',
-            "timestamp":int(time.time())
+            "timestamp":str(int(time.time())),
+            "nonce": get_digit()
         }
+        #入参加密
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('发送讲义到邮箱返回：%s' % r.json())
         self.assertEqual('请求成功.', r.json()['note'])
@@ -52,8 +57,11 @@ class Meet(unittest.TestCase):
             "token": self.uid_token,
             "attach_code": 'A2018072075966',
             "email": '15651797525@163.com',
-            "timestamp":int(time.time())
+            "timestamp":str(int(time.time())),
+            "nonce": get_digit()
         }
+        #入参加密
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('发送讲义到163邮箱返回：%s' % r.json())
         self.assertEqual('请求成功.', r.json()['note'])

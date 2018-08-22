@@ -5,8 +5,9 @@ import time
 from common.login import LG
 from common.logger import Log
 from common.Excel import Excel_util
-class Tickets(unittest.TestCase):
+from common.Hash import get_digit,get_sign
 
+class Tickets(unittest.TestCase):
 
     def setUp(self):
         self.s = requests.session()
@@ -29,8 +30,12 @@ class Tickets(unittest.TestCase):
         self.log.info('开始测试会议门票接口！')
         url = 'http://api.meet.sunnycare.cc/v2/ticket/mine'
         json_data = {
-            "token":self.uid_token
+            "token":self.uid_token,
+            "timestamp": str(int(time.time())),
+            "nonce": get_digit()
         }
+        #入参加密
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('会议门票返回的结果是：%s' % r.json())
         self.assertEqual('请求成功.',r.json()['note'])
@@ -41,7 +46,6 @@ class Tickets(unittest.TestCase):
         for i in ticket_code:
             code['ticket_co'+str(j)] = (i['ticket_order_code'])
         self.excel.write_value(16,6,code)
-
         self.log.info('会议门票接口测试结束！')
 
 

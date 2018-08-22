@@ -46,7 +46,7 @@ class Feed(unittest.TestCase):
             "text":t,
             'groups':['G00001','G00004','G00002']
                      }
-        #for i in range(1,20):
+        #for i in range(0,20):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])

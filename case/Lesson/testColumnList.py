@@ -34,7 +34,7 @@ class ColumnList(unittest.TestCase):
         json_data = {
             "timestamp": str(int(time.time())),
             "token": self.uid_token,
-            "time":  "0"
+            "time": "0"
         }
         #加入nonce参数
         json_data['nonce'] = get_digit()

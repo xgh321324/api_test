@@ -5,6 +5,7 @@ import time,json
 from common.login import LG
 from common.logger import Log
 from common.Excel import Excel_util
+from common.Hash import get_digit,get_sign
 
 class Contact(unittest.TestCase):
 
@@ -23,6 +24,7 @@ class Contact(unittest.TestCase):
                        'Connection':  'keep-alive'}
         self.log = Log()#实例化日志的类
         self.excel = Excel_util(r'C:\Users\Administrator\Desktop\interface_testcase.xls')
+
     def test_update_contacts01(self):
         u'更新联系人-更新名字'
         #先读取一个参会人code然后更新其信息
@@ -34,18 +36,20 @@ class Contact(unittest.TestCase):
             "token": self.uid_token,
             "name": '更新后的名字',
             "contact_code": be_use_code['contact_code1'],
-            "phone": 13605246089,
-            "sex": 0,
+            "phone": '13605246089',
+            "sex": '0',
             "address": '江苏省南京市江宁区',
             "company": '南京麦澜德',
             "job": 'xxx',
             "job_title": 'sss',
-            "is_from_base": '1'
+            "is_from_base": '1',
+            "timestamp": str(int(time.time())),
+            "nonce": get_digit()
         }
+        #入参加密
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(update_url,headers = self.header,json=json_data)
         self.assertEqual(200,r.json()['code'])
-
-
 
     def test_update_contacts02(self):
         u'更新联系人-更新号码'
@@ -56,14 +60,18 @@ class Contact(unittest.TestCase):
             "token": self.uid_token,
             "name": '更新后的名字',
             "contact_code": be_use_code['contact_code1'],
-            "phone": 13888888888,
-            "sex": 0,
+            "phone": '13888888888',
+            "sex": '0',
             "address": '江苏省南京市江宁区',
             "company": '南京麦澜德',
             "job": 'xxx',
             "job_title": 'sss',
-            "is_from_base": '1'
+            "is_from_base": '1',
+            "timestamp": str(int(time.time())),
+            "nonce": get_digit()
         }
+        #入参加密
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(update_url,headers = self.header,json=json_data)
         self.assertEqual(200,r.json()['code'])
 
@@ -76,14 +84,18 @@ class Contact(unittest.TestCase):
             "token": self.uid_token,
             "name": '更新后的名字',
             "contact_code": be_use_code['contact_code1'],
-            "phone": 13888888888,
-            "sex": 0,
+            "phone": '13888888888',
+            "sex": '0',
             "address": '北京市江宁区天元东路122号',
             "company": '南京麦澜德',
             "job": 'xxx',
             "job_title": 'sss',
-            "is_from_base": '1'
+            "is_from_base": '1',
+            "timestamp": str(int(time.time())),
+            "nonce": get_digit()
         }
+        #入参加密
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(update_url,headers = self.header,json=json_data)
         self.assertEqual(200,r.json()['code'])
 

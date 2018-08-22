@@ -5,6 +5,8 @@ import time
 from common.login import LG
 from common.logger import Log
 from common.Excel import Excel_util
+from common.Hash import get_digit,get_sign
+
 class Contact(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
@@ -27,8 +29,12 @@ class Contact(unittest.TestCase):
         self.log.info('参会人列表接口测试开始')
         url = 'http://api.meet.sunnycare.cc/v2/contact/records'
         json_data = {
-            "token":self.uid_token
+            "token":self.uid_token,
+            "nonce": get_digit(),
+            "timestamp": str(int(time.time()))
         }
+        #入参加密
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('参会人列表返回内容是：%s' % r.json())
         conten = r.json()['data']['content']

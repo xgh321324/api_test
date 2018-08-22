@@ -5,6 +5,7 @@ import time,json
 from common.login import LG
 from common.logger import Log
 from common.Excel import Excel_util
+from common.Hash import get_digit,get_sign
 
 class Tickets(unittest.TestCase):
 
@@ -34,8 +35,12 @@ class Tickets(unittest.TestCase):
         for v in be_use_code.values():
             json_data = {
                 "token":self.uid_token,
-                "ticket_order_code":v
+                "ticket_order_code":v,
+                "timestamp":str(int(time.time())),
+                "nonce": get_digit()
             }
+            #入参加密
+            json_data['sign'] = get_sign(json_data)
             r = self.s.post(url,headers = self.header,json=json_data)
             self.log.info('%s的门票详情返回的结果是：%s' % (v,r.json()))
             self.assertEqual('请求成功.',r.json()['note'])

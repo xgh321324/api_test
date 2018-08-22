@@ -6,6 +6,7 @@ from common.login import LG
 from common.logger import Log
 from common.Excel import Excel_util
 from case.Meet.testAEContactsList import Contact
+from common.Hash import get_digit,get_sign
 
 class Con(unittest.TestCase):
 
@@ -37,8 +38,12 @@ class Con(unittest.TestCase):
             for v in be_code.values():
                 json_data = {
                     "token":self.uid_token,
-                    "contact_code":v #读取excel中的code
+                    "contact_code":v, #读取excel中的code,
+                    "timestamp": str(int(time.time())),
+                    "nonce": get_digit()
                 }
+                #入参加密
+                json_data['sign'] = get_sign(json_data)
                 r = self.s.post(url,headers = self.header,json=json_data)
                 self.log.info('删除该条联系人返回结果是：%s' % r.json())
                 self.assertEqual('请求成功.',r.json()['note'])

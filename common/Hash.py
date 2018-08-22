@@ -30,8 +30,8 @@ def get_digit():
     d2 = ''.join(random.sample(string.digits,8))
     d3 = ''.join(random.sample(string.digits,8))
     final_d = d + d1 +d2 + d3
-    print(type(final_d))
-    print(final_d)
+    #print(type(final_d))
+    #print(final_d)
     return final_d
 
 def get_md5(target):
@@ -54,7 +54,7 @@ def phone_nember():
     u'随机产生合法格式的手机号码'
     pre_list = ["130","131","132","133","134","135","136","137","138","139","147","150","151","152","153","155","156","157","158","159","186","187","188"]
     num = random.choice(pre_list) + ''.join(random.sample(string.digits,8))
-    print(num)
+    #print(num)
     return num
 
 #API签名算法
@@ -64,6 +64,7 @@ def get_sign(t):
     #print(result)
     target2 = ''
     for i in result:
+        #将键值对拼接
         target1 = i[0]+'='+i[1]+'&'
         target2 += target1
     #print(target2)

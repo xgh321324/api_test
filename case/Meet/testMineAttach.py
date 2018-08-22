@@ -4,6 +4,8 @@ import unittest
 import time
 from common.login import LG
 from common.logger import Log
+from common.Hash import get_digit,get_sign
+
 class Attach(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
@@ -26,8 +28,11 @@ class Attach(unittest.TestCase):
         url = 'http://api.meet.sunnycare.cc/v2/attach/mine'
         json_data = {
             "token":self.uid_token,
-            #""
+            "timestamp": str(int(time.time())),
+            "nonce": get_digit()
         }
+        #入参加密
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers= self.header,json=json_data)
         self.log.info('我的讲义返回的结果是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])

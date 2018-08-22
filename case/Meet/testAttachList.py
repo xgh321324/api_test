@@ -4,6 +4,8 @@ import unittest
 import time
 from common.login import LG
 from common.logger import Log
+from common.Hash import get_digit,get_sign
+
 class Attach(unittest.TestCase):
     def setUp(self):
         self.s = requests.session()
@@ -26,8 +28,12 @@ class Attach(unittest.TestCase):
         url = 'http://api.meet.sunnycare.cc/v2/attach/list'
         json_data = {
             "token":self.uid_token,
-            "meet_code":'M2018072025468'
+            "meet_code":'M2018072025468',
+            "timestamp": str(int(time.time())),
+            "nonce": get_digit()
         }
+        #入参加密
+        json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('该会议讲义列表接口返回内容是：%s' % r.json())
         self.assertEqual('请求成功.',r.json()['note'])

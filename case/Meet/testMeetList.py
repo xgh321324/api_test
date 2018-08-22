@@ -5,6 +5,8 @@ import time,json
 from common.login import LG
 from common.logger import Log
 from common.Excel import Excel_util
+from common.Hash import get_digit,get_sign
+
 class Meet(unittest.TestCase):
 
     @classmethod
@@ -34,8 +36,11 @@ class Meet(unittest.TestCase):
         url = 'http://api.meet.sunnycare.cc/v2/meet/records'
         json_data = {
             "token":self.uid_token,
-            "time": '0'
+            "time": '0',
+            "timestamp": str(int(time.time())),
+            "nonce": get_digit()
         }
+        json_data['sign'] = get_sign(json_data)
         #print(self.uid_token)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('列表返回的内容是：%s' % r.json())
@@ -64,8 +69,12 @@ class Meet(unittest.TestCase):
             #print(type(v))
             info_json_data = {
                     "token": self.uid_token,
-                    "meet_code":v
+                    "meet_code":v,
+                    "timestamp": str(int(time.time())),
+                    "nonce": get_digit()
                 }
+            #入参加密
+            info_json_data['sign'] = get_sign(info_json_data)
             #print(self.uid_token)
             r2 = self.s.post(info_url,headers = self.header,json=info_json_data)
             self.log.info('会议：%s返回详情是：%s' % (v,r2.json()))
