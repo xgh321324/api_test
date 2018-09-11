@@ -1,9 +1,9 @@
 #coding:utf-8
 import json
 
-#这个文件主要是封装一个读取配置文件的方法
 
 def get_content(key):
+    #这个文件主要是封装一个读取配置文件的方法
     #传入要读取的内容的key
     with open(r'C:\Users\Administrator\Documents\GitHub\Medohealth\config\config.json') as f:
         #先读取

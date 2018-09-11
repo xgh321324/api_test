@@ -30,6 +30,7 @@ class Meet(unittest.TestCase):
         }
         cls.log = Log()#实例化日志的类
         cls.excel = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
+
     def test_meet_list01(self):
         u'会议列表接口-获取会议列表'
         self.log.info('会议列表接口')

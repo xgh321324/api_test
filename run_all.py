@@ -2,6 +2,8 @@ import time,datetime,os
 import unittest
 import HTMLTestRunner
 from common.Send_email import Send_email
+
+
 #from BeautifulReport import BeautifulReport
 def all_case():
     '''
@@ -33,14 +35,15 @@ if __name__ == '__main__':
     now_time = time.strftime('%Y_%m_%d %H_%M_%S',time.localtime())
     #报告存放路径,若用HTMLTestRunner则要加上具体文件名称
     report_path = ("C:\\Users\\Administrator\\Documents\\GitHub\\Medohealth\\report\\"+ now_time+".html")
-
     today = datetime.date.today()
 
     with open(report_path,'wb') as f:
-        runner = HTMLTestRunner.HTMLTestRunner(stream=f,
-                                               title='麦豆接口测试',
-                                               description='这是'+str(today)+'日的测试结果',
-                                               verbosity=2)
+        runner = HTMLTestRunner.HTMLTestRunner(
+                stream=f,
+                title='麦豆接口测试',
+                description='这是'+str(today)+'日的测试结果',
+                verbosity=2
+        )
         runner.run(all_case())#这种用法也不错，也挺好看
 
     Send_email('15651797525@163.com',
@@ -48,5 +51,4 @@ if __name__ == '__main__':
                'xgh321324',
                ['15651797525@163.com','15651797525@139.com','970185127@qq.com']
                ,report_path).send()  #xgh321324是授权码登录
-
     print('发送成功！')

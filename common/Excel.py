@@ -17,48 +17,7 @@ class Excel_util():
         #获取索引
         table = self.data.sheet_by_name('Sheet1')
         return table
-    '''
-    @property
-    #获取请求方式
-    def get_get_way(self):
-        ways = []
-        for i in range(1,self.get_row_num):
-            ways.append(self.gettable.cell_value(i,1))
-        return ways
-    #获取接口url
-    @property
-    def get_url(self):
-        urls = []
-        for i in range(1,self.get_row_num):
-            urls.append(self.gettable.cell_value(i,2))
-        return urls
 
-    #获取入参
-    @property
-    def get_Input_parameter(self):
-        parameters = []
-        for i in range(1,self.get_row_num):
-            parameters.append(self.gettable.cell_value(i,3))
-        return parameters
-    #获取出参
-    @property
-    def get_out_parameter(self):
-        parameters = []
-        for i in range(1,self.get_row_num):
-            parameters.append(self.gettable(i,4))
-        return parameters
-    #获取期望输出
-    @property
-    def get_Expect_out(self):
-        parameters = []
-        for i in range(1,self.get_row_num):
-            parameters.append(self.gettable.cell_value(i,5))
-        return parameters
-    '''
-
-
-
-###########################################################################################################
     #下面是常用的读取具体位置数值
     def read_value(self,row,col):
         try:
@@ -104,9 +63,6 @@ class Excel_util():
             except Exception as e :
                 print('数据写入失败，原因：%s' % e)
 
-
-
-#########################################################################################################
     #这个方法是将表格中所有数据返回成字典的格式 ；每一行是一个字典
     def dict_data(self):
         #先获取行数，列数
@@ -131,7 +87,6 @@ class Excel_util():
             print(L)
             return L
 
-    #####################################################################################################
     #这个方法是将excel中每一行生成一个字典，只需要传入caseid，字典的key是表头
     def get_dict(self,caseid):
         '''传入caseid即可以将此行数据返回成dict，每一个表头key对应该行的值'''

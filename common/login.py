@@ -4,10 +4,11 @@ import unittest
 import requests
 
 
-#澜渟医生app的登录脚本
 
 class LG():
-
+    '''
+    澜渟医生测试环境app的登录脚本
+    '''
     def __init__(self,s):
         self.s = requests.session()
         self.header = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.108 Safari/537.36 2345Explorer/8.0.0.13547',
@@ -32,7 +33,6 @@ class LG():
         #print(tok)
         return tok
 
-
     def get_token(self):
         '''取账号密码登录成功后的token作为下一步的请求体'''
         url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/loginByUsername'
@@ -47,6 +47,7 @@ class LG():
         success_token = r.json()['data']['Token']  #后面的很多操作会用到这个token，该token在登录成功后的步骤中作为请求的数据
         #print('success token:%s' % success_token)
         return success_token
+
     def get_duid(self):
         #取第一步登录成功后的duid作为第二部登录的请求体
         #url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/loginByUsername' #测试环境
