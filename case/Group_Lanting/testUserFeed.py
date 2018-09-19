@@ -25,6 +25,7 @@ class Feed(unittest.TestCase):
         self.log = Log()
         self.excel = Excel_util(r'C:\Users\Administrator\Desktop\Interface_testcase.xls')
 
+
     def test_user_feed01(self):
         u'测试发布文字-不发布到圈子-参数正常'
         self.log.info('测试发布文字接口-不发布到圈子')
@@ -64,6 +65,8 @@ class Feed(unittest.TestCase):
         self.excel.write_value(12,6,d)
         self.log.info('测试用户动态接口-参数正常情况结束！\n')
     time.sleep(2)
+
+
     def test_user_feed03(self):
         u'feed详情接口-参数正常'
         url = get_content('sns_base_url')+'/v1/feed/record'
@@ -101,6 +104,7 @@ class Feed(unittest.TestCase):
                 "feed_id":x
             }
             #需要保留一个动态不删除，后面的接口要用到这条动态中的图片地址
+
             if json_data['feed_id'] == 'F00083':
                 pass
             else:

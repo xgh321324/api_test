@@ -1,6 +1,7 @@
 #coding:utf-8
 import pymysql
 from common.logger import Log
+import random
 log = Log()
 
 class Sqldriver(object):
@@ -68,21 +69,24 @@ class Sqldriver(object):
 
     #向数据库某表中批量插入数据
     def insert_data(self):
-        for i in range(1,101):
+        for i in range(1,8):
             str_i = str(i)
             real_name = 'jack'+ str_i
             phone = 13800110000+i
             email = 'jack'+str_i+'@mail.com'
             #符串用双引号加单引号"''"
             #sql = 'insert into table_a (realname,phone,email,sign,event_id) values ("'+realname+'",' +str(phone)+ ',"'+email+'",0,1);'
-            #不过还是下面的方法好用
-            sql = "insert into sign_gust (realname,phone,email,sign,event_id) VALUES (%s,%s,%s,%s,%s)" % (real_name,phone,email,0,1)
+            #不过还是下面的方法好用(务必此格式)
+            sql = "insert into sign_gust (realname,phone,email,sign,event_id) VALUES ('%s','%s','%s','%s','%s')" % (real_name,phone,email,0,1)
             #生成完毕sql后开始执行
             self.exec_mysql(sql)
 
 
 if __name__=='__main__':
-    s = Sqldriver('120.26.40.252',3306,'root','MedLander','school')
-    sql = "select code from chap"
-    need = s.exec_mysql(sql)
-    print('need:',need)
+    s = Sqldriver('192.168.88.101',3306,'root','mld2013','userdata')
+    for i in range(10):
+        real_name = '许广会'+str(i)
+        data1 = random.randint(1,10000)
+        data2 = random.randint(1,888888)
+        sql2 = "insert into t_patientinfomation (piUID,piManualNO,piRealName,piGender,SyncDataProcessFlag) VALUES ('%s','%s','%s','%s','%s')" % (data1,data2,real_name,2,2)
+        s.exec_mysql(sql2)

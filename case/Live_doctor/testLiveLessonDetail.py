@@ -31,7 +31,7 @@ class Detail(unittest.TestCase):
         json_data = {
             'token': self.uid_token,
             'timestamp': str(int(time.time())),
-            'live_code': 'L2018090784511',
+            'live_code': 'L2018091759278',
             'nonce': get_digit()
         }
         json_data['sign'] = get_sign(json_data)

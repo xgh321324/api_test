@@ -26,7 +26,13 @@ class LG():
         #澜渟医生测试环境
         url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/loginByUsername'
         #利用自己固定的账号密码登录
-        t = {"username":"15651797525","password":"123456","loginDevice":"2","loginCity":"南京市"}
+        t = {
+            "username":"15651797525",
+            "password":"123456",
+            "loginDevice":"2",
+            "loginCity":"南京市"
+        }
+
         r = self.s.post(url,headers=self.header,json=t)
         #print(r.json())
         tok = r.json()['data']['Token']
@@ -92,5 +98,5 @@ class LG():
 if __name__=='__main__':
     s = requests.session()
     x = LG(s)
-    x.get_autologin_token()
+    x.login()
 
