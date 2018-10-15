@@ -24,9 +24,43 @@ class FollowRoom(unittest.TestCase):
         }
         cls.log = Log() #实例化日志的类
 
-    def test_my_follow_room(self):
+    def test_my_follow_room01(self):
+        u'去关注直播间接口'
+        self.log.info('关注直播间的接口测试开始..')
+        url = 'http://api-live.sunnycare.cc/v1/room/setfollow'
+        json_data = {
+            'token': self.uid_token,
+            'timestamp': str(int(time.time())),
+            'room_code': 'R2018091851448',
+            'status': '1',
+            'nonce': get_digit()
+        }
+        json_data['sign'] = get_sign(json_data)
+        r = self.s.post(url,headers = self.header,json=json_data)
+        self.log.info('关注直播间返回：%s' % r.json())
+        self.assertEqual(200,r.json()['code'])
+        self.log.info('关注直播间的接口测试结束\n')
+
+    def test_my_follow_room02(self):
+        u'去关注直播间接口'
+        self.log.info('取消关注直播间接口测试开始..')
+        url = 'http://api-live.sunnycare.cc/v1/room/setfollow'
+        json_data = {
+            'token': self.uid_token,
+            'timestamp': str(int(time.time())),
+            'room_code': 'R2018091851448',
+            'status': '0',
+            'nonce': get_digit()
+        }
+        json_data['sign'] = get_sign(json_data)
+        r = self.s.post(url,headers = self.header,json=json_data)
+        self.log.info('取消关注直播间返回：%s' % r.json())
+        self.assertEqual(200,r.json()['code'])
+        self.log.info('取消关注直播间接口测试结束\n')
+
+    def test_my_follow_room03(self):
         u'我关注的直播间接口'
-        self.log.info('我关注的直播间接口测试开始..')
+        self.log.info('我关注的直播间列表接口测试开始..')
         url = 'http://api-live.sunnycare.cc/v1/room/followlist'
         json_data = {
             'token': self.uid_token,
@@ -36,9 +70,9 @@ class FollowRoom(unittest.TestCase):
         }
         json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
-        self.log.info('我关注的直播间返回：%s' % r.json())
+        self.log.info('我关注的直播间列表返回：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.log.info('我关注的直播间接口测试结束\n')
+        self.log.info('我关注的直播间列表接口测试结束\n')
 
     @classmethod
     def tearDownClass(cls):
