@@ -76,19 +76,17 @@ class Recommend(unittest.TestCase):
         read_code = self.excel.read_value(18,6)
         #将读取的str转换为dict
         real_code = json.loads(read_code)
-        #循环去请求详情
-        for i in real_code.values():
-            json_data = {
-                'token': self.to,
-                'timestamp': str(int(time.time())),
-                'nonce': get_digit(),
-                'promotion_code': i
-            }
-            json_data['sign'] = get_sign(json_data)
-            r = self.s.post(url,headers = self.header,json=json_data)
-            #结果断言
-            self.log.info('活动详情返回：%s' % r.json())
-            self.assertEqual(200,r.json()['code'])
+        json_data = {
+            'token': self.to,
+            'timestamp': str(int(time.time())),
+            'nonce': get_digit(),
+            'promotion_code': real_code['promotion_code0']
+        }
+        json_data['sign'] = get_sign(json_data)
+        r = self.s.post(url,headers = self.header,json=json_data)
+        #结果断言
+        self.log.info('活动详情返回：%s' % r.json())
+        self.assertEqual(200,r.json()['code'])
         self.log.info('测试推广活动详情接口结束..\n')
 
     def test_recommender04(self):

@@ -56,7 +56,7 @@ def phone_nember():
         "130","131","132","133","134","135","136","137","138","139","147","150","151","152","153","155","156","157","158","159","186","187","188"
     ]
     num = random.choice(pre_list) + ''.join(random.sample(string.digits,8))
-    #print(num)
+    print(num)
     return num
 
 #API签名算法
@@ -81,7 +81,7 @@ def get_sign(t):
     return target5
 
 if __name__ == '__main__':
-    get_digit()
+    phone_nember()
 
 
 
