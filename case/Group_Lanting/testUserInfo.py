@@ -35,7 +35,7 @@ class User(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('接口返回结果是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.log.info('我的信息接口测试结束\n')
 
     def test_user_info02(self):
@@ -49,7 +49,7 @@ class User(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('用户信息返回的结果是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.assertTrue(r.json()['data'])
         self.log.info('用户的信息的接口测试结束\n')
 

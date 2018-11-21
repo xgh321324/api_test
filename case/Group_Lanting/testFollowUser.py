@@ -46,7 +46,7 @@ class Feed(unittest.TestCase):
         L2=[]
         for i in con:
             #如果该用户还未关注就关注他检查返回结果
-            if i['is_follow'] == 0:
+            if i['is_follow'] == '0':
                 L1.append(i['user_id'])
                 json_data = {
                     "user_id":i['user_id'],
@@ -57,7 +57,7 @@ class Feed(unittest.TestCase):
                 self.assertEqual(200,r.json()['code'])
                 self.assertEqual('关注成功.',r.json()['note'])
                 #self.assertEqual(1,r.json()['data']['is_follow'])
-            #如果该用户已经被关注就取消关注他没检查返回结果
+            #如果该用户已经被关注就取消关注他并检查返回结果
             elif i['is_follow']=='1' or '2' :
                 L2.append(i['user_id'])
                 json_data = {
@@ -65,7 +65,7 @@ class Feed(unittest.TestCase):
                     "token":self.auto_login_token
                 }
                 r = self.s.post(cancle_url,headers = self.header,json=json_data)
-                self.log.info('取消关注用户返回的内容是：%s' % r.json())
+                self.log.info('取消关注%s返回的内容是：%s' % (json_data['user_id'],r.json()))
                 self.assertEqual(200,r.json()['code'])
                 self.assertEqual('取消关注成功.',r.json()['note'])
             else:

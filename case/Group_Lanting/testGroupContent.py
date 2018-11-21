@@ -35,7 +35,7 @@ class Content(unittest.TestCase):
         print(r.status_code)
         self.log.info('返回内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.log.info('测试圈子内容接口-参数正确情况测试结束\n')
 
     def test_group_content2(self):
@@ -50,7 +50,7 @@ class Content(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.log.info('测试圈子内容接口-无token情况测试结束\n')
 
     def test_group_content3(self):
@@ -65,7 +65,7 @@ class Content(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.log.info('测试圈子内容接口-page为空情况测试结束\n')
 
     def test_group_content4(self):
@@ -80,7 +80,7 @@ class Content(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.log.info('测试圈子内容接口-page页码不存在情况测试结束\n')
 
     def test_group_content5(self):
@@ -94,8 +94,8 @@ class Content(unittest.TestCase):
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回内容是：%s' % r.json())
-        self.assertEqual(501,r.json()['code'])
-        self.assertIn('不存在.',r.json()['note'])
+        self.assertEqual(200,r.json()['code'])
+        self.assertIn('请求成功',r.json()['note'])
         self.log.info('测试圈子内容接口-圈子id不存在情况测试结束\n')
 
     def test_group_content6(self):

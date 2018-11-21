@@ -57,7 +57,7 @@ class Feed(unittest.TestCase):
                     "height":618
                 }
             ],
-            "groups":['G00001','G00003','G00007','G00006'],
+            "groups":['G00001','G00016','G00017','G00018'],
             "token":self.auto_login_token,
             "text":"南京东路"
         }

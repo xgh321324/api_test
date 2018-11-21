@@ -34,7 +34,7 @@ class Groupinfo(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         print(self.log.info('返回的内容是：%s' % r.json()))
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         #except requests.exceptions.ConnectionError as e:
            # pass
 
@@ -52,7 +52,7 @@ class Groupinfo(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         print(self.log.info('返回的内容是：%s' % r.json()))
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         #except requests.exceptions.ConnectionError as e:
            # pass
 
@@ -70,7 +70,7 @@ class Groupinfo(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         print(self.log.info('返回的内容是：%s' % r.json()))
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         #except requests.exceptions.ConnectionError as e:
            # pass
 

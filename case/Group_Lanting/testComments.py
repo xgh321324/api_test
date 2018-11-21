@@ -30,7 +30,7 @@ class Comment(unittest.TestCase):
         self.log.info('开始测试评论渟说接口-评论内容正常')
         url = get_content('sns_base_url')+'/v1/comment/add'
         #读取关联参数-推荐的动态的id
-        read_recommened_ids = self.excel.read_value(13,6)
+        read_recommened_ids = self.excel.read_value(12,6)
         feed_ids = json.loads(read_recommened_ids)
         L = []
         for i in feed_ids.values():
@@ -52,7 +52,7 @@ class Comment(unittest.TestCase):
         self.log.info('开始测试评论渟说接口-评论内容为空')
         url = get_content('sns_base_url')+'/v1/comment/add'
         #读取关联参数-推荐的动态的id
-        read_recommened_ids = self.excel.read_value(13,6)
+        read_recommened_ids = self.excel.read_value(12,6)
         feed_ids = json.loads(read_recommened_ids)
         L = []
         for i in feed_ids.values():
@@ -65,7 +65,7 @@ class Comment(unittest.TestCase):
         }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('评论为空feed返回的内容是：%s' % r.json())
-        self.assertEqual(501,r.json()['code'])
+        self.assertEqual(200,r.json()['code'])
         self.assertEqual('text 的长度要求为 1 - 800.',r.json()['note'])
         self.log.info('评论渟说-评论内容为空测试结束\n')
 
@@ -77,7 +77,7 @@ class Comment(unittest.TestCase):
         #评论记录接口
         pre_url = get_content('sns_base_url')+'/v1/comment/records'
         #读取关联参数-推荐的动态的id
-        read_recommened_ids = self.excel.read_value(13,6)
+        read_recommened_ids = self.excel.read_value(12,6)
         feed_ids = json.loads(read_recommened_ids)
         L = []
         for i in feed_ids.values():

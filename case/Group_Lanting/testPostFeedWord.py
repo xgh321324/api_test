@@ -44,7 +44,7 @@ class Feed(unittest.TestCase):
         json_data = {
             "token":self.auto_login_token,
             "text":t,
-            'groups':['G00001','G00004','G00002']
+            'groups':['G00018']
                      }
         #for i in range(0,20):
         r = self.s.post(url,headers = self.header,json=json_data)
@@ -60,7 +60,7 @@ class Feed(unittest.TestCase):
         json_data = {
             "token":self.auto_login_token,
             "text":"不知道自己的心",
-            'groups':['G00009','G00008','G00007','G00006']
+            'groups':['G00001','G000016','G000017','G000018']
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是是：%s' % r.json())

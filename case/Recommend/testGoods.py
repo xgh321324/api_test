@@ -1,5 +1,5 @@
 #coding:utf-8
-#coding:utf-8
+
 from common.login_lanting import auto_login_by_UID
 import requests,unittest,time,json
 from common.logger import Log

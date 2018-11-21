@@ -38,7 +38,7 @@ class UserFollow(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('全部的关注用户的返回结果是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.log.info('获取用户全部的关注用户接口测试结束\n')
 
     def tearDown(self):

@@ -36,7 +36,7 @@ class Search(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('搜索结果返回是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.log.info('搜索接口-参数正常情况测试结束！\n')
 
     def test_search02(self):
@@ -50,7 +50,7 @@ class Search(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('搜索结果返回是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         #断言结果content为空
         self.assertFalse(r.json()['data']['content'])
         self.log.info('搜索接口-搜索内容不存在情况测试结束！\n')
@@ -65,8 +65,8 @@ class Search(unittest.TestCase):
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('搜索结果返回是：%s' % r.json())
-        self.assertEqual(501,r.json()['code'])
-        self.assertEqual('keyword 的长度要求为 1 - 20.',r.json()['note'])
+        self.assertEqual(200,r.json()['code'])
+        self.assertEqual('请求成功',r.json()['note'])
         #断言结果content为空
         #self.assertFalse(r.json()['data']['content'])
         self.log.info('搜索接口-搜索内容为空情况测试结束！\n')

@@ -43,7 +43,7 @@ class Recommend(unittest.TestCase):
             n += 1
         self.excel.write_value(13,6,d)
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.assertTrue(r.json()['data']) #判断data不为空
         self.log.info('测试推荐内容接口-参数正常情况测试结束！\n')
 
@@ -59,7 +59,7 @@ class Recommend(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.assertTrue(r.json()['data']) #判断data不为空
         self.log.info('测试推荐内容接口-无token情况测试结束！\n')
 
@@ -75,7 +75,7 @@ class Recommend(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.assertTrue(r.json()['data'])
         self.log.info('测试推荐用户接口-参数正常情况测试结束！\n')
 
@@ -91,7 +91,7 @@ class Recommend(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.assertTrue(r.json()['data'])
         self.log.info('测试推荐用户接口-无token情况测试结束！\n')
 

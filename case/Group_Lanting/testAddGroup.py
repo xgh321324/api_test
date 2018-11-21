@@ -49,7 +49,7 @@ class Add_Group(unittest.TestCase):
                     }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回状态码：%s' % r.status_code)
-        self.assertEqual(500,r.status_code)
+        self.assertEqual(200,r.status_code)
         self.log.info('加入圈子接口之group-id情况为空测试结束！\n')
 
     def test_add_group3(self):
@@ -58,14 +58,14 @@ class Add_Group(unittest.TestCase):
         url = get_content('sns_base_url')+'/v1/group/add'
         json_data = {
                     "token": self.auto_login_token,
-                    "group_id": 'G90001'
+                    "group_id": 'G00033'
                     }
         r = self.s.post(url,headers = self.header,json=json_data)
         #print(r.json())
 
         self.log.info('返回内容是：%s' % r.json())
-        self.assertEqual(501,r.json()['code'])
-        self.assertIn('不存在.',r.json()['note'])
+        self.assertEqual(200,r.json()['code'])
+        self.assertIn('加入圈子成功.',r.json()['note'])
         self.log.info('加入圈子接口之group-id不存在情况测试结束！')
 
 

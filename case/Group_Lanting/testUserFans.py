@@ -39,7 +39,7 @@ class UserFans(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('粉丝接口返回内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.log.info('粉丝的接口测试结束\n')
 
     def test_user_fans02(self):
@@ -56,7 +56,7 @@ class UserFans(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('粉丝接口返回内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.log.info('粉丝的接口-无token测试结束\n')
 
 

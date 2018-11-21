@@ -44,7 +44,7 @@ class Group(unittest.TestCase):
                      }
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回内容是:%s' % r.json())
-        self.assertEqual(501,r.json()['code'])
+        self.assertEqual(200,r.json()['code'])
         #self.assertEqual('退出圈子成功.',r.json()['note'])
         self.log.info('退出圈子接口-roupid不存在情况测试结束\n')
 

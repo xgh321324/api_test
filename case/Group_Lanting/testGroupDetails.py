@@ -32,7 +32,7 @@ class Detail(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.log.info('圈子详情接口-参数正确情况测试结束！\n')
 
     def test_group_details2(self):
@@ -45,7 +45,7 @@ class Detail(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容是：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.log.info('圈子详情接口-无token情况测试结束！\n')
 
 

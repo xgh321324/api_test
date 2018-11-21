@@ -65,3 +65,7 @@ class Websiteuser(HttpLocust):
     #host = 'http://api-live.sunnycare.cc'
     max_wait = 6000
     min_wait = 3000
+
+if __name__=='__main__':
+    import os
+    os.system('locust -f locustfile6.py --host=http://api-live.sunnycare.cc')

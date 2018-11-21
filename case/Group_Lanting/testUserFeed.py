@@ -43,11 +43,11 @@ class Feed(unittest.TestCase):
         u'获取用户动态接口-参数正常'
         self.log.info('测试用户动态接口-参数正常')
         url = get_content('sns_base_url')+'/v1/user/feed'
-        json_data = {"user_id":"U00060","time":0,"page":1}
+        json_data = {"user_id":"U00014","time":0,"page":1}
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('返回的内容：%s' % r.json())
         self.assertEqual(200,r.json()['code'])
-        self.assertEqual('请求成功.',r.json()['note'])
+        self.assertEqual('请求成功',r.json()['note'])
         self.assertTrue(r.json()['data']) #判断data不为空
         con = r.json()['data']['content']
 
@@ -84,7 +84,7 @@ class Feed(unittest.TestCase):
             r = self.s.post(url,headers = self.header,json=json_data)
             self.log.info('%s详情返回的内容：%s' % (x,r.json()))
             #self.assertEqual(200,r.json()['code'])
-            self.assertEqual('请求成功.',r.json()['note'])
+            self.assertEqual('请求成功',r.json()['note'])
             self.assertTrue(r.json()['data']) #判断data不为空
 
 
