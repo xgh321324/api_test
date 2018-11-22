@@ -37,7 +37,7 @@ class Meet(unittest.TestCase):
         url = 'http://api.meet.sunnycare.cc/v2/attach/email'
         json_data = {
             "token": self.uid_token,
-            "attach_code": 'A2018072075966',
+            "attach_code": 'A2018112182583',
             "email": '970185127@qq.com',
             "timestamp":str(int(time.time())),
             "nonce": get_digit()
@@ -55,7 +55,7 @@ class Meet(unittest.TestCase):
         url = 'http://api.meet.sunnycare.cc/v2/attach/email'
         json_data = {
             "token": self.uid_token,
-            "attach_code": 'A2018072075966',
+            "attach_code": 'A2018112182583',
             "email": '15651797525@163.com',
             "timestamp":str(int(time.time())),
             "nonce": get_digit()

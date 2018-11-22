@@ -56,7 +56,7 @@ class Invite(unittest.TestCase):
         json_data['sign']= get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('邀请邀请自己返回结果是：%s' % r.json())
-        self.assertEqual(207,r.json()['code'])
+        self.assertEqual(200,r.json()['code'])
         self.log.info('邀请嘉宾接口-邀请自己 测试结束！\n')
 
     def test_invite_gust03(self):

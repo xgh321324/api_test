@@ -41,6 +41,7 @@ class Wallet(unittest.TestCase):
         self.assertEqual('请求成功',r.json()['note'])
         self.log.info('收支明细接口测试结束！\n')
 
+    @unittest.skip('该模块删除了')
     def test_accout02(self):
         u'推广收益接口'
         self.log.info('开始测试推广收益接口..')
@@ -69,6 +70,7 @@ class Wallet(unittest.TestCase):
         self.excel.write_value(21,6,d)
         self.log.info('推广收益接口测试结束\n')
 
+    @unittest.skip('该模块删除了')
     def test_accout03(self):
         u'收益详情接口'
         self.log.info('开始测试收益详情接口..')
@@ -90,6 +92,7 @@ class Wallet(unittest.TestCase):
             self.assertEqual(200,r.json()['code'],msg='返回状态码不是200')
             self.assertEqual('请求成功',r.json()['note'])
         self.log.info('收益详情接口测试结束！\n')
+
 
     def test_accout04(self):
         u'提现记录接口'

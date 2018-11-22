@@ -33,7 +33,8 @@ class Test_pay(unittest.TestCase):
         json_data2 = {"payType":"1",
                       "user_source":"1",
                       "product_type":"2",
-                      "token":t,"product_code":"K00067"
+                      "token":t,
+                      "product_code":"K00134"
                       }  #上一接口返回的token现在用来做请求参数
         url2 ='http://api.exam.sunnycare.cc/v1/mldProductPay'#支付接口地址
         r2 = self.s.post(url2,headers=self.header,json=json_data2)
@@ -55,7 +56,8 @@ class Test_pay(unittest.TestCase):
         json_data2 = {"payType":"0",
                       "user_source":"1",
                       "product_type":"2",
-                      "token":t,"product_code":"K00067"
+                      "token":t,
+                      "product_code":"K00134"
                       }
         url2 ='http://api.exam.sunnycare.cc/v1/mldProductPay'#支付接口地址
         r2 = self.s.post(url2,headers=self.header,json=json_data2)
@@ -78,7 +80,7 @@ class Test_pay(unittest.TestCase):
                       "user_source":"1",
                       "product_type":"3",
                       "token":t,
-                      "product_code":"Z00020"
+                      "product_code":"Z00030"
                       }
         url2 ='http://api.exam.sunnycare.cc/v1/mldProductPay'#支付接口地址
         r2 = self.s.post(url2,headers=self.header,json=json_data2)
