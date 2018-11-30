@@ -81,14 +81,14 @@ class Test_pay(unittest.TestCase):
         self.log.info('返回：%s'% r.json())
         self.assertEqual(200,r.json()['code'],msg=('支付的orderid，支付确认接口有问题'))
         self.log.info('支付后的确认接口（已支付的orderid）测试结束')
-
+    @unittest.skip('no reason')
     def test_pay_suc02(self):
         u'测试支付后的确认接口（未支付的orderid）'
         self.log.info('测试支付后的确认接口（未支付的orderid）')
         url = 'http://api.pay.sunnycare.cc/v1/success'
 
         json_data = {
-            'order_id': '201811220316080201115480',
+            'order_id': '2018112309061402011185001',
             'token': self.uid_token,
             'timestamp': str(time.time()),
             'nonce': get_digit()

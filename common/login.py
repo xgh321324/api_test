@@ -66,21 +66,19 @@ class LG():
         }
         r = self.s.post(url,headers=self.header,json=t)
         success_duid = r.json()['data']['doctorInfo']['duid']  #后面的很多操作会用到这个duid，
-        #print(success_duid)
+        print(success_duid)
         return success_duid
 
 
     def gettoken_loginbyUID(self):
         u'取第二部UID登录成功后的token'
         #url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'  #医生用uid自动登录接口'  测试环境
-        url = 'http://121.43.168.217/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'
+        url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'
         json_data1 = {
-            "UID": str(self.get_duid()),
-            "loginDevice": "1",
-            "loginCity": "南京市"
-        }  #device 1是安卓
+            'UID': '4oKWq92Zauzmtj8JpBUnISb3ferNF1DE'
+        }
         r = self.s.post(url,headers= self.header,json=json_data1) ##医生用uid自动登录接口的请求数据又是登录成功后返回的json中的duid
-        UID_token = r.json()['data']['Token'] #取到我想要的token
+        UID_token = r.json()['data']['doctorInfo']['duid'] #取到我想要的token
         #print(UID_token)
         return UID_token
 
@@ -98,5 +96,5 @@ class LG():
 if __name__=='__main__':
     s = requests.session()
     x = LG(s)
-    x.login()
+    x.gettoken_loginbyUID()
 

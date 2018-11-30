@@ -4,6 +4,8 @@ import time,requests
 from locust import HttpLocust,TaskSet,task
 from common import login
 
+#澜渟医生APP直播接口压测
+
 #定义用户行为
 class User(TaskSet):
     #下面是请求头header
@@ -113,3 +115,4 @@ if __name__=='__main__':
     #导入os模块，os.system方法可以直接在pycharm中该文件中直接运行该py文件
     import os
     os.system('locust -f locustfile4.py --host=http://api-live.sunnycare.cc')
+

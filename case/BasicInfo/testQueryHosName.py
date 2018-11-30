@@ -20,6 +20,7 @@ class Query(unittest.TestCase):
                        'Connection': 'keep-alive'
                        }
 
+    @unittest.skip('no reason')
     def test_query_hosName(self):
         u'模糊查询医院接口'
         url = 'http://api.rih.medohealth.com/API/V1/DoctorInfo/SeacherHosName'
