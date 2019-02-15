@@ -2,6 +2,7 @@
 from common import Hash
 import time,requests
 from locust import HttpLocust,TaskSet,task
+from locust.contrib.fasthttp import FastHttpLocust
 from common import login_lanting
 
 
@@ -39,7 +40,7 @@ class User(TaskSet):
         'token': t,
         'nonce': Hash.get_digit(),
         'timestamp': str(int(time.time())),
-        'live_code': 'L2018112248566'
+        'live_code': 'L2018121173179'
     }
     #入参加密
     de['sign'] = Hash.get_sign(de)
@@ -52,7 +53,7 @@ class User(TaskSet):
             if response.status_code == 200:
                 response.success()
             else:
-                response.failure()
+                response.failure('not 200!')
 
     @task(1)
     def detail(self):
@@ -60,9 +61,9 @@ class User(TaskSet):
             if response.status_code == 200:
                 response.success()
             else:
-                response.failure()
+                response.failure('not 200!')
 
-class Websiteuser(HttpLocust):
+class Websiteuser(HttpLocust):   # or HttpLocust
     task_set = User
     #host = 'http://api-live.sunnycare.cc'
     max_wait = 6000
@@ -72,4 +73,4 @@ class Websiteuser(HttpLocust):
 if __name__=='__main__':
     #导入os模块，os.system方法可以直接在pycharm中该文件中直接运行该py文件
     import os
-    os.system('locust -f locustfile7.py --host=http://api-live.wrightin.com')
+    os.system('locust -f locustfile7.py --host=http://api-live.sunnycare.cc')

@@ -24,12 +24,12 @@ class Test_pay(unittest.TestCase):
 
     def test_pay01(self):
         u'测试支付接口,已购买的课程，去支付'
-        self.log.info('开始测试支付接口,已购买的课程再次支付')
+        self.log.info('开始测试支付接口,购买的课程再次支付')
         url = 'http://api.pay.sunnycare.cc/v1/pay'
         json_data = {"token":self.uid_token,
                      "pay_method":"1",
                      "product_type":"2",
-                     "product_code":"K00134",
+                     "product_code":"K00129",
                      "timestamp":str(time.time()),
                      "nonce": get_digit()
                      }
@@ -53,7 +53,7 @@ class Test_pay(unittest.TestCase):
             "pay_method":"1",
             "product_type":"2",
             "token":self.uid_token,
-            "product_code":"K00129",
+            "product_code":"K00134",
             "timestamp": str(time.time()),
             "nonce": get_digit()
         }
@@ -61,7 +61,7 @@ class Test_pay(unittest.TestCase):
         r = self.s.post(url,headers = self.header,json=json_data)
         global out_trad_num   #设置为全局变量供下一case调用
         out_trad_num= r.json()['data']
-        self.assertEqual('请求成功.',r.json()['note'],msg='支付请求状态没成功')
+        self.assertEqual('请求成功.',r.json()['note'])
         self.log.info('支付接口,未购买的课程，去支付测试结束')
 
 

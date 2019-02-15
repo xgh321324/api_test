@@ -53,7 +53,7 @@ class Add_Group(unittest.TestCase):
         self.log.info('加入圈子接口之group-id情况为空测试结束！\n')
 
     def test_add_group3(self):
-        u'加入圈子接口'
+        u'加入圈子接口-id不存在'
         self.log.info('测试加入圈子接口之group-id不存在')
         url = get_content('sns_base_url')+'/v1/group/add'
         json_data = {

@@ -75,7 +75,7 @@ class LG():
         #url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'  #医生用uid自动登录接口'  测试环境
         url = 'http://api.rih.sunnycare.cc/API/V1/DoctorLoginForToken/doctorAutoLoginByUID'
         json_data1 = {
-            'UID': '4oKWq92Zauzmtj8JpBUnISb3ferNF1DE'
+            'UID': 'YtW71rxqo0zs8RQ2yGZIPf6vJujM54pa'
         }
         r = self.s.post(url,headers= self.header,json=json_data1) ##医生用uid自动登录接口的请求数据又是登录成功后返回的json中的duid
         UID_token = r.json()['data']['doctorInfo']['duid'] #取到我想要的token

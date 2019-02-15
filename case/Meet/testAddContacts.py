@@ -96,7 +96,7 @@ class Contact(unittest.TestCase):
         json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('新增手机号格式不正确返回结果是：%s' % r.json())
-        self.assertEqual(201, r.json()['code'])
+        self.assertEqual(203, r.json()['code'])
         self.log.info('新增参会人-手机号格式不正确情况测试结束！\n')
 
     def test_add_contacts04(self):
@@ -119,7 +119,7 @@ class Contact(unittest.TestCase):
         json_data['sign'] = get_sign(json_data)
         r = self.s.post(url,headers = self.header,json=json_data)
         self.log.info('新增参会人-地址为空返回结果是：%s' % r.json())
-        self.assertEqual(201, r.json()['code'])
+        self.assertEqual(203, r.json()['code'])
         self.log.info('新增参会人-地址为空情况测试结束！\n')
 
     @unittest.skip('无理由')

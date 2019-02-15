@@ -82,7 +82,7 @@ class Contact(unittest.TestCase):
         update_url = 'http://api.meet.sunnycare.cc/v2/contact/update'
         json_data = {
             "token": self.uid_token,
-            "name": '更新后的名字',
+            "name": '更新后的名字2',
             "contact_code": be_use_code['contact_code1'],
             "phone": '13888888888',
             "sex": '0',
