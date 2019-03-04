@@ -2,6 +2,10 @@
 import time,requests
 from locust import HttpLocust, TaskSet, task
 from locust.clients import HttpSession
+from locust.contrib.fasthttp import FastHttpLocust
+"""
+使用FastHttpLocust的话rps会更高，有更高的并发
+"""
 
 class User(TaskSet):
 
@@ -24,11 +28,11 @@ class User(TaskSet):
             else:
                 response.failure('not 200!')
 
-class Websiteuser(HttpLocust):   # or HttpLocust
+class Websiteuser(FastHttpLocust):   # or HttpLocust
     task_set = User
     #host = 'http://api-live.sunnycare.cc'
-    max_wait = 6000
-    min_wait = 3000
+    max_wait = 0
+    min_wait = 0
 
 
 if __name__=='__main__':
